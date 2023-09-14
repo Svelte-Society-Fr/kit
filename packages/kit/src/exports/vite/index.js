@@ -123,7 +123,7 @@ const warning_preprocessor = {
 };
 
 /**
- * Returns the SvelteKit Vite plugins.
+ * Renvoie les <span class='vo'>[plugins](https://sveltefr.dev/docs/development#plugin)</span> Vite de SvelteKit.
  * @returns {Promise<import('vite').Plugin[]>}
  */
 export async function sveltekit() {
@@ -870,7 +870,7 @@ function warn_overridden_config(config, resolved_config) {
 	if (overridden.length > 0) {
 		console.error(
 			colors.bold().red('The following Vite config options will be overridden by SvelteKit:') +
-				overridden.map((key) => `\n  - ${key}`).join('')
+			overridden.map((key) => `\n  - ${key}`).join('')
 		);
 	}
 }
@@ -914,9 +914,9 @@ const create_service_worker_module = (config) => dedent`
 	export const build = [];
 	export const files = [
 		${create_assets(config)
-			.filter((asset) => config.kit.serviceWorker.files(asset.file))
-			.map((asset) => `${s(`${config.kit.paths.base}/${asset.file}`)}`)
-			.join(',\n')}
+		.filter((asset) => config.kit.serviceWorker.files(asset.file))
+		.map((asset) => `${s(`${config.kit.paths.base}/${asset.file}`)}`)
+		.join(',\n')}
 	];
 	export const prerendered = [];
 	export const version = ${s(config.kit.version.name)};
