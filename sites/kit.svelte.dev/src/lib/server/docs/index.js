@@ -12,6 +12,8 @@ import { readFile, readdir } from 'node:fs/promises';
 import { CONTENT_BASE_PATHS } from '../../../constants.js';
 import { render_content } from '../renderer';
 
+import { SVELTE_SITE_URL, LEARN_SITE_URL } from '$env/static/private';
+
 /**
  * @param {import('./types').DocsData} docs_data
  * @param {string} slug
@@ -20,9 +22,13 @@ export async function get_parsed_docs(docs_data, slug) {
 	for (const { pages } of docs_data) {
 		for (const page of pages) {
 			if (page.slug === slug) {
+				const content = page.content
+					.replace(/SVELTE_SITE_URL/g, SVELTE_SITE_URL)
+					.replace(/LEARN_SITE_URL/g, LEARN_SITE_URL);
+
 				return {
 					...page,
-					content: await render_content(page.file, page.content)
+					content: await render_content(page.file, content)
 				};
 			}
 		}
