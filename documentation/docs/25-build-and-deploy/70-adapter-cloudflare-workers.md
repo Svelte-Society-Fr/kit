@@ -2,13 +2,13 @@
 title: Cloudflare Workers
 ---
 
-To deploy to [Cloudflare Workers](https://workers.cloudflare.com/), use [`adapter-cloudflare-workers`](https://github.com/sveltejs/kit/tree/main/packages/adapter-cloudflare-workers).
+Pour déployer sur [Cloudflare Workers](https://workers.cloudflare.com/), utilisez [`adapter-cloudflare-workers`](https://github.com/sveltejs/kit/tree/main/packages/adapter-cloudflare-workers).
 
-> Unless you have a specific reason to use `adapter-cloudflare-workers`, it's recommended that you use `adapter-cloudflare` instead. Both adapters have equivalent functionality, but Cloudflare Pages offers features like GitHub integration with automatic builds and deploys, preview deployments, instant rollback and so on.
+> À moins d'avoir une raison précise d'utiliser `adapter-cloudflare-workers`, nous recommandons plutôt d'utiliser `adapter-cloudflare`. Les deux adaptateurs sont équivalents, mais Cloudflare Pages vous offre des fonctionnalités comme l'intégration Github avec des <span class="vo">[builds](PUBLIC_SVELTE_SITE_URL/docs/development#build)</span> et déploiements automatisés, des aperçus de déploiement, des retours en arrière instantanés, et d'autres choses.
 
 ## Usage
 
-Install with `npm i -D @sveltejs/adapter-cloudflare-workers`, then add the adapter to your `svelte.config.js`:
+Installez l'adaptateur avec `npm i -D @sveltejs/adapter-cloudflare-workers`, puis ajoutez-le à votre fichier `svelte.config.js` :
 
 ```js
 // @errors: 2307
@@ -22,9 +22,9 @@ export default {
 };
 ```
 
-## Basic Configuration
+## Configuration de base
 
-This adapter expects to find a [wrangler.toml](https://developers.cloudflare.com/workers/platform/sites/configuration) file in the project root. It should look something like this:
+Cet adaptateur attend un fichier [wrangler.toml](https://developers.cloudflare.com/workers/platform/sites/configuration) à la racine de votre projet. Il doit avoir cette forme :
 
 ```toml
 /// file: wrangler.toml
@@ -40,30 +40,30 @@ compatibility_date = "2021-11-12"
 workers_dev = true
 ```
 
-`<your-service-name>` can be anything. `<your-account-id>` can be found by logging into your [Cloudflare dashboard](https://dash.cloudflare.com) and grabbing it from the end of the URL:
+`<your-service-name>` peut être n'importe quoi. `<your-account-id>` peut être récupéré en vous connectant à votre [espace Cloudflare](https://dash.cloudflare.com) et en l'extrayant de la fin de l'URL :
 
 ```
 https://dash.cloudflare.com/<your-account-id>
 ```
 
-> You should add the `.cloudflare` directory (or whichever directories you specified for `main` and `site.bucket`) to your `.gitignore`.
+> Vous devriez ajouter le dossier `.cloudflare` (ou tout dossier défini en tant que `main` et `site.bucket`) à votre fichier `.gitignore`.
 
-You will need to install [wrangler](https://developers.cloudflare.com/workers/wrangler/get-started/) and log in, if you haven't already:
+Vous aurez besoin d'installer [wrangler](https://developers.cloudflare.com/workers/wrangler/get-started/) et de vous y connecter, si vous ne l'avez pas déjà fait :
 
 ```
 npm i -g wrangler
 wrangler login
 ```
 
-Then, you can build your app and deploy it:
+Puis, vous pouvez compiler votre application et la déployer :
 
 ```sh
 wrangler deploy
 ```
 
-## Custom config
+## Configuration personnalisée
 
-If you would like to use a config file other than `wrangler.toml`, you can do like so:
+Si vous souhaitez utiliser un fichier de configuration autre que `wrangler.toml`, vous pouvez le faire ainsi :
 
 ```js
 // @errors: 2307
@@ -79,7 +79,8 @@ export default {
 
 ## Bindings
 
-The [`env`](https://developers.cloudflare.com/workers/runtime-apis/fetch-event#parameters) object contains your project's [bindings](https://developers.cloudflare.com/workers/platform/environment-variables/), which consist of KV/DO namespaces, etc. It is passed to SvelteKit via the `platform` property, along with `context` and `caches`, meaning that you can access it in hooks and endpoints:
+
+L'objet [`env`](https://developers.cloudflare.com/workers/runtime-apis/fetch-event#parameters) contient les [bindings](https://developers.cloudflare.com/workers/platform/environment-variables/) de votre projet, qui consistent en des <span class="vo">[namespaces](PUBLIC_SVELTE_SITE_URL/docs/development#namespace)</span> KV/DO, etc. Il est fourni à SvelteKit via la propriété `platform`, conjointement à `context` et `caches`, ce qui signifie que vous pouvez y accéder dans les <span class="vo">[hooks](PUBLIC_SVELTE_SITE_URL/docs/sveltejs#hook)</span> et les <span class="vo">[endpoints](PUBLIC_SVELTE_SITE_URL/docs/web#endpoint)</span> :
 
 ```js
 // @errors: 7031
@@ -88,9 +89,9 @@ export async function POST({ request, platform }) {
 }
 ```
 
-> SvelteKit's built-in `$env` module should be preferred for environment variables.
+> Vous devriez plutôt utiliser le module intégré de SvelteKit `$env` pour gérer vos variables d'environnement.
 
-To make these types available to your app, reference them in your `src/app.d.ts`:
+Pour rendre ces types accessibles dans votre application, référencez-les dans votre fichier `src/app.d.ts` :
 
 ```diff
 /// file: src/app.d.ts
@@ -108,16 +109,17 @@ declare global {
 export {};
 ```
 
-### Testing Locally
+### Tester localement
 
-`platform.env` is only available in the final build and not in dev mode. For testing the build, you can use [wrangler](https://developers.cloudflare.com/workers/cli-wrangler). Once you have built your site, run `wrangler dev`. Ensure you have your [bindings](https://developers.cloudflare.com/workers/wrangler/configuration/#bindings) in your `wrangler.toml`. Wrangler version 3 is recommended.
+`platform.env` est uniquement accessible dans le <span class="vo">[build](PUBLIC_SVELTE_SITE_URL/docs/development#build)</span> final, et donc pas en mode développement. Pour tester le build, vous pouvez utiliser [wrangler](https://developers.cloudflare.com/workers/cli-wrangler). Une fois que vous avez compilé votre site, lancez la commande `wrangler pages dev .svelte-kit/cloudflare`. Assurez-vous d'avoir vos [bindings](https://developers.cloudflare.com/workers/wrangler/configuration/#bindings) dans votre fichier `wrangler.toml`. La version 3 de Wrangler est recommandée.
 
-## Troubleshooting
+## Résolution de problèmes
 
-### Worker size limits
+### Limites de taille de Worker
 
-When deploying to workers, the server generated by SvelteKit is bundled into a single file. Wrangler will fail to publish your worker if it exceeds [the size limits](https://developers.cloudflare.com/workers/platform/limits/#worker-size) after minification. You're unlikely to hit this limit usually, but some large libraries can cause this to happen. In that case, you can try to reduce the size of your worker by only importing such libraries on the client side. See [the FAQ](./faq#how-do-i-use-x-with-sveltekit-how-do-i-use-a-client-side-only-library-that-depends-on-document-or-window) for more information.
+Lorsque vous déployez sur des <span class="vo">[workers](PUBLIC_SVELTE_SITE_URL/docs/development#worker)</span>, le serveur généré par SvelteKit est compilé en un seul fichier. Wrangler échouera à publier votre worker s'il excède la [limite de taille](https://developers.cloudflare.com/workers/platform/limits/#worker-size) après minification. Vous ne devriez normalement pas dépasser cette limite, mais certaines grosses librairies peuvent vous faire rencontrer ce problème. Dans ce cas, essayez de réduire la taille de votre worker en important ce type de librairie uniquement côté client. Lire la [FÀQ](./faq#comment-utiliser-x-avec-sveltekit-comment-utiliser-une-librairie-r-serv-e-au-client-qui-d-pend-de-document-ou-de-window) pour plus d'informations.
 
-### Accessing the file system
+### Accès au système de fichiers
 
-You can't access the file system through methods like `fs.readFileSync` in Serverless/Edge environments. If you need to access files that way, do that during building the app through [prerendering](https://kit.svelte.dev/docs/page-options#prerender). If you have a blog for example and don't want to manage your content through a CMS, then you need to prerender the content (or prerender the endpoint from which you get it) and redeploy your blog everytime you add new content.
+Vous ne pouvez pas accéder au système de fichiers avec les méthodes type `fs.readFileSync` dans les environnement <span class="vo">[Serverless](PUBLIC_SVELTE_SITE_URL/docs/web#serverless)</span>/<span class="vo">[Edge](PUBLIC_SVELTE_SITE_URL/docs/web#edge)</span>. Si vous avez besoin d'accéder à des fichiers de cette manière là, faites-le pendant la compilation de votre application grâce au [prérendu](page-options#prerender). Si vous avez un blog par exemple, et ne voulez pas gérer votre contenu via un <span class="vo">[CMS](PUBLIC_SVELTE_SITE_URL/docs/web#cms)</span>, vous pouvez alors prérendre le contenu (ou prérendre le <span class="vo">[endpoint](PUBLIC_SVELTE_SITE_URL/docs/web#endpoint)</span> à partir duquel vous récupérez le contenu) et redéployer votre blog à chaque fois que vous ajoutez du nouveau contenu.
+
