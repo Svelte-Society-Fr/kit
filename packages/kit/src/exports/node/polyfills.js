@@ -1,7 +1,7 @@
-import { ReadableStream, TransformStream, WritableStream } from 'node:stream/web';
 import buffer from 'node:buffer';
 import { webcrypto as crypto } from 'node:crypto';
-import { fetch, Response, Request, Headers, FormData, File as UndiciFile } from 'undici';
+import { ReadableStream, TransformStream, WritableStream } from 'node:stream/web';
+import { FormData, Headers, Request, Response, File as UndiciFile, fetch } from 'undici';
 
 // `buffer.File` was added in Node 18.13.0 while the `File` global was added in Node 20.0.0
 const File = /** @type {import('node:buffer') & { File?: File}} */ (buffer).File ?? UndiciFile;
@@ -29,7 +29,7 @@ const globals_pre_node_18_11 = {
 
 // exported for dev/preview and node environments
 /**
- * Make various web APIs available as globals:
+ * Rend ces <span class='vo'>[APIs](https://sveltefr.dev/docs/development#api)</span> web disponibles en tant que variables globales :
  * - `crypto`
  * - `fetch` (only in node < 18.11)
  * - `Headers` (only in node < 18.11)
