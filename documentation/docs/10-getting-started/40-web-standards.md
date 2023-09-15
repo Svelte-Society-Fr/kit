@@ -99,7 +99,7 @@ const foo = url.searchParams.get('foo');
 
 ## Web Crypto
 
-L'[API Web Crypto](https://developer.mozilla.org/fr/docs/Web/API/Web_Crypto_API) est rendue disponible via le module global `crypto`. Elle est utilisée en interne pour les <span class="vo">[headers](SVELTE_SITE_URL/docs/web#header)</span> de [Content Security Policy](configuration#csp), mais vous pouvez également vous en servir pour par exemple générer des identifiants UUIDs :
+L'[API Web Crypto](https://developer.mozilla.org/fr/docs/Web/API/Web_Crypto_API) est rendue disponible via le module global `crypto`. Elle est utilisée en interne pour les <span class="vo">[headers](SVELTE_SITE_URL/docs/web#header)</span> de [Content Security Policy](configuration#csp), mais vous pouvez également vous en servir pour par exemple générer des identifiants UUID :
 
 ```js
 const uuid = crypto.randomUUID();
