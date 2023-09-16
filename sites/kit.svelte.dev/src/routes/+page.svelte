@@ -53,7 +53,15 @@
 
 	<Hero />
 	<Intro />
-	<TrySection />
+	<TrySection>
+		<svelte:fragment slot="content-heading">voyez par vous-même</svelte:fragment>
+		<svelte:fragment slot="content"
+			>Essayez en local, <a target="_blank" rel="noreferrer" href="https://sveltekit.new"
+				>sur StackBlitz</a
+			>, ou bien avec
+			<a target="_blank" href={PUBLIC_LEARN_SITE_URL}>le tutoriel interactif</a>.</svelte:fragment
+		>
+	</TrySection>
 	<Svelte />
 	<Features />
 	<Deployment />
