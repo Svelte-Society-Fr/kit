@@ -1,5 +1,6 @@
 <script>
 	import { page } from '$app/stores';
+	import { PUBLIC_GITHUB_ORG } from '$env/static/public';
 	import { copy_code_descendants } from '@sveltejs/site-kit/actions';
 	import { Icon } from '@sveltejs/site-kit/components';
 	import { DocsOnThisPage, setupDocsHovers } from '@sveltejs/site-kit/docs';
@@ -53,7 +54,8 @@
 
 	<a
 		class="edit"
-		href="https://github.com/svelte-society-fr/kit/edit/master/documentation/docs/{data.page.file}"
+		href="https://github.com/{PUBLIC_GITHUB_ORG}/kit/edit/master/documentation/docs/{data.page
+			.file}"
 	>
 		<Icon size={50} name="edit" /> Éditer cette page sur Github
 	</a>
