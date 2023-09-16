@@ -10,6 +10,7 @@
 	import schema_url from './schema.json?url';
 
 	import './home/common.css';
+	import { SVELTE_SITE_URL, LEARN_SITE_URL } from '$env/static/private';
 
 	let schema;
 	onMount(async () => {
@@ -25,13 +26,16 @@
 
 	<meta name="twitter:title" content="SvelteKit" />
 	<meta name="twitter:description" content="Web development, streamlined" />
-	<meta name="description" content="SvelteKit is the official Svelte application framework" />
+	<meta
+		name="description"
+		content="SvelteKit est le framework d'application officiel pour Svelte"
+	/>
 
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="SvelteKit • Web development, streamlined" />
 	<meta
 		property="og:description"
-		content="SvelteKit is the official Svelte application framework"
+		content="SvelteKit est le framework d'application officiel pour Svelte"
 	/>
 	<meta property="og:url" content="https://kit.svelte.dev/" />
 	<meta
@@ -63,12 +67,12 @@
 					href: '/docs'
 				},
 				{
-					title: 'tutorial',
-					href: 'https://learn.svelte.dev/tutorial/introducing-sveltekit'
+					title: 'tutoriel',
+					href: `${LEARN_SITE_URL}/tutorial/introducing-sveltekit`
 				},
 				{
 					title: 'blog',
-					href: 'https://svelte.dev/blog'
+					href: `${SVELTE_SITE_URL}/blog`
 				}
 			],
 			connect: [
@@ -82,7 +86,7 @@
 				},
 				{
 					title: 'discord',
-					href: 'https://svelte.dev/chat'
+					href: `${SVELTE_SITE_URL}/chat`
 				},
 				{
 					title: 'twitter',
@@ -92,9 +96,9 @@
 		}}
 	>
 		<span slot="license">
-			SvelteKit is <a target="_blank" rel="noreferrer" href="https://github.com/sveltejs/kit"
-				>free and open source software</a
-			> released under the MIT license.
+			SvelteKit est un <a target="_blank" rel="noreferrer" href="https://github.com/sveltejs/kit"
+				>logiciel gratuit et en source ouverte</a
+			> publié sous la licence MIT.
 		</span></Footer
 	>
 </div>

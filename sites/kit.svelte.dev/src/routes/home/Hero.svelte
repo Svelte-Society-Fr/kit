@@ -13,7 +13,7 @@
 			</div>
 
 			<div class="tagline">web development, streamlined</div>
-			<a href="{base}/docs/introduction" class="cta"> read the docs </a>
+			<a href="{base}/docs/introduction" class="cta"> lire la documentation </a>
 		</div>
 
 		<div class="hero-image">

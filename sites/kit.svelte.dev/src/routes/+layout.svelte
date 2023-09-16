@@ -3,6 +3,7 @@
 
 	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
+	import { LEARN_SITE_URL, SVELTE_SITE_URL } from '$env/static/private';
 	import { Icon, Shell } from '@sveltejs/site-kit/components';
 	import { Nav, Separator } from '@sveltejs/site-kit/nav';
 	import { Search, SearchBox } from '@sveltejs/site-kit/search';
@@ -28,6 +29,7 @@
 <div style:display={$page.url.pathname !== '/docs' ? 'contents' : 'none'}>
 	<Shell nav_visible={$page.url.pathname !== '/repl/embed'} bind:snapshot={shell_snapshot}>
 		<Nav slot="top-nav" title={data.nav_title} links={data.nav_links}>
+			<svelte:fragment slot="theme-label">Thème</svelte:fragment>
 			<svelte:fragment slot="home-large">
 				<strong>kit</strong>.svelte.dev
 			</svelte:fragment>
@@ -38,18 +40,17 @@
 
 			<svelte:fragment slot="search">
 				{#if $page.url.pathname !== '/search'}
-					<Search />
+					<Search label="Recherche" />
 				{/if}
 			</svelte:fragment>
 
 			<svelte:fragment slot="external-links">
-				<a href="https://learn.svelte.dev/tutorial/introducing-sveltekit" rel="external">Tutorial</a
-				>
-				<a href="https://svelte.dev">Svelte</a>
+				<a href="{LEARN_SITE_URL}/tutorial/introducing-sveltekit" rel="external">Tutoriel</a>
+				<a href={SVELTE_SITE_URL}>Svelte</a>
 
 				<Separator />
 
-				<a href="https://svelte.dev/chat" rel="external" title="Discord Chat">
+				<a href="{SVELTE_SITE_URL}/chat" rel="external" title="Discord Chat">
 					<span class="small">Discord</span>
 					<span class="large"><Icon name="discord" /></span>
 				</a>
@@ -66,7 +67,15 @@
 </div>
 
 {#if browser}
-	<SearchBox />
+	<SearchBox placeholder="Recherche">
+		<svelte:fragment slot="search-description">
+			Les résultats se mettent à jour quand vous écrivez
+		</svelte:fragment>
+		<svelte:fragment slot="idle" let:has_recent_searches>
+			{has_recent_searches ? 'Recherches récentes' : 'Aucune recherche récente'}
+		</svelte:fragment>
+		<svelte:fragment slot="no-results">Aucun résultat</svelte:fragment>
+	</SearchBox>
 {/if}
 
 <style>
