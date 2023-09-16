@@ -69,7 +69,7 @@
 
 	<Footer
 		links={{
-			resources: [
+			ressources: [
 				{
 					title: 'documentation',
 					href: '/docs'
@@ -83,7 +83,7 @@
 					href: `${PUBLIC_SVELTE_SITE_URL}/blog`
 				}
 			],
-			connect: [
+			contact: [
 				{
 					title: 'github',
 					href: 'https://github.com/sveltejs/kit'
