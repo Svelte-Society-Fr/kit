@@ -4,7 +4,7 @@ title: Standards du web
 
 Tout au long de cette documentation, vous trouverez des références aux [APIs Web](https://developer.mozilla.org/fr/docs/Web/API) standards sur lesquelles s'appuie SvelteKit. Plutôt que de réinventer la roue, SvelteKit _utilise la plateforme_, ce qui signifie que vos compétences en développement web sont utilisables avec SvelteKit. De même, le temps passé à apprendre SvelteKit vous aidera à progresser en tant que développeur ou développeuse web de manière générale.
 
-Ces <span class="vo">[APIs](SVELTE_SITE_URL/docs/development#api)</span> sont disponibles dans tous les navigateurs modernes et dans de nombreux environnements hors navigateur, comme les "Cloudflare Workers", ou les "Edge Functions" de Deno et Vercel. Pendant le développement, et au sein des [adaptateurs](adapters) d'environnement Node (dont AWS Lambda), elles sont rendues disponibles via des <span class="vo">[polyfills](SVELTE_SITE_URL/docs/javascript#polyfill)</span> lorsque nécessaire (en tout cas pour le moment — Node ajoute de plus en plus de standards web).
+Ces <span class="vo">[APIs](PUBLIC_SVELTE_SITE_URL/docs/development#api)</span> sont disponibles dans tous les navigateurs modernes et dans de nombreux environnements hors navigateur, comme les "Cloudflare Workers", ou les "Edge Functions" de Deno et Vercel. Pendant le développement, et au sein des [adaptateurs](adapters) d'environnement Node (dont AWS Lambda), elles sont rendues disponibles via des <span class="vo">[polyfills](PUBLIC_SVELTE_SITE_URL/docs/javascript#polyfill)</span> lorsque nécessaire (en tout cas pour le moment — Node ajoute de plus en plus de standards web).
 
 En particulier, vous deviendrez familier•e•s avec :
 
@@ -12,13 +12,13 @@ En particulier, vous deviendrez familier•e•s avec :
 
 Svelte utilise [`fetch`](https://developer.mozilla.org/fr/docs/Web/API/fetch) pour récupérer la donnée du réseau. Cette méthode est disponible dans les [hooks](hooks) et les [routes serveur](routing#server) ainsi que dans le navigateur.
 
-> Une version spéciale de `fetch` est disponible dans les fonctions [`load`](load), dans les [hooks server](hooks#server-hooks), ainsi que dans les [routes d'API serveur](routing#server) pour appeler des <span class="vo">[endpoints](SVELTE_SITE_URL/docs/web#endpoint)</span> directement lors du rendu côté serveur, sans faire d'appel HTTP tout en préservant les identifiants. (Pour faire des appels identifiés dans du code serveur en dehors de `load`, vous devez explicitement passer des <span class="vo">[headers](SVELTE_SITE_URL/docs/web#header)</span> `cookie` et/ou `authorization`.) Elle vous permet également de faire des requêtes relatives, là où un `fetch` côté serveur vous impose normalement une URL complète.
+> Une version spéciale de `fetch` est disponible dans les fonctions [`load`](load), dans les [hooks server](hooks#server-hooks), ainsi que dans les [routes d'API serveur](routing#server) pour appeler des <span class="vo">[endpoints](PUBLIC_SVELTE_SITE_URL/docs/web#endpoint)</span> directement lors du rendu côté serveur, sans faire d'appel HTTP tout en préservant les identifiants. (Pour faire des appels identifiés dans du code serveur en dehors de `load`, vous devez explicitement passer des <span class="vo">[headers](PUBLIC_SVELTE_SITE_URL/docs/web#header)</span> `cookie` et/ou `authorization`.) Elle vous permet également de faire des requêtes relatives, là où un `fetch` côté serveur vous impose normalement une URL complète.
 
 En plus de `fetch`, l'[API Fetch](https://developer.mozilla.org/fr/docs/Web/API/Fetch_API) inclut les interfaces suivantes :
 
 ### Request
 
-Une instance de [`Request`](https://developer.mozilla.org/fr/docs/Web/API/Request) est accessible dans les [hooks](hooks) et les [routes serveur](routing#server) en tant que `event.request`. Elle contient des méthodes utiles comme `request.json()` et `request.formData()` pour récupérer la donnée envoyée au <span class="vo">[endpoint](SVELTE_SITE_URL/docs/web#endpoint)</span>.
+Une instance de [`Request`](https://developer.mozilla.org/fr/docs/Web/API/Request) est accessible dans les [hooks](hooks) et les [routes serveur](routing#server) en tant que `event.request`. Elle contient des méthodes utiles comme `request.json()` et `request.formData()` pour récupérer la donnée envoyée au <span class="vo">[endpoint](PUBLIC_SVELTE_SITE_URL/docs/web#endpoint)</span>.
 
 ### Response
 
@@ -74,7 +74,7 @@ export async function POST(event) {
 
 ## APIs de Stream
 
-La plupart du temps, vos <span class="vo">[endpoints](SVELTE_SITE_URL/docs/web#endpoint)</span> vous renverront de la donnée complète, comme dans l'exemple `userAgent` ci-dessus. Parfois, vous pourriez avoir besoin de renvoyer une réponse trop lourde pour être envoyée en une seule fois, ou de renvoyer la donnée en morceaux, et pour cela la plateforme fournit des [streams](https://developer.mozilla.org/fr/docs/Web/API/Streams_API) — [ReadableStream](https://developer.mozilla.org/fr/docs/Web/API/ReadableStream), [WritableStream](https://developer.mozilla.org/fr/docs/Web/API/WritableStream) et [TransformStream](https://developer.mozilla.org/fr/docs/Web/API/TransformStream).
+La plupart du temps, vos <span class="vo">[endpoints](PUBLIC_SVELTE_SITE_URL/docs/web#endpoint)</span> vous renverront de la donnée complète, comme dans l'exemple `userAgent` ci-dessus. Parfois, vous pourriez avoir besoin de renvoyer une réponse trop lourde pour être envoyée en une seule fois, ou de renvoyer la donnée en morceaux, et pour cela la plateforme fournit des [streams](https://developer.mozilla.org/fr/docs/Web/API/Streams_API) — [ReadableStream](https://developer.mozilla.org/fr/docs/Web/API/ReadableStream), [WritableStream](https://developer.mozilla.org/fr/docs/Web/API/WritableStream) et [TransformStream](https://developer.mozilla.org/fr/docs/Web/API/TransformStream).
 
 ## APIs d'URL
 
@@ -99,7 +99,7 @@ const foo = url.searchParams.get('foo');
 
 ## Web Crypto
 
-L'[API Web Crypto](https://developer.mozilla.org/fr/docs/Web/API/Web_Crypto_API) est rendue disponible via le module global `crypto`. Elle est utilisée en interne pour les <span class="vo">[headers](SVELTE_SITE_URL/docs/web#header)</span> de [Content Security Policy](configuration#csp), mais vous pouvez également vous en servir pour par exemple générer des identifiants UUID :
+L'[API Web Crypto](https://developer.mozilla.org/fr/docs/Web/API/Web_Crypto_API) est rendue disponible via le module global `crypto`. Elle est utilisée en interne pour les <span class="vo">[headers](PUBLIC_SVELTE_SITE_URL/docs/web#header)</span> de [Content Security Policy](configuration#csp), mais vous pouvez également vous en servir pour par exemple générer des identifiants UUID :
 
 ```js
 const uuid = crypto.randomUUID();

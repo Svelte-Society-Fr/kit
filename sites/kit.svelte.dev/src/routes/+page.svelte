@@ -10,7 +10,7 @@
 	import schema_url from './schema.json?url';
 
 	import './home/common.css';
-	import { SVELTE_SITE_URL, LEARN_SITE_URL } from '$env/static/private';
+	import { PUBLIC_SVELTE_SITE_URL, PUBLIC_LEARN_SITE_URL } from '$env/static/public';
 
 	let schema;
 	onMount(async () => {
@@ -68,11 +68,11 @@
 				},
 				{
 					title: 'tutoriel',
-					href: `${LEARN_SITE_URL}/tutorial/introducing-sveltekit`
+					href: `${PUBLIC_LEARN_SITE_URL}/tutorial/introducing-sveltekit`
 				},
 				{
 					title: 'blog',
-					href: `${SVELTE_SITE_URL}/blog`
+					href: `${PUBLIC_SVELTE_SITE_URL}/blog`
 				}
 			],
 			connect: [
@@ -86,7 +86,7 @@
 				},
 				{
 					title: 'discord',
-					href: `${SVELTE_SITE_URL}/chat`
+					href: `${PUBLIC_SVELTE_SITE_URL}/chat`
 				},
 				{
 					title: 'twitter',
