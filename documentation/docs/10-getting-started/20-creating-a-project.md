@@ -16,7 +16,7 @@ Vous trouverez des indications pour installer d'autres outils sur la page d'[int
 
 SvelteKit a deux principes de base :
 
-- Chaque page de votre application est un composant [Svelte](SVELTE_SITE_URL)
+- Chaque page de votre application est un composant [Svelte](PUBLIC_SVELTE_SITE_URL)
 - Vous créez des pages en ajoutant des fichiers dans le dossier `src/routes` de votre projet. Ces pages seront d'abord rendues sur le serveur afin que la première visite d'un utilisateur ou d'une utilisatrice soit aussi rapide que possible, puis une application côté client prend le relais
 
 Essayez de modifier les fichiers pour vous faire une idée de comment les choses fonctionnent.

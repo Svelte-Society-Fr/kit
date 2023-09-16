@@ -12,7 +12,7 @@ import { readFile, readdir } from 'node:fs/promises';
 import { CONTENT_BASE_PATHS } from '../../../constants.js';
 import { render_content } from '../renderer';
 
-import { SVELTE_SITE_URL, LEARN_SITE_URL } from '$env/static/private';
+import { PUBLIC_SVELTE_SITE_URL, PUBLIC_LEARN_SITE_URL } from '$env/static/public';
 
 /**
  * @param {import('./types').DocsData} docs_data
@@ -23,8 +23,8 @@ export async function get_parsed_docs(docs_data, slug) {
 		for (const page of pages) {
 			if (page.slug === slug) {
 				const content = page.content
-					.replace(/SVELTE_SITE_URL/g, SVELTE_SITE_URL)
-					.replace(/LEARN_SITE_URL/g, LEARN_SITE_URL);
+					.replace(/PUBLIC_SVELTE_SITE_URL/g, PUBLIC_SVELTE_SITE_URL)
+					.replace(/PUBLIC_LEARN_SITE_URL/g, PUBLIC_LEARN_SITE_URL);
 
 				return {
 					...page,
