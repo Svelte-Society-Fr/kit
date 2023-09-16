@@ -38,13 +38,13 @@ Vous trouverez aussi des fichiers classiques comme `.gitignore` et `.npmrc` (et 
 
 Le dossier `src` contient le coeur de votre projet. Tout est optionnel, à l'exception de `src/routes` et `src/app.html`.
 
-- `lib` contient votre code de bibliothèque (utilitaires et composants), qui peut être importé via l'alias [`$lib`](modules#$lib) alias, ou <span class="vo">[packagé](SVELTE_SITE_URL/docs/web#bundler-packager)</span> pour être distribué en utilisant [`svelte-package`](packaging)
+- `lib` contient votre code de bibliothèque (utilitaires et composants), qui peut être importé via l'alias [`$lib`](modules#$lib) alias, ou <span class="vo">[packagé](PUBLIC_SVELTE_SITE_URL/docs/web#bundler-packager)</span> pour être distribué en utilisant [`svelte-package`](packaging)
 	- `server` contient votre code de bibliothèque spécifique au serveur. Il peut être importé via l'alias [`$lib/server`](server-only-modules). SvelteKit vous empêchera d'importer ces fichiers dans du code client
 - `params` contient les [validateurs de paramètres](advanced-routing#matching) dont votre application a besoin
 - `routes` contient les [routes](routing) de votre application. Vous pouvez aussi y placer des composants qui ne sont utilisés que dans une seule route
-- `app.html` est votre <span class="vo">[template](SVELTE_SITE_URL/docs/development#template)</span> de page — un document HTML contenant les emplacements réservés suivants :
+- `app.html` est votre <span class="vo">[template](PUBLIC_SVELTE_SITE_URL/docs/development#template)</span> de page — un document HTML contenant les emplacements réservés suivants :
   - `%sveltekit.head%` — les éléments `<link>` et `<script>` requis par votre application, plus tout contenu `<svelte:head>` éventuel
-  - `%sveltekit.body%` — le <span class="vo">[markup](SVELTE_SITE_URL/docs/web#markup)</span> d'une page. Ce contenu devrait être placé à l'intérieur d'une `<div>` ou tout autre élément, plutôt que directement dans le `<body>`, pour éviter des <span class="vo">[bugs](SVELTE_SITE_URL/docs/development#bug)</span> liés à certaines extensions navigateurs qui y injectent des éléments qui seront ensuite détruits par le processus d'hydratation. SvelteKit vous préviendra pendant le développement si ce n'est pas le cas
+  - `%sveltekit.body%` — le <span class="vo">[markup](PUBLIC_SVELTE_SITE_URL/docs/web#markup)</span> d'une page. Ce contenu devrait être placé à l'intérieur d'une `<div>` ou tout autre élément, plutôt que directement dans le `<body>`, pour éviter des <span class="vo">[bugs](PUBLIC_SVELTE_SITE_URL/docs/development#bug)</span> liés à certaines extensions navigateurs qui y injectent des éléments qui seront ensuite détruits par le processus d'hydratation. SvelteKit vous préviendra pendant le développement si ce n'est pas le cas
   - `%sveltekit.assets%` — [`paths.assets`](configuration#paths) si précisé, ou un chemin relatif à [`paths.base`](configuration#paths)
   - `%sveltekit.nonce%` — une configuration [CSP](configuration#csp) `nonce` pour les scripts et liens manuellement inclus, si nécessaire
   - `%sveltekit.env.[NAME]%` - ceci sera remplacé au moment du rendu par la variable d'environnement `[NAME]`, qui doit commencer par le préfixe [`publicPrefix`](configuration#env) (en général `PUBLIC_`). Le défaut `''` sera appliqué si ce n'est pas le cas.
@@ -83,7 +83,7 @@ Ce fichier (ou `jsconfig.json` si vous préférez vérifier le typage dans des f
 
 ### vite.config.js
 
-Un project SvelteKit est en réalité un projet [Vite](https://vitejs.dev) qui utilise le <span class="vo">[plugin](SVELTE_SITE_URL/docs/development#plugin)</span> [`@sveltejs/kit/vite`](modules#sveltejs-kit-vite) en plus de toute autre [configuration Vite](https://vitejs.dev/config/) éventuelle.
+Un project SvelteKit est en réalité un projet [Vite](https://vitejs.dev) qui utilise le <span class="vo">[plugin](PUBLIC_SVELTE_SITE_URL/docs/development#plugin)</span> [`@sveltejs/kit/vite`](modules#sveltejs-kit-vite) en plus de toute autre [configuration Vite](https://vitejs.dev/config/) éventuelle.
 
 ## Autres fichiers
 

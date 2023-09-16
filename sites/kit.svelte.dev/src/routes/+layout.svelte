@@ -3,7 +3,7 @@
 
 	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
-	import { LEARN_SITE_URL, SVELTE_SITE_URL } from '$env/static/private';
+	import { PUBLIC_LEARN_SITE_URL, PUBLIC_SVELTE_SITE_URL } from '$env/static/public';
 	import { Icon, Shell } from '@sveltejs/site-kit/components';
 	import { Nav, Separator } from '@sveltejs/site-kit/nav';
 	import { Search, SearchBox } from '@sveltejs/site-kit/search';
@@ -45,12 +45,12 @@
 			</svelte:fragment>
 
 			<svelte:fragment slot="external-links">
-				<a href="{LEARN_SITE_URL}/tutorial/introducing-sveltekit" rel="external">Tutoriel</a>
-				<a href={SVELTE_SITE_URL}>Svelte</a>
+				<a href="{PUBLIC_LEARN_SITE_URL}/tutorial/introducing-sveltekit" rel="external">Tutoriel</a>
+				<a href={PUBLIC_SVELTE_SITE_URL}>Svelte</a>
 
 				<Separator />
 
-				<a href="{SVELTE_SITE_URL}/chat" rel="external" title="Discord Chat">
+				<a href="{PUBLIC_SVELTE_SITE_URL}/chat" rel="external" title="Discord Chat">
 					<span class="small">Discord</span>
 					<span class="large"><Icon name="discord" /></span>
 				</a>
