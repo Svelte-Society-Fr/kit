@@ -7,7 +7,7 @@
 		<div class="features">
 			<h2><span>des fonctionnalités ? on a ça en stock.</span></h2>
 			<p class="wall">
-				Mélangez des pages <strong>pré-rendues</strong>pour une perfomance optimale avec du
+				Mélangez des pages <strong>pré-rendues</strong> pour une perfomance optimale avec du
 				<strong>rendu dynamique sur le serveur</strong>
 				pour une flexibilité maximale. Transformez votre application en une
 				<strong>PWA</strong> rendue côté client avec une seule ligne de code, pour toute votre
