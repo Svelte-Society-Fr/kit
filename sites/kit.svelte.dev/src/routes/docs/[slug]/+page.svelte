@@ -51,8 +51,11 @@
 <div class="text content" use:copy_code_descendants>
 	<h1>{data.page.title}</h1>
 
-	<a class="edit" href="https://github.com/sveltejs/kit/edit/master/documentation/docs/{data.page.file}">
-		<Icon size={50} name="edit" /> Edit this page on GitHub
+	<a
+		class="edit"
+		href="https://github.com/svelte-society-fr/kit/edit/master/documentation/docs/{data.page.file}"
+	>
+		<Icon size={50} name="edit" /> Éditer cette page sur Github
 	</a>
 
 	<DocsOnThisPage details={data.page} />
@@ -63,14 +66,14 @@
 
 	<div class="controls">
 		<div>
-			<span class:faded={!prev}>previous</span>
+			<span class:faded={!prev}>précédent</span>
 			{#if prev}
 				<a href={prev.path}>{prev.title}</a>
 			{/if}
 		</div>
 
 		<div>
-			<span class:faded={!next}>next</span>
+			<span class:faded={!next}>suivant</span>
 			{#if next}
 				<a href={next.path}>{next.title}</a>
 			{/if}
