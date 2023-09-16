@@ -1,6 +1,6 @@
 <script>
 	import { page } from '$app/stores';
-	import { PUBLIC_SVELTE_SITE_URL } from '$env/static/public';
+	import { PUBLIC_SVELTE_SITE_URL, PUBLIC_GITHUB_ORG } from '$env/static/public';
 
 	// we don't want to use <svelte:window bind:online> here, because we only care about the online
 	// state when the page first loads
@@ -28,7 +28,7 @@
 				>forum Discord</a
 			>
 			et de nous remonter le problème, ou ouvrez une issue sur
-			<a href="https://github.com/svelte-society-fr/kit">GitHub</a>. Merci !
+			<a href="https://github.com/{PUBLIC_GITHUB_ORG}/kit">GitHub</a>. Merci !
 		</p>
 	{:else}
 		<h1>Il semblerait que vous soyez hors ligne</h1>
