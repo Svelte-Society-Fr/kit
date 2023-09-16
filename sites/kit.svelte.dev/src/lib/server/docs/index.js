@@ -12,7 +12,12 @@ import { readFile, readdir } from 'node:fs/promises';
 import { CONTENT_BASE_PATHS } from '../../../constants.js';
 import { render_content } from '../renderer';
 
-import { PUBLIC_SVELTE_SITE_URL, PUBLIC_LEARN_SITE_URL } from '$env/static/public';
+import {
+	PUBLIC_SVELTE_SITE_URL,
+	PUBLIC_KIT_SITE_URL,
+	PUBLIC_LEARN_SITE_URL,
+	PUBLIC_GITHUB_ORG
+} from '$env/static/public';
 
 /**
  * @param {import('./types').DocsData} docs_data
@@ -24,7 +29,9 @@ export async function get_parsed_docs(docs_data, slug) {
 			if (page.slug === slug) {
 				const content = page.content
 					.replace(/PUBLIC_SVELTE_SITE_URL/g, PUBLIC_SVELTE_SITE_URL)
-					.replace(/PUBLIC_LEARN_SITE_URL/g, PUBLIC_LEARN_SITE_URL);
+					.replace(/PUBLIC_KIT_SITE_URL/g, PUBLIC_KIT_SITE_URL)
+					.replace(/PUBLIC_LEARN_SITE_URL/g, PUBLIC_LEARN_SITE_URL)
+					.replace(/PUBLIC_GITHUB_ORG/g, PUBLIC_GITHUB_ORG);
 
 				return {
 					...page,
