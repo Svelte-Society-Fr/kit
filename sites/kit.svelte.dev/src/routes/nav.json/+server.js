@@ -19,7 +19,7 @@ async function get_nav_list() {
 
 	return [
 		{
-			title: 'Docs',
+			title: 'Documentation',
 			prefix: 'docs',
 			pathname: '/docs/introduction',
 			sections: [
