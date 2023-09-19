@@ -11,7 +11,7 @@ npm install
 npm run dev
 ```
 
-La première commande va préparer un nouveau projet dans le dossier `my-app`, en vous proposant d'utiliser de l'outillage de base comme TypeScript.
+La première commande va générer un nouveau projet dans le dossier `my-app`, en vous proposant d'utiliser de l'outillage de base comme TypeScript.
 Vous trouverez des indications pour installer d'autres outils sur la page d'[intégrations](./integrations). Les autres commandes installent ensuite les dépendances du projet, et lancent un serveur de développement sur [localhost:5173](http://localhost:5173).
 
 SvelteKit a deux principes de base :
