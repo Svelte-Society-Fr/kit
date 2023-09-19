@@ -2,7 +2,7 @@
 title: Créer un projet
 ---
 
-La façon la plus simple de commencer à construire une application SvelteKit est d'utiliser `npm create` :
+La façon la plus simple de commencer une application SvelteKit est d'utiliser `npm create` :
 
 ```bash
 npm create svelte@latest my-app
