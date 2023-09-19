@@ -43,7 +43,7 @@ Le dossier `src` contient le coeur de votre projet. Tout est optionnel, à l'exc
 - `params` contient les [validateurs de paramètres](advanced-routing#matching) dont votre application a besoin
 - `routes` contient les [routes](routing) de votre application. Vous pouvez aussi y placer des composants qui ne sont utilisés que dans une seule route
 - `app.html` est votre <span class="vo">[template](PUBLIC_SVELTE_SITE_URL/docs/development#template)</span> de page — un document HTML contenant les emplacements réservés suivants :
-  - `%sveltekit.head%` — les éléments `<link>` et `<script>` requis par votre application, plus tout contenu `<svelte:head>` éventuel
+  - `%sveltekit.head%` — les éléments `<link>` et `<script>` requis par votre application, ainsi que le contenu `<svelte:head>` éventuel
   - `%sveltekit.body%` — le <span class="vo">[markup](PUBLIC_SVELTE_SITE_URL/docs/web#markup)</span> d'une page. Ce contenu devrait être placé à l'intérieur d'une `<div>` ou tout autre élément, plutôt que directement dans le `<body>`, pour éviter des <span class="vo">[bugs](PUBLIC_SVELTE_SITE_URL/docs/development#bug)</span> liés à certaines extensions navigateurs qui y injectent des éléments qui seront ensuite détruits par le processus d'hydratation. SvelteKit vous préviendra pendant le développement si ce n'est pas le cas
   - `%sveltekit.assets%` — [`paths.assets`](configuration#paths) si précisé, ou un chemin relatif à [`paths.base`](configuration#paths)
   - `%sveltekit.nonce%` — une configuration [CSP](configuration#csp) `nonce` pour les scripts et liens manuellement inclus, si nécessaire

@@ -22,7 +22,7 @@ WEBVTT
  de construire un site web qui rend ça plus fun
 
 00:00:13.160 --> 00:00:15.440
- et facile que tout ce que l'on connu depuis longtemps.
+ et plus facile que tout ce que l'on a connu depuis longtemps.
 
 00:00:15.440 --> 00:00:18.720
  Et cela est fait en introduisant
@@ -40,7 +40,7 @@ WEBVTT
  [Amelia Wattenberger] Vous manipulez principalement du HTML,
 
 00:00:32.760 --> 00:00:34.760
- JavaScript, et CSS basiques.
+ du JavaScript, et du CSS basiques.
 
 00:00:34.760 --> 00:00:37.120
  [Aliza Aufrichtig] La chose que je préfère quand j'utilise Svelte
@@ -79,7 +79,7 @@ WEBVTT
  ou une des plus hautes parmi les principaux frameworks
 
 00:01:05.920 --> 00:01:08.120
- JavaScript les plus utilisés.
+ JavaScript utilisés.
 
 00:01:08.120 --> 00:01:10.040
  [Guillermo Rauch] Lorsque vous écrivez votre application,
@@ -91,7 +91,7 @@ WEBVTT
  C'est presque impossible de créer une application lente
 
 00:01:14.880 --> 00:01:17.200
- et je pense qu'en ça Svelte a un avantage incroyable.
+ et je pense qu'en ça, Svelte a un avantage incroyable.
 
 00:01:17.200 --> 00:01:18.360
  Les gens adorent Svelte.
