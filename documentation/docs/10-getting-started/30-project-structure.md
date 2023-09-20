@@ -9,7 +9,7 @@ my-project/
 ├ src/
 │ ├ lib/
 │ │ ├ server/
-│ │ │ └ [vos fichiers spécifiques serveur]
+│ │ │ └ [vos fichiers spécifiques de serveur]
 │ │ └ [vos fichiers utilitaires]
 │ ├ params/
 │ │ └ [vos validateurs de paramètres]
