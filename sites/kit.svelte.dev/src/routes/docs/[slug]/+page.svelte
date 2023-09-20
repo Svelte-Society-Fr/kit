@@ -60,7 +60,7 @@
 		<Icon size={50} name="edit" /> Éditer cette page sur Github
 	</a>
 
-	<DocsOnThisPage details={data.page} />
+	<DocsOnThisPage details={data.page}>Sur cette page</DocsOnThisPage>
 
 	<section>
 		{@html data.page.content}
