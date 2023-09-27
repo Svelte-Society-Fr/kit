@@ -57,7 +57,7 @@ export async function load({ params }) {
 }
 ```
 
-Notez que le type a changé de `PageLoad` à `PageServerLoad`, car les fonctions `load` de serveur ont accès à des arguments additionnels. Pour comprendre les cas d'utilisation de `+page.js` et ceux de `+page.server.js`, lire [Universel vs serveur](load#universel-vs-server).
+Notez que le type a changé de `PageLoad` à `PageServerLoad`, car les fonctions `load` de serveur ont accès à des arguments additionnels. Pour comprendre les cas d'utilisation de `+page.js` et ceux de `+page.server.js`, lire [Universel vs serveur](load#universel-vs-serveur).
 
 ## Donnée de layout
 
@@ -166,7 +166,7 @@ Conceptuellement, elles font la même chose, mais il existe des différences imp
 
 Les fonction `load` de serveur sont _toujours_ exécutées sur le serveur.
 
-Par défaut, les fonctions `load` universelles s'exécutent sur le serveur pendant le [SSR](glossary#ssr) lorsque l'utilisateur ou l'utilisatrice visite la page pour la première fois. Elles sont ensuite de nouveau exécutées lors de l'hydration, en utilisant les réponses des [requêtes `fetch`](#requeter-avec-fetch). Toutes les invocations suivantes de fonctions `load` universelles ont lieu dans le navigateur. Vous pouvez personnaliser ce comportement avec les [options de page](page-options). Si vous [désactivez le rendu côté serveur](page-options#ssr), vous obtiendrez un comportement de <span class="vo">[SPA](PUBLIC_SVELTE_SITE_URL/docs/web#spa)</span>, et les fonctions `load` universelles de la page en question seront _toujours_ exécutées dans le navigateur.
+Par défaut, les fonctions `load` universelles s'exécutent sur le serveur pendant le [SSR](glossary#ssr) lorsque l'utilisateur ou l'utilisatrice visite la page pour la première fois. Elles sont ensuite de nouveau exécutées lors de l'hydration, en utilisant les réponses des [requêtes `fetch`](#requ-ter-avec-fetch). Toutes les invocations suivantes de fonctions `load` universelles ont lieu dans le navigateur. Vous pouvez personnaliser ce comportement avec les [options de page](page-options). Si vous [désactivez le rendu côté serveur](page-options#ssr), vous obtiendrez un comportement de <span class="vo">[SPA](PUBLIC_SVELTE_SITE_URL/docs/web#spa)</span>, et les fonctions `load` universelles de la page en question seront _toujours_ exécutées dans le navigateur.
 
 Une fonction `load` est exécutée à <span class="vo">[runtime](PUBLIC_SVELTE_SITE_URL/docs/development#runtime)</span>, à moins que vous ne [prérendiez](page-options#prerender) la page — dans ce cas, elle sera exécutée à la compilation.
 
@@ -598,7 +598,7 @@ Pour résumer, une fonction `load` sera rejouée dans les situations suivantes :
 - Elle référence une propriété de `params` dont la valeur a changé
 - Elle référence une propriété de l'`url` (comme `url.pathname` ou `url.search`) dont la valeur a changé. Les propriétés de `request.url` ne sont _pas_ prises en compte
 - Elle appelle `await parent()` et une fonction `load` parente a été rejouée
-- Elle déclare une dépendance à une URL spécifique via [`fetch`](#requeter-avec-fetch) (fonctions universelles seulement) ou [`depends`](types#public-types-loadevent), et cette URL a été déclarée invalide avec [`invalidate(url)`](modules#$app-navigation-invalidate)
+- Elle déclare une dépendance à une URL spécifique via [`fetch`](#requ-ter-avec-fetch) (fonctions universelles seulement) ou [`depends`](types#public-types-loadevent), et cette URL a été déclarée invalide avec [`invalidate(url)`](modules#$app-navigation-invalidate)
 - Toutes les fonctions `load` actives ont été rejouées de force avec [`invalidateAll()`](modules#$app-navigation-invalidateall)
 
 `params` et `url` peuvent changer en réponse à un clic sur un lien `<a href="..">`, une [interaction sur un `<form>`](form-actions#get-vs-post), une invocation de [`goto`](modules#$app-navigation-goto), ou un [`redirect`](modules#sveltejs-kit-redirect).

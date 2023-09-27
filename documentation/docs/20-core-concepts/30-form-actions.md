@@ -209,7 +209,7 @@ The returned data must be serializable as JSON. Beyond that, the structure is en
 
 ### Redirects
 
-Redirects (and errors) work exactly the same as in [`load`](load#redirects):
+Redirects (and errors) work exactly the same as in [`load`](load#redirections):
 
 ```diff
 /// file: src/routes/login/+page.server.js
