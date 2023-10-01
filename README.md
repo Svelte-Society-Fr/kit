@@ -41,11 +41,11 @@ Svelte is an MIT-licensed open source project with its ongoing development made 
 
 Funds donated via Open Collective will be used for compensating expenses related to Svelte's development such as hosting costs. If sufficient donations are received, funds may also be used to support Svelte's development more directly.
 
-## i18n
+## Translating SvelteKit docs
 
-This is the french version of the Svelte website.
+This is the french version of the SvelteKit docs.
 
-If you are willing to fork this project and translate it into your own language, you will need to add the `PUBLIC_SVELTE_SITE_URL`, `PUBLIC_KIT_SITE_URL`, `PUBLIC_LEARN_SITE_URL` and `PUBLIC_GITHUB_ORG` to your environment variables to point to your local Svelte sites and Github organization.
+Read more about this was done [here](i18n.md).
 
 ## License
 
