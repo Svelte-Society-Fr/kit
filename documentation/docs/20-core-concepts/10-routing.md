@@ -2,7 +2,7 @@
 title: Routing
 ---
 
-Le cœur de SvelteKit est un _routeur basé sur l'arborescence de fichiers_. Les routes de votre application — c-à-d les URLs auxquelles les utilisateurs et utilisatrices ont accès — sont définis par les dossiers de votre projet :
+Le cœur de SvelteKit est un _routeur basé sur l'arborescence de fichiers_. Les routes de votre application — c'est-à-dire les URLs auxquelles les utilisateurs et utilisatrices ont accès — sont définies par les dossiers de votre projet :
 
 - `src/routes` est la route racine
 - `src/routes/about` crée une route `/about`
