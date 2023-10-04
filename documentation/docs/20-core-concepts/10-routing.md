@@ -73,7 +73,7 @@ En plus de `load`, `+page.js` peut exporter des valeurs qui configurent le compo
 - `export const ssr = true` ou `false`
 - `export const csr = true` ou `false`
 
-Vous trouverez plus d'informations sur ces valeurs dans la section [page options](page-options).
+Vous trouverez plus d'informations sur ces valeurs dans la section [options de page](page-options).
 
 ### +page.server.js
 
