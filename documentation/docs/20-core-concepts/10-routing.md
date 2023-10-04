@@ -112,7 +112,7 @@ Lors de la navigation côté client, SvelteKit va charger cette donnée sur le s
 
 Comme `+page.js`, `+page.server.js` peut exporter des [options de page](page-options) — `prerender`, `ssr` et `csr`.
 
-Un fichier `+page.server.js` peut exporter des _actions_. Si `load` vous permet de lire de la donnée sur le serveur, les `actions` vous permettent d'_écrire_ de la donnée sur le serveur en utilisant l'élément `<form>`. Pour savoir comment vous en servir, reportez-vous à la section sur les [actions de formulaire](form-actions).
+Un fichier `+page.server.js` peut également exporter des _actions_. Si `load` vous permet de lire de la donnée sur le serveur, les `actions` vous permettent d'_écrire_ de la donnée sur le serveur en utilisant l'élément `<form>`. Pour savoir comment vous en servir, reportez-vous à la section sur les [actions de formulaire](form-actions).
 
 ## +error
 
