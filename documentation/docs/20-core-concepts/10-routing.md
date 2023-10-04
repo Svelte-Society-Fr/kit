@@ -46,7 +46,7 @@ Un composant `+page.svelte` définit une page de votre application. Par défaut,
 
 ### +page.js
 
-Souvent, une page a besoin de charger de la donnée avant qu'elle puisse être rendue. Pour cela, il suffit d'ajouter un module `+page.js` qui exporte une fonction `load` :
+Souvent, une page a besoin de charger de la donnée avant qu'elle ne puisse être rendue. Pour cela, il suffit d'ajouter un module `+page.js` qui exporte une fonction `load` :
 
 ```js
 /// file: src/routes/blog/[slug]/+page.js
