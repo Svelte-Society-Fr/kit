@@ -225,7 +225,7 @@ export function load() {
 
 Si un `+layout.js` exporte des [options de page](page-options) — `prerender`, `ssr` et `csr` — elles seront appliquées par défaut aux pages enfantes.
 
-La donnée renvoyée d'une fonction `load` de layout est aussi accessible dans toutes ses pages enfantes :
+La donnée renvoyée d'une fonction `load` de layout est aussi accessible dans toutes ses pages enfants :
 
 ```svelte
 <!--- file: src/routes/settings/profile/+page.svelte --->
