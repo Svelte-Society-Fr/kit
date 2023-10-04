@@ -204,7 +204,7 @@ Nous pouvons créer un layout qui s'applique aux pages en-dessous de `/settings`
 <slot></slot>
 ```
 
-Par défaut, chaque layout hérite du layout au-dessus de lui. Mais parfois c'est pas ce que l'on souhaite — dans ce cas, la section [layouts avancés](advanced-routing#advanced-layouts) peut vous aider.
+Par défaut, chaque layout hérite du layout au-dessus de lui. Mais parfois ce n'est pas ce que l'on souhaite — dans ce cas, la section [layouts avancés](advanced-routing#advanced-layouts) peut vous aider.
 
 ### +layout.js
 
