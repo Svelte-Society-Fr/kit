@@ -182,7 +182,7 @@ Si nous créeons des pages pour `/`, `/about`, et `/settings`...
 
 ... la barre de navigation sera alors toujours visible, et passer d'une page à l'autre ne remplacera que le `<h1>`.
 
-Les layouts peuvent être _imbriqués_. Supposez que nous ayons plusieurs pages `/settings`, comme `/settings/profile` et `/settings/notifications` avec un sous-menu partagé (un exemple de la vraie vie est disponible sur [github.com/settings](https://github.com/settings)).
+Les layouts peuvent être _imbriqués_. Supposez que nous ayons plusieurs pages de paramètres – `/settings`, `/settings/profile` et `/settings/notifications` – avec un sous-menu partagé (un exemple est disponible sur [github.com/settings](https://github.com/settings)).
 
 Nous pouvons créer un layout qui s'applique aux pages en-dessous de `/settings` (tout en héritant de la barre de navigation du layout racine) :
 
