@@ -127,7 +127,7 @@ Si une erreur survient durant `load`, SvelteKit affiche une page d'erreur par d�
 <h1>{$page.status}: {$page.error.message}</h1>
 ```
 
-SvekteKit "remonte l'arbre" à la recherche de la page d'erreur la plus proche — si le fichier de l'exemple ci-dessus n'existe pas, il essaie de trouver `src/routes/blog/+error.svelte` puis `src/routes/+error.svelte` avant d'afficher la page d'erreur par défaut. Si _cette page_ échoue également (ou si l'erreur survient au sein de la fonction `load` du `+layout` racine, qui est "au-dessus" du fichier `+error` racine), SvelteKit sauve les meubles et rend une page d'erreur statique, que vous pouvez personnaliser en créant un fichier `src/error.html`.
+SvekteKit "remonte l'arborescence de fichiers" à la recherche de la page d'erreur la plus proche — si le fichier de l'exemple ci-dessus n'existe pas, il essaie de trouver `src/routes/blog/+error.svelte` puis `src/routes/+error.svelte` avant d'afficher la page d'erreur par défaut. Si _cette page_ échoue également (ou si l'erreur survient au sein de la fonction `load` du `+layout` racine, qui est "au-dessus" du fichier `+error` racine), SvelteKit sauve les meubles et rend une page d'erreur statique, que vous pouvez personnaliser en créant un fichier `src/error.html`.
 
 Si l'erreur survient dans la fonction `load` d'un `+layout(.server).js`, le fichier d'erreur le plus proche dans l'arbre est un fichier `+error.svelte` _au-dessus_ de ce <span class="vo">[layout](PUBLIC_SVELTE_SITE_URL/docs/web#layout)</span> (et non au même niveau).
 
