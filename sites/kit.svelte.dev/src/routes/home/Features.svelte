@@ -11,10 +11,11 @@
 				<strong>rendu dynamique sur le serveur</strong>
 				pour une flexibilité maximale. Transformez votre application en une
 				<strong>PWA</strong> rendue côté client avec une seule ligne de code, pour toute votre
-				application ou seulement une seule page. Utilisez un <strong>routeur côté client</strong> accessible
-				avec du <strong>préchargement</strong> automatique pour une navigation instantanée qui ne
-				recharge pas entièrement votre page (ni vos analytiques, et toutes ces choses qui pèsent
-				lourd). Protégez vos utilisateurs avec de la <strong>protection CSRF</strong>
+				application ou seulement une seule page. Utilisez un <strong>routeur côté client</strong>
+				accessible avec du <strong>préchargement</strong> automatique pour une navigation
+				instantanée qui ne recharge pas entièrement votre page (ni vos analytiques, et toutes ces
+				choses qui pèsent lourd). Protégez vos utilisateurs avec de la
+				<strong>protection CSRF</strong>
 				et une configuration
 				<strong>Content Security Policy</strong> simple à utiliser. Gardez vos secrets bien gardés
 				avec une gestion avancée des <strong>variables d'environnement</strong>. Gérez les erreurs
@@ -24,10 +25,10 @@
 				<strong>typés</strong>
 				et des <strong>actions de formulaire</strong> qui fonctionnent avec ou sans JavaScript.
 				Faites <strong>co-exister</strong> d'autres frameworks utilisant du routing côté client sur
-				la même page. Ajoutez des services workers pour le support <strong>hors ligne</strong>.
+				la même page. Ajoutez des service workers pour le support <strong>hors ligne</strong>.
 				Générez des pages <strong>compatibles AMP</strong> si vous en avez le besoin. Construisez
-				des UI complexes à l'aide d'un système puissant de routes basé sur votre arborescence de
-				fichiers. Des layouts imbriqués ? Évidemment. Apprenez les <strong>standards du web</strong>
+				des UIs complexes à l'aide d'un système puissant de routes basé sur votre arborescence de
+				fichiers Des layouts imbriqués ? Évidemment. Apprenez les <strong>standards du web</strong>
 				qui fonctionnent dans tous les environnements. Utilisez <strong>Tailwind</strong> et
 				<strong>Playwright</strong>
 				et <strong>Vitest</strong> et <strong>Storybook</strong> et, bah, ce que vous voulez.
