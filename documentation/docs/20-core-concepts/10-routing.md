@@ -340,7 +340,7 @@ export async function POST({ request }) {
 	return json(a + b);
 }
 
-// This handler will respond to PUT, PATCH, DELETE, etc.
+// Cette fonction gèrera PUT, PATCH, DELETE, etc.
 /** @type {import('./$types').RequestHandler} */
 export async function fallback({ request }) {
 	return text(`J'ai géré votre requête ${request.method} !`);

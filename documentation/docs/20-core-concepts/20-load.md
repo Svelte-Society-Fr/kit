@@ -2,9 +2,9 @@
 title: Charger des données
 ---
 
-Avant qu'un composant [`+page.svelte`](routing#page-page-svelte) (et son composant [`+layout.svelte`](routing#layout-layout-svelte) qui l'entoure) puisse être rendu, il est souvent nécessaire de récupérer de la donnée. Nous faisons cela avec des fonctions `load`.
+Avant qu'un composant [`+page.svelte`](routing#page-page-svelte) (et son composant [`+layout.svelte`](routing#layout-layout-svelte) qui l'entoure) puisse être rendu, il est souvent nécessaire de récupérer des données. Nous faisons cela avec les fonctions `load`.
 
-## Donnée de page
+## Données de page
 
 Un fichier `+page.svelte` peut avoir un fichier partenaire `+page.js` qui exporte une fonction `load`, dont la valeur de retour est disponible dans la page via la <span class="vo">[prop](PUBLIC_SVELTE_SITE_URL/docs/svelte#props)</span> `data` :
 
@@ -59,9 +59,9 @@ export async function load({ params }) {
 
 Notez que le type a changé de `PageLoad` à `PageServerLoad`, car les fonctions `load` de serveur ont accès à des arguments additionnels. Pour comprendre les cas d'utilisation de `+page.js` et ceux de `+page.server.js`, lire [Universel vs serveur](load#universel-vs-serveur).
 
-## Donnée de layout
+## Données de layout
 
-Vos fichiers `+layout.svelte` peuvent aussi charger de la donnée, via `+layout.js` ou `+layout.server.js`.
+Vos fichiers `+layout.svelte` peuvent aussi charger des données, via `+layout.js` ou `+layout.server.js`.
 
 ```js
 /// file: src/routes/blog/[slug]/+layout.server.js
@@ -108,7 +108,7 @@ export async function load() {
 </aside>
 ```
 
-La donnée renvoyée par les fonctions `load` de <span class="vo">[layout](PUBLIC_SVELTE_SITE_URL/docs/web#layout)</span> est accessible dans le `+layout.svelte` auquel il "appartient", le composant `+page.svelte`, ainsi que dans les composants `+layout.svelte` enfant.
+Les données renvoyées par les fonctions `load` de <span class="vo">[layout](PUBLIC_SVELTE_SITE_URL/docs/web#layout)</span> sont accessibles dans le `+layout.svelte` auquel il "appartient", le composant `+page.svelte`, ainsi que dans les composants `+layout.svelte` enfant.
 
 ```diff
 /// file: src/routes/blog/[slug]/+page.svelte
@@ -132,11 +132,11 @@ La donnée renvoyée par les fonctions `load` de <span class="vo">[layout](PUBLI
 +{/if}
 ```
 
-> Si plusieurs fonctions `load` renvoient de la donnée portant la même clé, la dernière "gagne" — le résultat d'un `load` de layout renvoyant `{ a: 1, b: 2 }` et d'un `load` de page renvoyant `{ b: 3, c: 4 }` serait `{ a: 1, b: 3, c: 4 }`
+> Si plusieurs fonctions `load` renvoient des données portant la même clé, la dernière "gagne" — le résultat d'un `load` de layout renvoyant `{ a: 1, b: 2 }` et d'un `load` de page renvoyant `{ b: 3, c: 4 }` serait `{ a: 1, b: 3, c: 4 }`
 
 ## $page.data
 
-Le composant `+page.svelte` et tous les composants `+layout.svelte` au-dessus ont accès à leur propre donnée en plus de toutes les données de leur parents.
+Le composant `+page.svelte` et tous les composants `+layout.svelte` au-dessus ont accès à leurs propres données en plus de toutes les données de leur parents.
 
 Dans certains cas, nous pourrions avoir besoin de l'opposé — un <span class="vo">[layout](PUBLIC_SVELTE_SITE_URL/docs/web#layout)</span> parent pourrait avoir besoin d'accéder à la donnée de page ou à la donnée d'un layout enfant. Par exemple, le layout racine pourrait avoir besoin d'accéder à la propriété `title` renvoyée par la fonction `load` de `+page.js` ou `+page.server.js`. Ceci est possible grâce à `$page.data` :
 
@@ -166,11 +166,11 @@ Conceptuellement, elles font la même chose, mais il existe des différences imp
 
 Les fonction `load` de serveur sont _toujours_ exécutées sur le serveur.
 
-Par défaut, les fonctions `load` universelles s'exécutent sur le serveur pendant le [SSR](glossary#ssr) lorsque l'utilisateur ou l'utilisatrice visite la page pour la première fois. Elles sont ensuite de nouveau exécutées lors de l'hydration, en utilisant les réponses des [requêtes `fetch`](#requ-ter-avec-fetch). Toutes les invocations suivantes de fonctions `load` universelles ont lieu dans le navigateur. Vous pouvez personnaliser ce comportement avec les [options de page](page-options). Si vous [désactivez le rendu côté serveur](page-options#ssr), vous obtiendrez un comportement de <span class="vo">[SPA](PUBLIC_SVELTE_SITE_URL/docs/web#spa)</span>, et les fonctions `load` universelles de la page en question seront _toujours_ exécutées dans le navigateur.
+Par défaut, les fonctions `load` universelles s'exécutent sur le serveur pendant le [SSR](glossary#ssr) lorsque l'utilisateur ou l'utilisatrice visite la page pour la première fois. Elles sont ensuite de nouveau exécutées lors de l'hydratation, en utilisant les réponses des [requêtes `fetch`](#requ-ter-avec-fetch). Toutes les invocations suivantes de fonctions `load` universelles ont lieu dans le navigateur. Vous pouvez personnaliser ce comportement avec les [options de page](page-options). Si vous [désactivez le rendu côté serveur](page-options#ssr), vous obtiendrez un comportement de <span class="vo">[SPA](PUBLIC_SVELTE_SITE_URL/docs/web#spa)</span>, et les fonctions `load` universelles de la page en question seront _toujours_ exécutées dans le navigateur.
 
 Une fonction `load` est exécutée à <span class="vo">[runtime](PUBLIC_SVELTE_SITE_URL/docs/development#runtime)</span>, à moins que vous ne [prérendiez](page-options#prerender) la page — dans ce cas, elle sera exécutée à la compilation.
 
-### Input
+### Paramètres d'entrée
 
 Les fonctions `load` universelles et de serveur ont toutes les deux accès aux propriétés décrivant la requête (`params`, `route`, et `url`) ainsi qu'à diverses fonctions (`fetch`, `setHeaders`, `parent` et `depends`). Celles-ci sont décrités dans les sections suivantes.
 
@@ -178,7 +178,7 @@ Les fonctions `load` de serveur sont appelées avec un évènement `ServerLoadEv
 
 Les fonctions `load` universelles sont appelées avec un évènement `LoadEvent`, qui a une propriété `data`. Si vous avez des fonctions `load` à la fois dans `+page.js` et `+page.server.js` (ou `+layout.js` et `+layout.server.js`), la valeur de retour de la fonction `load` de serveur est la propriété `data` dans l'argument de la fonction `load` universelle.
 
-### Output
+### Paramètres de sortie
 
 Une fonction `load` universelle peut renvoyer un objet contenant n'importe quelles valeurs, même des choses comme des classes personnalisée et des constructeurs de composant.
 
@@ -233,7 +233,7 @@ Pour obtenir de la donnée d'une <span class="vo">[API](PUBLIC_SVELTE_SITE_URL/d
 
 - Elle peut être utilisée pour faire des requêtes authentifiées sur le serveur, puisqu'elle hérite des <span class="vo">[headers](PUBLIC_SVELTE_SITE_URL/docs/web#header)</span> `cookie` et `authorization` pour la requête de page.
 - Elle peut faire des requêtes relatives sur le serveur (ordinairement, `fetch` nécessite une URL avec une origine lorsqu'utilisée dans un contexte serveur).
-- Les requêtes internes (i.e. vers les routes `+server.js`) sont directement envoyées à la fonction concernée lorsqu'exécutées sur le serveur, sans appel HTTP supplémentaire.
+- Les requêtes internes (i.e. vers les routes `+server.js`) exécutent directement la fonction concernée lorsqu'émises depuis le serveur, sans appel HTTP supplémentaire.
 - Pendant le rendu côté serveur, la réponse sera capturée et <span class="vo">[inlinée](PUBLIC_SVELTE_SITE_URL/docs/javascript#inline)</span> dans le HTML construit en utilisant les méthodes `text` et `json` de l'objet `Response`. Notez que les headers ne sont _pas_ sérialisés, à moins d'avoir explicitement utilisé [`filterSerializedResponseHeaders`](hooks#server-hooks-handle).
 - Pendant l'hydratation, la réponse sera lue depuis le HTML, garantissant la consistance et évitant ainsi une requête réseau additionnelle — si vous recevez un avertissement dans votre console de navigateur après avoir utilisé `fetch` plutôt que le `fetch` de `load`, c'est la raison.
 
@@ -312,7 +312,7 @@ Définir le même header plusieurs fois (même dans des fonctions `load` sépar�
 
 ## Utiliser la donnée du parent
 
-Il est occasionnellement utile qu'une fonction `load` accède à la donnée d'une fonction `load` parente, ce qui est possible avec `await parent()` :
+Il est occasionnellement utile qu'une fonction `load` accède à la donnée d'une fonction `load` parent, ce qui est possible avec `await parent()` :
 
 ```js
 /// file: src/routes/+layout.js
@@ -496,7 +496,7 @@ Cela peut servir pour créer des affichages spécifiques de chargement, par exem
 
 ## Chargement parallèle
 
-Lorsque qu'il rend (ou qu'il navigue vers) une page, SvelteKit exécute toutes les fonctions `load` en parallèle, en évitant une cascade de requêtes. Pendant la navigation côté client, le résultat des appels de `load` serveur multiples sont groupés dans une seule et même réponse. Une fois toutes les fonctions `load` se sont terminées, la page est rendue.
+Lorsque qu'il rend (ou qu'il navigue vers) une page, SvelteKit exécute toutes les fonctions `load` en parallèle, en évitant une cascade de requêtes. Pendant la navigation côté client, le résultat des appels de `load` serveur multiples sont groupés dans une seule et même réponse. Une fois toutes les fonctions `load` terminées, la page est rendue.
 
 ## Rejouer les fonctions `load`
 
