@@ -13,6 +13,8 @@
 	import netlify from './logos/netlify.svg';
 	import node from './logos/node.svg';
 	import vercel from './logos/vercel.svg';
+
+	import { PUBLIC_KIT_SITE_URL } from '$env/static/public';
 </script>
 
 <Section --background="var(--background-1)">
@@ -108,7 +110,7 @@
 				<img src={azure} alt="" />
 				<span>Azure</span>
 			</a>
-			<a target="_blank" rel="noreferrer" href="/docs/adapters">
+			<a target="_blank" rel="noreferrer" href="{PUBLIC_KIT_SITE_URL}/docs/adapters">
 				<img src={plus} alt="" />
 				<span>Et plus...</span>
 			</a>

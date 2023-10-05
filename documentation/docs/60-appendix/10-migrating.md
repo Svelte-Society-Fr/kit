@@ -81,7 +81,7 @@ Routes now are made up of the folder name exclusively to remove ambiguity, the f
 | routes/about/index.svelte | routes/about/+page.svelte |
 | routes/about.svelte       | routes/about/+page.svelte |
 
-Your custom error page component should be renamed from `_error.svelte` to `+error.svelte`. Any `_layout.svelte` files should likewise be renamed `+layout.svelte`. [Any other files are ignored](routing#other-files).
+Your custom error page component should be renamed from `_error.svelte` to `+error.svelte`. Any `_layout.svelte` files should likewise be renamed `+layout.svelte`. [Any other files are ignored](routing#autres-fichiers).
 
 ### Imports
 
@@ -97,7 +97,7 @@ As before, pages and layouts can export a function that allows data to be loaded
 
 This function has been renamed from `preload` to [`load`](load), it now lives in a `+page.js` (or `+layout.js`) next to its `+page.svelte` (or `+layout.svelte`), and its API has changed. Instead of two arguments — `page` and `session` — there is a single `event` argument.
 
-There is no more `this` object, and consequently no `this.fetch`, `this.error` or `this.redirect`. Instead, you can get [`fetch`](load#making-fetch-requests) from the input methods, and both [`error`](load#errors) and [`redirect`](load#redirects) are now thrown.
+There is no more `this` object, and consequently no `this.fetch`, `this.error` or `this.redirect`. Instead, you can get [`fetch`](load#requ-ter-avec-fetch) from the input methods, and both [`error`](load#erreurs) and [`redirect`](load#redirections) are now thrown.
 
 ### Stores
 
