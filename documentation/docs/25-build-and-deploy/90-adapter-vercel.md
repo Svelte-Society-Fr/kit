@@ -38,7 +38,7 @@ export const config = {
 };
 ```
 
-...et d'autres en tant que [Serverless Functions](https://vercel.com/docs/concepts/functions/serverless-functions) (notez qu'en précisant `config` dans un <span class="vo">[layout](PUBLIC_SVELTE_URL_SITE/docs/web#layout)</span>, l'option s'applique à toutes les pages enfant) :
+...et d'autres en tant que [Serverless Functions](https://vercel.com/docs/concepts/functions/serverless-functions) (notez qu'en précisant `config` dans un <span class="vo">[layout](PUBLIC_SVELTE_SITE_URL/docs/web#layout)</span>, l'option s'applique à toutes les pages enfant) :
 
 ```js
 /// file: admin/+layout.js
