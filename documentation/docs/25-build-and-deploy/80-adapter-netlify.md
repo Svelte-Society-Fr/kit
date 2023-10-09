@@ -4,7 +4,7 @@ title: Netlify
 
 Pour déployer sur [Netlify](https://www.netlify.com/), utilisez [`adapter-netlify`](https://github.com/sveltejs/kit/tree/master/packages/adapter-netlify).
 
-Cet adaptateur sera installé par défaut lorsque vous utilisez [`adapter-auto`](adapter-auto), mais l'ajouter à votre projet vous permet de préciser des options spécifiques à Netlify.
+Cet adaptateur est installé par défaut lorsque vous utilisez [`adapter-auto`](adapter-auto), mais l'ajouter à votre projet vous permet de préciser des options spécifiques à Netlify.
 
 ## Usage
 

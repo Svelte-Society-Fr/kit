@@ -4,7 +4,7 @@ title: Cloudflare Pages
 
 Pour déployer sur [Cloudflare Pages](https://developers.cloudflare.com/pages/), utilisez [`adapter-cloudflare`](https://github.com/sveltejs/kit/tree/master/packages/adapter-cloudflare).
 
-Cet adaptateur sera installé par défaut lorsque vous utilisez [`adapter-auto`](adapter-auto). Si vous prévoyez de rester sur Cloudflare Pages, vous pouvez supprimer [`adapter-auto`](adapter-auto) pour utiliser directement cet adaptateur de sorte que les déclarations de types soit automatiquement appliquées et que vous puissiez utiliser les options spécifiques à Cloudflare.
+Cet adaptateur est installé par défaut lorsque vous utilisez [`adapter-auto`](adapter-auto). Si vous prévoyez de rester sur Cloudflare Pages, vous pouvez supprimer [`adapter-auto`](adapter-auto) pour utiliser directement cet adaptateur de sorte que les déclarations de types soit automatiquement appliquées et que vous puissiez utiliser les options spécifiques à Cloudflare.
 
 ## Comparaisons
 
