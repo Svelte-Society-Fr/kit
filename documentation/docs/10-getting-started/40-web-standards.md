@@ -74,7 +74,7 @@ export async function POST(event) {
 
 ## APIs de Stream
 
-La plupart du temps, vos <span class="vo">[endpoints](PUBLIC_SVELTE_SITE_URL/docs/web#endpoint)</span> vous renverront de la donnée complète, comme dans l'exemple `userAgent` ci-dessus. Parfois, vous pourriez avoir besoin de renvoyer une réponse trop lourde pour être envoyée en une seule fois, ou de renvoyer la donnée en morceaux, et pour cela la plateforme fournit des [streams](https://developer.mozilla.org/fr/docs/Web/API/Streams_API) — [ReadableStream](https://developer.mozilla.org/fr/docs/Web/API/ReadableStream), [WritableStream](https://developer.mozilla.org/fr/docs/Web/API/WritableStream) et [TransformStream](https://developer.mozilla.org/fr/docs/Web/API/TransformStream).
+La plupart du temps, vos <span class="vo">[endpoints](PUBLIC_SVELTE_SITE_URL/docs/web#endpoint)</span> vous renverront des données complètes, comme dans l'exemple `userAgent` ci-dessus. Parfois, vous pourriez avoir besoin de renvoyer une réponse trop lourde pour être envoyée en une seule fois, ou de renvoyer la donnée en morceaux, et pour cela la plateforme fournit des [streams](https://developer.mozilla.org/fr/docs/Web/API/Streams_API) — [ReadableStream](https://developer.mozilla.org/fr/docs/Web/API/ReadableStream), [WritableStream](https://developer.mozilla.org/fr/docs/Web/API/WritableStream) et [TransformStream](https://developer.mozilla.org/fr/docs/Web/API/TransformStream).
 
 ## APIs d'URL
 

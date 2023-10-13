@@ -2,9 +2,11 @@
 title: Actions de formulaire
 ---
 
-Un fichier `+page.server.js` peut exporter des _actions_, qui vous permettent d'envoyer avec `POST` de la donnée au serveur en utilisant l'élément `<form>`.
+Un fichier `+page.server.js` peut exporter des _actions_, qui vous permettent d'envoyer avec `POST` des données au serveur en utilisant l'élément `<form>`.
 
 Lorsque vous utilisez `<form>`, JavaScript côté client est facultatif, mais vous pouvez _améliorer progressivement_ vos interactions de formulaire de manière simple avec JavaScript pour proposer la meilleure expérience utilisateur.
+
+Lorsque vous utilisez un formulaire natif `<form>`, l'envoi du formulaire est réalisé sans JavaScript, rendant JavaScript complètement facultatif sur la page, mais vous pouvez _améliorer progressivement_ les interactions du formulaire de manière simple avec JavaScript pour proposer une meilleure expérience utilisateur (plus d'infos dans [cette section](form-actions#am-lioration-progressive)).
 
 ## Actions par défaut
 
@@ -103,7 +105,7 @@ Comme pour l'attribut `action`, nous pouvons utiliser l'attribut `formaction` su
 
 ## Anatomie d'une action
 
-Chaque action reçoit un objet `RequestEvent`, vous permettant de lire la donnée avec `request.formData()`. Après avoir traité la requête (par exemple, en connectant l'utilisateur grâce à un cookie), l'action peut répondre avec de la donnée qui sera disponible au travers de la propriété `form` dans la page correspondante, et à travers `$page.form` dans toute l'application jusqu'à la prochaine mise à jour.
+Chaque action reçoit un objet `RequestEvent`, vous permettant de lire la donnée avec `request.formData()`. Après avoir traité la requête (par exemple, en connectant l'utilisateur grâce à un cookie), l'action peut répondre avec des données qui seront disponibles au travers de la propriété `form` dans la page correspondante, et à travers `$page.form` dans toute l'application jusqu'à la prochaine mise à jour.
 
 ```js
 // @errors: 2304
@@ -458,7 +460,7 @@ const response = await fetch(this.action, {
 
 ## Alternatives
 
-Les actions de formulaires sont la méthode à privilégier pour envoyer de la donnée au serveur, puisqu'elles peuvent améliorées progressivement, mais vous pouvez aussi utiliser des fichiers [`+server.js`](routing#server) pour exposer (par exemple) une <span class="vo">[API](PUBLIC_SVELTE_SITE_URL/docs/development#api)</span> <span class="vo">[JSON](PUBLIC_SVELTE_SITE_URL/docs/web#json)</span>. Voici comment une telle interaction serait écrite :
+Les actions de formulaires sont la méthode à privilégier pour envoyer des données au serveur, puisqu'elles peuvent améliorées progressivement, mais vous pouvez aussi utiliser des fichiers [`+server.js`](routing#server) pour exposer (par exemple) une <span class="vo">[API](PUBLIC_SVELTE_SITE_URL/docs/development#api)</span> <span class="vo">[JSON](PUBLIC_SVELTE_SITE_URL/docs/web#json)</span>. Voici comment une telle interaction serait écrite :
 
 ```svelte
 <!--- file: send-message/+page.svelte --->
@@ -487,7 +489,7 @@ export function POST() {
 
 Comme nous l'avons vu, pour invoquer une action de formulaire, vous devez utiliser `method="POST"`.
 
-Certains formulaires n'ont pas besoin d'utiliser `POST` pour envoyer de la donnée au serveur – les `<input>` de recherche par exemple. Dans ces cas là, vous pouvez utiliser `method="GET"` (ou de manière équivalente, aucune `method`), et SvelteKit les traitera alors comme les éléments `<a>`, utilisant le routeur client plutôt qu'une navigation rechargeant la page entièrement :
+Certains formulaires n'ont pas besoin d'utiliser `POST` pour envoyer des données au serveur – les `<input>` de recherche par exemple. Dans ces cas là, vous pouvez utiliser `method="GET"` (ou de manière équivalente, aucune `method`), et SvelteKit les traitera alors comme les éléments `<a>`, utilisant le routeur client plutôt qu'une navigation rechargeant la page entièrement :
 
 ```html
 <form action="/search">
