@@ -182,15 +182,15 @@ Les fonctions `load` universelles sont appelées avec un évènement `LoadEvent`
 
 Une fonction `load` universelle peut renvoyer un objet contenant n'importe quelles valeurs, même des choses comme des classes personnalisée et des constructeurs de composant.
 
-Une fonction `load` de serveur doit renvoyer de la donnée pouvant être sérialisée avec [devalue](https://github.com/rich-harris/devalue) — tout ce qui être représenté en <span class="vo">[JSON](PUBLIC_SVELTE_SITE_URL/docs/web#json)</span> plus des choses comme `BigInt`, `Date`, `Map`, `Set` et `RegExp`, ou des références cycliques — afin qu'elle soit transportée sur le réseau. Votre donnée peut inclure des [promesses](#le-flux-des-promesses), dont les valeurs promises seront envoyées en flux aux navigateurs.
+Une fonction `load` de serveur doit renvoyer des données pouvant être sérialisées avec [devalue](https://github.com/rich-harris/devalue) — tout ce qui être représenté en <span class="vo">[JSON](PUBLIC_SVELTE_SITE_URL/docs/web#json)</span> plus des choses comme `BigInt`, `Date`, `Map`, `Set` et `RegExp`, ou des références cycliques — afin qu'elle soit transportée sur le réseau. Votre donnée peut inclure des [promesses](#le-flux-des-promesses), dont les valeurs promises seront envoyées en flux aux navigateurs.
 
 ### Quand utiliser quoi
 
 Les fonctions `load` de serveur sont pratiques lorsque vous avez besoin d'accéder à la donnée directement depuis une base de données ou un système de fichiers, ou lorsque vous avez besoin d'utiliser des variables d'environnement privées.
 
-Les fonctions `load` universelles sont utiles lorsque vous avez besoin de récupérer avec `fetch` de la donnée d'une <span class="vo">[API](PUBLIC_SVELTE_SITE_URL/docs/development#api)</span> externe et n'avez pas besoin d'identifiants privés, puisque SvelteKit peut récupérer la donnée directement depuis l'API plutôt que de faire un aller-retour vers votre serveur. Elles sont également utiles lorsque vous avez besoin de renvoyer quelque chose qui ne peut pas être sérialisé, comme un constructeur de composant Svelte.
+Les fonctions `load` universelles sont utiles lorsque vous avez besoin de récupérer avec `fetch` des données d'une <span class="vo">[API](PUBLIC_SVELTE_SITE_URL/docs/development#api)</span> externe et n'avez pas besoin d'identifiants privés, puisque SvelteKit peut récupérer la donnée directement depuis l'API plutôt que de faire un aller-retour vers votre serveur. Elles sont également utiles lorsque vous avez besoin de renvoyer quelque chose qui ne peut pas être sérialisé, comme un constructeur de composant Svelte.
 
-Dans de rares cas, vous pourriez avoir besoin d'utiliser les deux ensemble – par exemple, vous pourriez avoir besoin de renvoyer une instance d'une classe personnalisée qui a été initialisée avec de la donnée venant de votre serveur.
+Dans de rares cas, vous pourriez avoir besoin d'utiliser les deux ensemble – par exemple, vous pourriez avoir besoin de renvoyer une instance d'une classe personnalisée qui a été initialisée avec des données venant de votre serveur.
 
 ## Utiliser la donnée d'URL
 
@@ -229,7 +229,7 @@ Si on suppose une `route.id` étant `/a/[b]/[...c]` et un `url.pathname` étant 
 
 ## Requêter avec `fetch`
 
-Pour obtenir de la donnée d'une <span class="vo">[API](PUBLIC_SVELTE_SITE_URL/docs/development#api)</span> externe ou d'une fonction de `+server.js`, vous pouvez utiliser la fonction `fetch` fournie, qui fonctionne exactement comme l'[API web `fetch` native](https://developer.mozilla.org/fr/docs/Web/API/fetch) avec quelques fonctionnalités supplémentaires :
+Pour obtenir des données d'une <span class="vo">[API](PUBLIC_SVELTE_SITE_URL/docs/development#api)</span> externe ou d'une fonction de `+server.js`, vous pouvez utiliser la fonction `fetch` fournie, qui fonctionne exactement comme l'[API web `fetch` native](https://developer.mozilla.org/fr/docs/Web/API/fetch) avec quelques fonctionnalités supplémentaires :
 
 - Elle peut être utilisée pour faire des requêtes authentifiées sur le serveur, puisqu'elle hérite des <span class="vo">[headers](PUBLIC_SVELTE_SITE_URL/docs/web#header)</span> `cookie` et `authorization` pour la requête de page.
 - Elle peut faire des requêtes relatives sur le serveur (ordinairement, `fetch` nécessite une URL avec une origine lorsqu'utilisée dans un contexte serveur).
@@ -441,7 +441,7 @@ Dans le navigateur, vous pouvez aussi naviguer programmatiquement en dehors d'un
 
 ## Le flux des promesses
 
-Les promesses à la _racine_ de l'objet renvoyé sont automatiquement attendues (`await`), rendant plus simple l'utilisation de plusieurs promesses sans créer de cascades de chargement. Lors de l'exécution d'une fonction `load` de serveur, les promesses _imbriquées_ seront envoyées en flux ("<span class="vo">[streamées](PUBLIC_SVELTE_SITE_URL/docs/web#stream)</span>") vers le navigateur à leur résolution. Cela est utile si vous avez de la donnée lourde et non essentielle, car vous pouvez commencer à afficher la page avant que toute la donnée soit disponible :
+Les promesses à la _racine_ de l'objet renvoyé sont automatiquement attendues (`await`), rendant plus simple l'utilisation de plusieurs promesses sans créer de cascades de chargement. Lors de l'exécution d'une fonction `load` de serveur, les promesses _imbriquées_ seront envoyées en flux ("<span class="vo">[streamées](PUBLIC_SVELTE_SITE_URL/docs/web#stream)</span>") vers le navigateur à leur résolution. Cela est utile si vous avez des données lourdes et non essentielles, car vous pouvez commencer à afficher la page avant que toute la donnée soit disponible :
 
 ```js
 /// file: src/routes/+page.server.js
@@ -607,6 +607,6 @@ Notez que rejouer une fonction `load` va mettre à jour la <span class="vo">[pro
 
 ## Sur le même sujet
 
-- [Tutoriel: Charger de la donnée](PUBLIC_LEARN_SITE_URL/tutorial/page-data)
+- [Tutoriel: Chargement de données](PUBLIC_LEARN_SITE_URL/tutorial/page-data)
 - [Tutoriel: Erreurs et redirections](PUBLIC_LEARN_SITE_URL/tutorial/error-basics)
 - [Tutoriel: Chargement avancé](PUBLIC_LEARN_SITE_URL/tutorial/await-parent)
