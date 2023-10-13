@@ -172,7 +172,7 @@ Note : pour utiliser le module intégré `crypto` de Node avec Node 18, vous aur
 
 L'adaptateur crée deux fichiers dans votre dossier de <span class="vo">[build](PUBLIC_SVELTE_SITE_URL/docs/development#build)</span> – `index.js` et `handler.js`. Exécuter `index.js` – par exemple avec `node build` si vous utilisez le dossier de build par défault – va lancer le serveur sur le port configuré.
 
-Autrement, vous pouvez importer le fichier `handler.js`, qui exporte une fonction prévue pour être utilisée avec [Express](https://github.com/expressjs/expressjs.com), [Connect](https://github.com/senchalabs/connect) ou [Polka](https://github.com/lukeed/polka) (ou même uniquement avec le module intégré [`http.createServer`](https://nodejs.org/dist/latest/docs/api/http.html#httpcreateserveroptions-requestlistener)), et mettre en place votre propre serveur :
+Autrement, vous pouvez importer le fichier `handler.js`, qui exporte une fonction prévue pour être utilisée avec [Express](https://github.com/expressjs/express), [Connect](https://github.com/senchalabs/connect) ou [Polka](https://github.com/lukeed/polka) (ou même uniquement avec le module intégré [`http.createServer`](https://nodejs.org/dist/latest/docs/api/http.html#httpcreateserveroptions-requestlistener)), et mettre en place votre propre serveur :
 
 ```js
 // @errors: 2307 7006

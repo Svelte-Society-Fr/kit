@@ -58,7 +58,7 @@ De plus, l'option suivante s'applique aux fonctions <span class="vo">[edge](PUBL
 
 Enfin les options suivantes s'appliquent aux fonctions <span class="vo">[serverless](PUBLIC_SVELTE_SITE_URL/docs/web#serverless)</span> :
 - `memory`: la quantité de mémoire disponible pour la fonction. Vaut par défaut `1024` Mb, et peut être réduite à `128` Mb ou [augmentée](https://vercel.com/docs/concepts/limits/overview#serverless-function-memory) par tranche de 64Mb jusqu'à `3008` Mb pour les comptes Pro ou Enterprise
-- `maxDuration`: durée maximum d'exécution de la fonction. Vaut par défaut `10` secondes pour les comptes Hobby, `60` pour les comptes Pro et `900` pour les comptes Enterprise
+- `maxDuration`: durée maximum d'exécution de la fonction. Vaut par défaut `10` secondes pour les comptes Hobby, `15` pour les comptes Pro et `900` pour les comptes Enterprise
 - `isr`: la configuration de l'<span class="vo">[ISR](PUBLIC_SVELTE_SITE_URL/docs/web#isr)</span>, décrite plus bas
 
 Si vos fonctions ont besoin d'avoir accès à des données dans une région spécifique, il est recommandé qu'elles soient déployées dans la même région (ou proche de celle-ci) pour optimiser la performance.
