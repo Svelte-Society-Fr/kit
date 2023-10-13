@@ -115,7 +115,7 @@ Vous devriez commencer à lire depuis la _droite_, en comptant le nombre de <spa
 
 ### `BODY_SIZE_LIMIT`
 
-Cette variable d'environnement représent la taille de <span class="vo">[body](PUBLIC_SVELTE_SITE_URL/docs/web#body)</span> de requête maximale à accepter en octets, même en <span class="vo">[streaming](PUBLIC_SVELTE_SITE_URL/docs/web#stream)</span>. Vous pouvez désactiver cette option avec une valeur de 0 et implémenter une vérification personnalisée dans la fonction [`handle`](hooks#server-hooks-handle) si vous avez besoin de quelque chose plus avancé.
+Cette variable d'environnement représent la taille de <span class="vo">[body](PUBLIC_SVELTE_SITE_URL/docs/web#body)</span> de requête maximale à accepter en octets, même en <span class="vo">[streaming](PUBLIC_SVELTE_SITE_URL/docs/web#stream)</span>. Vous pouvez désactiver cette option avec une valeur de 0 et implémenter une vérification personnalisée dans la fonction [`handle`](hooks#hooks-de-serveur-handle) si vous avez besoin de quelque chose plus avancé.
 
 ## Options
 

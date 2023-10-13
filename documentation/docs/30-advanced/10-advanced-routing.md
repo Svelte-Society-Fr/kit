@@ -61,7 +61,7 @@ export function load(event) {
 }
 ```
 
-> Si vous ne gérez pas les cas 404, ils seront à gérer dans [`handleError`](hooks#shared-hooks-handleerror)
+> Si vous ne gérez pas les cas 404, ils seront à gérer dans [`handleError`](hooks#hooks-partag-s-handleerror)
 
 ## Paramètres optionnels
 

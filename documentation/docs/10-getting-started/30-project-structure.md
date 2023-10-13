@@ -40,7 +40,7 @@ Le dossier `src` contient le coeur de votre projet. Tout est optionnel, à l'exc
 
 - `lib` contient votre code de bibliothèque (utilitaires et composants), qui peut être importé via l'alias [`$lib`](modules#$lib) alias, ou <span class="vo">[packagé](PUBLIC_SVELTE_SITE_URL/docs/web#bundler-packager)</span> pour être distribué en utilisant [`svelte-package`](packaging)
 	- `server` contient votre code de bibliothèque spécifique au serveur. Il peut être importé via l'alias [`$lib/server`](server-only-modules). SvelteKit vous empêchera d'importer ces fichiers dans du code client
-- `params` contient les [validateurs de paramètres](advanced-routing#matching) dont votre application a besoin
+- `params` contient les [validateurs de paramètres](advanced-routing#fonctions-match) dont votre application a besoin
 - `routes` contient les [routes](routing) de votre application. Vous pouvez aussi y placer des composants qui ne sont utilisés que dans une seule route
 - `app.html` est votre <span class="vo">[template](PUBLIC_SVELTE_SITE_URL/docs/development#template)</span> de page — un document HTML contenant les emplacements réservés suivants :
   - `%sveltekit.head%` — les éléments `<link>` et `<script>` requis par votre application, ainsi que le contenu `<svelte:head>` éventuel

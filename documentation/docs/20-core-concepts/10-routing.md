@@ -133,7 +133,7 @@ Si l'erreur survient dans la fonction `load` d'un `+layout(.server).js`, le fich
 
 Si aucune route n'est trouvée (404), `src/routes/+error.svelte` est affichée (ou la page d'erreur par défaut, si ce fichier n'existe pas).
 
-> `+error.svelte` n'est _pas_ utilisée lorsqu'une erreur survient dans une fonction [`handle`](hooks#server-hooks-handle) ou un gestionnaire de requête [`+server.js`](#server).
+> `+error.svelte` n'est _pas_ utilisée lorsqu'une erreur survient dans une fonction [`handle`](hooks#hooks-de-serveur-handle) ou un gestionnaire de requête [`+server.js`](#server).
 
 Vous pouvez en apprendre plus sur la gestion des erreurs [ici](errors).
 
@@ -204,7 +204,7 @@ Nous pouvons créer un layout qui s'applique aux pages en-dessous de `/settings`
 <slot></slot>
 ```
 
-Par défaut, chaque layout hérite du layout au-dessus de lui. Mais parfois ce n'est pas ce que l'on souhaite — dans ce cas, la section [layouts avancés](advanced-routing#advanced-layouts) peut vous aider.
+Par défaut, chaque layout hérite du layout au-dessus de lui. Mais parfois ce n'est pas ce que l'on souhaite — dans ce cas, la section [layouts avancés](advanced-routing#layouts-avanc-s) peut vous aider.
 
 ### +layout.js
 
