@@ -58,9 +58,9 @@ export async function load({ fetch }) {
 
 La règle principale est la suivante : pour qu'une page puisse être prérendue, deux personnes arrivant dessus directement doivent voir le même contenu arriver du serveur.
 
-> Toutes les pages ne sont pas adaptées au prérendu. Tout contenu qui est prérendu sera affiché à tout le monde. Vous pouvez bien sûr requêter de la donnée personnalisée dans une page prérendu en utilisant `onMount`, mais cela pourrait déboucher sur une plus mauvaise expérience utilisateur puisque du contenu vide ou de chargement sera affiché.
+> Toutes les pages ne sont pas adaptées au prérendu. Tout contenu qui est prérendu sera affiché à tout le monde. Vous pouvez bien sûr requêter des données personnalisées dans une page prérendu en utilisant `onMount`, mais cela pourrait déboucher sur une plus mauvaise expérience utilisateur puisque du contenu vide ou de chargement sera affiché.
 
-Notez que vous pouvez toujours prérendre des pages qui chargent de la donnée en fonction des paramètres de page, comme cette route `src/routes/blog/[slug]/+page.svelte`.
+Notez que vous pouvez toujours prérendre des pages qui chargent des données en fonction des paramètres de page, comme cette route `src/routes/blog/[slug]/+page.svelte`.
 
 L'accès à [`url.searchParams`](load#utiliser-la-donn-e-d-url-url) durant le prérendu est interdit. Si vous en avez besoin, assurez-vous que vous vous en servez uniquement dans le navigateur (par exemple dans `onMount`).
 
