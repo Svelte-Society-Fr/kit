@@ -6,7 +6,7 @@ Le cœur de SvelteKit est un _routeur basé sur l'arborescence de fichiers_. Les
 
 - `src/routes` est la route racine
 - `src/routes/about` crée une route `/about`
-- `src/routes/blog/[slug]` crée une route avec un _paramètre_, `slug`, qui peut être utilisé pour charger de la donnée dynamiquement lorsque quelqu'un demande une page comme `/blog/hello-world`
+- `src/routes/blog/[slug]` crée une route avec un _paramètre_, `slug`, qui peut être utilisé pour charger des données dynamiquement lorsque quelqu'un demande une page comme `/blog/hello-world`
 
 > Vous pouvez utiliser un autre dossier que `src/routes` en modifiant la [configuration du projet](configuration).
 
@@ -46,7 +46,7 @@ Un composant `+page.svelte` définit une page de votre application. Par défaut,
 
 ### +page.js
 
-Souvent, une page a besoin de charger de la donnée avant qu'elle ne puisse être rendue. Pour cela, il suffit d'ajouter un module `+page.js` qui exporte une fonction `load` :
+Souvent, une page a besoin de charger des données avant qu'elle ne puisse être rendue. Pour cela, il suffit d'ajouter un module `+page.js` qui exporte une fonction `load` :
 
 ```js
 /// file: src/routes/blog/[slug]/+page.js
@@ -77,7 +77,7 @@ Vous trouverez plus d'informations sur ces valeurs dans la section [options de p
 
 ### +page.server.js
 
-Si votre fonction `load` doit impérativement être exécutée sur le serveur — par exemple, si elle a besoin de récupérer de la donnée dans une base de données, ou si elle a besoin d'accéder à des [variables d'environnement privées](modules#$env-static-private) comme des clés d'API — vous pouvez alors renommer `+page.js` en `+page.server.js` et changer le type `PageLoad` en `PageServerLoad`.
+Si votre fonction `load` doit impérativement être exécutée sur le serveur — par exemple, si elle a besoin de récupérer des données dans une base de données, ou si elle a besoin d'accéder à des [variables d'environnement privées](modules#$env-static-private) comme des clés d'API — vous pouvez alors renommer `+page.js` en `+page.server.js` et changer le type `PageLoad` en `PageServerLoad`.
 
 ```js
 /// file: src/routes/blog/[slug]/+page.server.js
@@ -112,7 +112,7 @@ Lors de la navigation côté client, SvelteKit va charger cette donnée sur le s
 
 Comme `+page.js`, `+page.server.js` peut exporter des [options de page](page-options) — `prerender`, `ssr` et `csr`.
 
-Un fichier `+page.server.js` peut également exporter des _actions_. Si `load` vous permet de lire de la donnée sur le serveur, les `actions` vous permettent d'_écrire_ de la donnée sur le serveur en utilisant l'élément `<form>`. Pour savoir comment vous en servir, reportez-vous à la section sur les [actions de formulaire](form-actions).
+Un fichier `+page.server.js` peut également exporter des _actions_. Si `load` vous permet de lire des données sur le serveur, les `actions` vous permettent d'_écrire_ des données sur le serveur en utilisant l'élément `<form>`. Pour savoir comment vous en servir, reportez-vous à la section sur les [actions de formulaire](form-actions).
 
 ## +error
 
@@ -280,7 +280,7 @@ Si une erreur survient (soit via `throw error(...)`, soit une erreur inattendue)
 
 > Lors que vous créez une fonction `OPTIONS`, notez que Vite injectera les headers `Access-Control-Allow-Origin` et `Access-Control-Allow-Methods` — ceux-ci ne sont pas présents en production à moins que vous ne les ajoutiez.
 
-### Recevoir de la donnée
+### Recevoir des données
 
 En exportant des fonctions `POST`/`PUT`/`PATCH`/`DELETE`/`OPTIONS`/`HEAD`, les fichiers `+server.js` peuvent être utilisés pour créer une <span class="vo">[API](PUBLIC_SVELTE_SITE_URL/docs/development#api)</span> complète :
 
@@ -322,7 +322,7 @@ export async function POST({ request }) {
 }
 ```
 
-> En général, les [actions de formulaire](form-actions) sont une meilleure façon d'envoyer de la donnée du navigateur vers le serveur.
+> En général, les [actions de formulaire](form-actions) sont une meilleure façon d'envoyer des données du navigateur vers le serveur.
 
 > Si une fonction `GET` est exportée, une requête `HEAD` renverra le `content-length` du <span class="vo">[body](PUBLIC_SVELTE_SITE_URL/docs/web#body)</span> de la réponse de `GET`.
 
