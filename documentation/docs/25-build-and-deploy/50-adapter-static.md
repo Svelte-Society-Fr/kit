@@ -122,7 +122,7 @@ jobs:
         uses: actions/checkout@v3
 
       # Si vous utilisez pnpm, ajoutez cette étape puis modifiez les commandes la clé de cache
-			# ci-dessous pour utiliser `pnpm`
+      # ci-dessous pour utiliser `pnpm`
       # - name: Install pnpm
       #   uses: pnpm/action-setup@v2
       #   with:
