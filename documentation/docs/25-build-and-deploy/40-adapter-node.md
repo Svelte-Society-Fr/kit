@@ -22,7 +22,7 @@ export default {
 
 ## Déploiement
 
-Commencez par compiler votre application avec `npm run build`. Ceci va créer le serveur de production dans le dossier défini par `out` dans les options d'adaptateur, `build` étant le dossier par défaut.
+Commencez par compiler votre application avec `npm run build`. Ceci va créer le serveur de production dans le dossier défini par `out` dans les options de l'adaptateur, `build` étant le dossier par défaut.
 
 Vous aurez besoin du dossier `out`, du fichier `package.json` de votre projet, et des dépendances de production de votre `node_modules` pour lancer l'application. Les dépendances de production peuvent être générées en copiant les fichiers `package.json` et `package-lock.json`, puis en lançant la commande `npm ci --omit dev` (vous pouvez ignorer cette étape si votre application n'a aucune dépendance). Vous pouvez ensuite lancer votre application avec cette commande :
 
