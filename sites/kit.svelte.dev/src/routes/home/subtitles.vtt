@@ -22,11 +22,7 @@ WEBVTT
  de construire un site web qui rend ça plus fun
 
 00:00:13.160 --> 00:00:15.440
-<<<<<<< HEAD
  et plus facile que tout ce que l'on a connu depuis longtemps.
-=======
- et facile que tout ce que l'on connu depuis longtemps.
->>>>>>> 782c7419 (docs: more details)
 
 00:00:15.440 --> 00:00:18.720
  Et cela est fait en introduisant
@@ -44,11 +40,7 @@ WEBVTT
  [Amelia Wattenberger] Vous manipulez principalement du HTML,
 
 00:00:32.760 --> 00:00:34.760
-<<<<<<< HEAD
  du JavaScript, et du CSS basiques.
-=======
- JavaScript, et CSS basiques.
->>>>>>> 782c7419 (docs: more details)
 
 00:00:34.760 --> 00:00:37.120
  [Aliza Aufrichtig] La chose que je préfère quand j'utilise Svelte
