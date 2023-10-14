@@ -27,7 +27,7 @@
 				Faites <strong>co-exister</strong> d'autres frameworks utilisant du routing côté client sur
 				la même page. Ajoutez des service workers pour le support <strong>hors ligne</strong>.
 				Générez des pages <strong>compatibles AMP</strong> si vous en avez le besoin. Construisez
-				des UIs complexes à l'aide d'un système puissant de routes basé sur votre arborescence de
+				des UI complexes à l'aide d'un système puissant de routes basé sur votre arborescence de
 				fichiers Des layouts imbriqués ? Évidemment. Apprenez les <strong>standards du web</strong>
 				qui fonctionnent dans tous les environnements. Utilisez <strong>Tailwind</strong> et
 				<strong>Playwright</strong>

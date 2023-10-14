@@ -39,7 +39,7 @@ Pour invoquer cette action depuis la page `/login`, ajoutez simplement un `<form
 </form>
 ```
 
-Si quelqu'un clique sur le bouton, le navigateur enverra au serveur la donnée de formulaire via une requête `POST`, déclenchant l'action par défaut.
+Si quelqu'un clique sur le bouton, le navigateur enverra au serveur la donnée du formulaire via une requête `POST`, déclenchant l'action par défaut.
 
 > Les actions utilisent toujours des requêtes `POST`, puisque les requêtes `GET` ne sont pas censées avoir d'effets de bord.
 
@@ -146,14 +146,14 @@ export const actions = {
 
 {#if form?.success}
 	<!-- ce message est ephémère ; il existe parce que la page a été rendue en
-        réponse à la soumission du formulaire. il disparaîtra si l'utilisateur recharge -->
+        réponse à la soumission du formulaire. il disparaîtra si l'utilisateur recharge la page -->
 	<p>Vous êtes bien connecté•e ! Ravi de vous revoir, {data.user.name}</p>
 {/if}
 ```
 
 ### Erreurs de validation
 
-Si la requête n'a pas pu être traitée à cause de donnée invalide, vous pouvez renvoyer des erreurs de validation — en plus des valeurs de formulaire reçues — à l'utilisateur ou l'utilisatrice pour qu'elle réessaie. La fonction `fail` vous permet de renvoyer un code HTTP (en général 400 ou 422, dans le cas d'erreurs de validation) avec la donnée. Le code est disponible via `$page.status` et la donnée via `form` :
+Si la requête n'a pas pu être traitée à cause de données invalides, vous pouvez renvoyer des erreurs de validation — en plus des valeurs du formulaire reçues — à l'utilisateur ou l'utilisatrice pour qu'elle réessaie. La fonction `fail` vous permet de renvoyer un code HTTP (en général 400 ou 422, dans le cas d'erreurs de validation) avec la donnée. Le code est disponible via `$page.status` et la donnée via `form` :
 
 ```diff
 /// file: src/routes/login/+page.server.js
@@ -186,7 +186,7 @@ export const actions = {
 };
 ```
 
-> Notez que par précaution, nous renvoyons uniquement l'email à a page — pas le mot de passe.
+> Notez que par précaution, nous renvoyons uniquement l'email à la page — pas le mot de passe.
 
 ```diff
 /// file: src/routes/login/+page.svelte
@@ -207,7 +207,7 @@ export const actions = {
 </form>
 ```
 
-La donnée renvoyée doit être sérialisable en <span class="vo">[JSON](PUBLIC_SVELTE_SITE_URL/docs/web#json)</span>. À part ça, vous pouvez utiliser la structure que vous voulez. Par exemple, si vous avez plusieurs formulaire sur la page, vous pouvez distinguer à quel `<form>` la donnée `form` fait référence avec une propriété `id` ou équivalent.
+La donnée renvoyée doit être sérialisable en <span class="vo">[JSON](PUBLIC_SVELTE_SITE_URL/docs/web#json)</span>. À part ça, vous pouvez utiliser la structure que vous voulez. Par exemple, si vous avez plusieurs formulaires sur la page, vous pouvez distinguer à quel `<form>` la donnée `form` fait référence avec une propriété `id` ou équivalent.
 
 ### Redirections
 
@@ -249,9 +249,9 @@ export const actions = {
 
 ## Chargement de données
 
-Après l'exécution d'une action, la page est re-rendue (à moins qu'une redirection ou une erreur inattendue se produise) avec la valeur de retour de l'action rendue disponible dans la page en tant que la <span class="vo">[prop](PUBLIC_SVELTE_SITE_URL/docs/sveltejs#prop)</span> `form`. Cela implique que les fonctions `load` de votre page sont exécutées après l'exécution de l'action.
+Après l'exécution d'une action, la page est re-rendue (à moins qu'une redirection ou une erreur inattendue ne se produise). La valeur de retour de l'action rendue disponible dans la page en tant que la <span class="vo">[prop](PUBLIC_SVELTE_SITE_URL/docs/sveltejs#prop)</span> `form`. Cela implique que les fonctions `load` de votre page sont exécutées après l'exécution de l'action.
 
-Notez que `handle` est exécutée avant l'invocation de l'action, et n'est pas rejouée avant les fonctions `load`. Cela signifie que si, par exemple, vous utilisez `handle` pour remplir `event.locals` en fonction d'un cookie, vos devez mettre à jour `event.locals` lorsque vous définissez ou supprimez le cookie dans une action :
+Notez que `handle` est exécutée avant l'invocation de l'action, et n'est pas rejouée avant les fonctions `load`. Cela signifie que si, par exemple, vous utilisez `handle` pour remplir `event.locals` en fonction d'un cookie, vous devez mettre à jour `event.locals` lorsque vous définissez ou supprimez le cookie dans une action :
 
 ```js
 /// file: src/hooks.server.js
@@ -444,7 +444,7 @@ Nous pouvons aussi implémenter de l'amélioration progressive nous-même, sans 
 </form>
 ```
 
-Notez que vous avez besoin de `deserialize` la réponse avant d'effectuer d'autres traitements en utilisant la méthode de `$app/forms`. `JSON.parse()` ne suffit pas car les actions de formulaire – comme les fonctions `load` – peuvent aussi renvoyer des objets `Date` ou `BigInt`.
+Notez que vous avez besoin de désérialiser la réponse avant d'effectuer d'autres traitements en utilisant la méthode `deserialize` de `$app/forms`. `JSON.parse()` ne suffit pas car les actions de formulaire – comme les fonctions `load` – peuvent aussi renvoyer des objets `Date` ou `BigInt`.
 
 Si vous avez un fichier `+server.js` en plus de votre `+page.server.js`, les requêtes `fetch` seront envoyées vers `+server.js` par défaut. Pour plutôt soumettre avec `POST` vers une action de `+page.server.js`, utilisez le <span class="vo">[header](PUBLIC_SVELTE_SITE_URL/docs/web#header)</span> personnalisé `x-sveltekit-action` :
 
@@ -460,7 +460,7 @@ const response = await fetch(this.action, {
 
 ## Alternatives
 
-Les actions de formulaires sont la méthode à privilégier pour envoyer des données au serveur, puisqu'elles peuvent améliorées progressivement, mais vous pouvez aussi utiliser des fichiers [`+server.js`](routing#server) pour exposer (par exemple) une <span class="vo">[API](PUBLIC_SVELTE_SITE_URL/docs/development#api)</span> <span class="vo">[JSON](PUBLIC_SVELTE_SITE_URL/docs/web#json)</span>. Voici comment une telle interaction serait écrite :
+Les actions de formulaires sont la méthode à privilégier pour envoyer des données au serveur, puisqu'elles peuvent améliorer progressivement votre application, mais vous pouvez aussi utiliser des fichiers [`+server.js`](routing#server) pour exposer (par exemple) une <span class="vo">[API](PUBLIC_SVELTE_SITE_URL/docs/development#api)</span> <span class="vo">[JSON](PUBLIC_SVELTE_SITE_URL/docs/web#json)</span>. Voici comment une telle interaction serait écrite :
 
 ```svelte
 <!--- file: send-message/+page.svelte --->
@@ -489,7 +489,7 @@ export function POST() {
 
 Comme nous l'avons vu, pour invoquer une action de formulaire, vous devez utiliser `method="POST"`.
 
-Certains formulaires n'ont pas besoin d'utiliser `POST` pour envoyer des données au serveur – les `<input>` de recherche par exemple. Dans ces cas là, vous pouvez utiliser `method="GET"` (ou de manière équivalente, aucune `method`), et SvelteKit les traitera alors comme les éléments `<a>`, utilisant le routeur client plutôt qu'une navigation rechargeant la page entièrement :
+Certains formulaires n'ont pas besoin d'utiliser `POST` pour envoyer des données au serveur – les `<input>` de recherche par exemple. Dans ces cas-là, vous pouvez utiliser `method="GET"` (ou de manière équivalente, ne pas spécifier l'attribut `method`), et SvelteKit les traitera alors comme les éléments `<a>`, utilisant le routeur client plutôt qu'une navigation rechargeant la page entièrement :
 
 ```html
 <form action="/search">

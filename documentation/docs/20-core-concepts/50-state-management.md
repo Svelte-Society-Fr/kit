@@ -6,9 +6,9 @@ Si vous êtes habitué•e•s à construire des applications pur-client, la ges
 
 ## Éviter les états partagés sur le serveur
 
-Les navigateurs _gèrent des états_ — de l'état est stocké en mémoire au fur et à mesure que l'utilisateur ou l'utilisatrice interagit avec l'application. En revanche, les serveurs _ne gèrent pas d'état_ — le contenu de la réponse est déterminé entièrement par le contenu de la requête.
+Les navigateurs _gèrent des états_ nativement — l'état est stocké en mémoire au fur et à mesure que l'utilisateur ou l'utilisatrice interagit avec l'application. En revanche, les serveurs _ne gèrent pas d'état_ — le contenu de la réponse est déterminé entièrement par le contenu de la requête.
 
-C'est un état de fait théorique. En réalité, les serveurs sont en service pendant de longues durées et sont partagés entre plusieurs utilisateurs. Pour cette raison il est important de ne pas y stocker de données dans des variables partagées. Par exemple, prenons ce code :
+C'est un état de fait théorique. En réalité, les serveurs sont souvent en service pendant de longues durées et sont partagés entre plusieurs utilisateurs. Pour cette raison il est important de ne pas y stocker de données dans des variables partagées. Par exemple, prenons ce code :
 
 ```js
 // @errors: 7034 7005
@@ -40,7 +40,7 @@ La variable `user` est partagée à toute personne se connectant à ce serveur. 
 
 ## Pas d'effets de bord dans les fonctions `load`
 
-Pour la même raison, vos fonctions `load` doivent être _pures_ — aucun effet de bord (à l'exception éventuellement d'un `console.log(...)` ponctuel). Par exemple, vous pourriez être tenté•e d'écrire dans un <span class="vo">[store](PUBLIC_SVELTE_SITE_URL/docs/sveltejs#store)</span> au sein d'une fonction `load` de sorte à réutiliser la valeur de ce store dans vos composants :
+Pour la même raison, vos fonctions `load` doivent être _pures_ — sans aucun effet de bord (à l'exception éventuellement d'un `console.log(...)` ponctuel). Par exemple, vous pourriez être tenté•e d'écrire dans un <span class="vo">[store](PUBLIC_SVELTE_SITE_URL/docs/sveltejs#store)</span> au sein d'une fonction `load` afin de réutiliser la valeur de ce store dans vos composants :
 
 ```js
 /// file: +page.js
@@ -113,7 +113,7 @@ Vous vous demandez peut-être comment nous pouvons utiliser `$page.data` et d'au
 <p>Bienvenue {$user.name}</p>
 ```
 
-Mettre à jour la valeur d'un store de contexte dans des pages ou composants plus profonds ne va affecter sa valeur dans le composant parent lors de son rendu en <span class="vo">[SSR](PUBLIC_SVELTE_SITE_URL/docs/web#server-side-rendering)</span> : le composant parent a déjà été rendu au moment de la mise à jour de la valeur du store. Pour éviter que les valeurs "clignotent" pendant les mises à jour d'état lors de l'hydratation, il est en général recommandé de faire descendre l'état vers les composants plutôt que de le faire remonter.
+Mettre à jour la valeur d'un store de contexte dans des pages ou composants plus profonds ne va pas affecter sa valeur dans le composant parent lors de son rendu côté serveur : le composant parent a déjà été rendu au moment de la mise à jour de la valeur du store. Pour éviter que les valeurs "clignotent" pendant les mises à jour d'état lors de l'hydratation, il est en général recommandé de faire descendre l'état vers les composants plutôt que de le faire remonter.
 
 Si vous n'utilisez pas le <span class="vo">[SSR](PUBLIC_SVELTE_SITE_URL/docs/web#server-side-rendering)</span> (et pouvez garantir que vous n'aurez pas besoin d'utiliser le SSR dans le futur), vous pouvez alors garder votre état en toute sécurité dans un module partagé, sans avoir besoin de l'<span class="vo">[API](PUBLIC_SVELTE_SITE_URL/docs/development#api)</span> de contexte.
 
@@ -163,11 +163,11 @@ Réutiliser de composants de cette manière signifie que des choses comme l'éta
 {/key}
 ```
 
-## Stocker de l'état dans l'URL
+## Stocker l'état dans l'URL
 
-Si vous avez de l'état qui a besoin de survivre à un rechargement et/ou affecter le <span class="vo">[SSR](PUBLIC_SVELTE_SITE_URL/docs/web#server-side-rendering)</span>, comme des filtres ou des règles de tri sur un tableau, les paramètres de recherche de l'URL (comme `?sort=price&order=ascending`) sont un emplacement idéal pour le stocker. Vous pouvez les préciser dans les attributs d'un `<a href="...">` ou d'un `<form action="...">`, ou les définir programmatiquement via `goto('?key=value')`. Ces états peuvent sont alors accessibles dans les fonctions `load` via le paramètre `url`, et dans les composants via `$page.url.searchParams`.
+Si vous avez un état qui a besoin de survivre à un rechargement et/ou d'affecter le <span class="vo">[SSR](PUBLIC_SVELTE_SITE_URL/docs/web#server-side-rendering)</span>, comme des filtres ou des règles de tri sur un tableau, les paramètres de recherche de l'URL (comme `?sort=price&order=ascending`) sont un emplacement idéal pour le stocker. Vous pouvez les préciser dans les attributs d'un `<a href="...">` ou d'un `<form action="...">`, ou les définir programmatiquement via `goto('?key=value')`. Ces états sont alors accessibles dans les fonctions `load` via le paramètre `url`, et dans les composants via `$page.url.searchParams`.
 
-## Stocker de l'état éphémère dans des snapshots
+## Stocker un état éphémère dans des snapshots
 
-Certains états d'interface, comme "est-ce que cette liste est ouverte ?", sont jetables — si l'utilisateur ou l'utilisatrice navigue sur une autre page ou rafraîchit la page, ce n'est pas grave de perdre ces états. Dans certains cas, vous aurez _besoin_ de persister cette donnée si la personne navigue vers une page différente et revient, mais stocker ce genre d'état dans l'URL ou dans une base de données n'est pas approprié. Dans ces cas là, SvelteKit fournit des [snapshots](snapshots), qui vous permettent d'associer l'état des composants avec une entrée dans l'historique de navigation.
+Certains états d'interface, comme "est-ce que cette liste est ouverte ?", sont jetables — si l'utilisateur ou l'utilisatrice navigue sur une autre page ou rafraîchit la page, ce n'est pas grave de perdre ces états. Dans certains cas, vous aurez _besoin_ de persister cette donnée, mais stocker ce genre d'état dans l'URL ou dans une base de données n'est pas approprié. Dans ces cas-là, SvelteKit fournit des [snapshots](snapshots), qui vous permettent d'associer l'état des composants avec une entrée dans l'historique de navigation.
 
