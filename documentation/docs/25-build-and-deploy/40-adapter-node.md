@@ -56,7 +56,7 @@ Par défaut, le serveur accepte les connections sur `0.0.0.0` avec le port 3000.
 HOST=127.0.0.1 PORT=4000 node build
 ```
 
-Autrement, le serveur peut également être configuré pour accepter les connections sur un certain chemin de <span class="vo">[socket](PUBLIC_SVELTE_SITE_URL/docs/web#socket)</span>. Lorsque vous faites cela avec la variable d'environnement `SOCKET_PATH`, les variables d'environnement `HOST` et `PORT` seront ignorées.
+Le serveur peut également être configuré pour accepter les connections sur un certain chemin de <span class="vo">[socket](PUBLIC_SVELTE_SITE_URL/docs/web#socket)</span>. Lorsque vous faites cela avec la variable d'environnement `SOCKET_PATH`, les variables d'environnement `HOST` et `PORT` seront ignorées.
 
 ```
 SOCKET_PATH=/tmp/socket node build
