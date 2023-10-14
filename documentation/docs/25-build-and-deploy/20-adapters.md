@@ -44,4 +44,4 @@ export default config;
 
 ## Contexte spécifique à chaque plateforme
 
-Certains adaptateurs peuvent avoir accès à des informations de requête additionnelles. Par exemple, les "Cloudflare Workers" ont accès à un objet `env` contenant les <span class="vo">[namespaces](PUBLIC_SVELTE_SITE_URL/docs/development#namespace)</span> KV, etc. Ceci peut être passé à un évènement `RequestEvent` utilisé dans les [hooks](hooks) ainsi qu'aux [routes de serveur](routing#server) comme propriété `platform` – consultez la documentation de chaque adaptateur pour en savoir plus.
+Certains adaptateurs peuvent avoir accès à des informations de requête additionnelles. Par exemple, les "Cloudflare Workers" ont accès à un objet `env` contenant les <span class="vo">[namespaces](PUBLIC_SVELTE_SITE_URL/docs/development#namespace)</span> KV, etc. Ceci peut être passé à un évènement [`RequestEvent`](types#public-types-requestevent) utilisé dans les [hooks](hooks) ainsi qu'aux [routes de serveur](routing#server) comme propriété `platform` – consultez la documentation de chaque adaptateur pour en savoir plus.
