@@ -8,7 +8,7 @@ Des adaptateurs officiels existent pour plusieurs plateformes – ils sont docum
 - [`@sveltejs/adapter-cloudflare`](adapter-cloudflare) pour [Cloudflare Pages](https://developers.cloudflare.com/pages/)
 - [`@sveltejs/adapter-cloudflare-workers`](adapter-cloudflare-workers) pour [Cloudflare Workers](https://workers.cloudflare.com/)
 - [`@sveltejs/adapter-netlify`](adapter-netlify) pour [Netlify](https://netlify.com/)
-- [`@sveltejs/adapter-node`](adapter-node) pour Node servers
+- [`@sveltejs/adapter-node`](adapter-node) pour les serveurs Node
 - [`@sveltejs/adapter-static`](adapter-static) pour les générateurs de sites statiques (<span class="vo">[SSG](PUBLIC_SVELTE_SITE_URL/docs/web#ssg)</span>)
 - [`@sveltejs/adapter-vercel`](adapter-vercel) pour [Vercel](https://vercel.com/home)
 
