@@ -10,7 +10,7 @@ Des adaptateurs officiels existent pour plusieurs plateformes – ils sont docum
 - [`@sveltejs/adapter-netlify`](adapter-netlify) pour [Netlify](https://netlify.com/)
 - [`@sveltejs/adapter-node`](adapter-node) pour Node servers
 - [`@sveltejs/adapter-static`](adapter-static) pour les générateurs de sites statiques (<span class="vo">[SSG](PUBLIC_SVELTE_SITE_URL/docs/web#ssg)</span>)
-- [`@sveltejs/adapter-vercel`](adapter-vercel) pour Vercel
+- [`@sveltejs/adapter-vercel`](adapter-vercel) pour [Vercel](https://vercel.com/home)
 
 D'autres [adaptateurs gérés par la communauté](https://sveltesociety.dev/components#adapters) existent pour d'autres plateformes.
 
