@@ -73,7 +73,7 @@ ORIGIN=https://my.site node build
 ORIGIN=http://localhost:3000 node build
 ```
 
-Ainsi, une requête demandant le chemin `/trucs` sera correctement dirigée vers `https://mon.site/trucs`. Autrement, vous pouvez préciser les <span class="vo">[headers](PUBLIC_SVELTE_SITE_URL/docs/web#header)</span> qui informeront SvelteKit du protocole et de l'hôte de la requête, à partir desquels il pourra construire l'URL d'origine :
+Ainsi, une requête demandant le chemin `/trucs` sera correctement dirigée vers `https://mon.site/trucs`. Sinon, vous pouvez préciser les <span class="vo">[headers](PUBLIC_SVELTE_SITE_URL/docs/web#header)</span> qui informeront SvelteKit du protocole et de l'hôte de la requête, à partir desquels il pourra construire l'URL d'origine :
 
 ```
 PROTOCOL_HEADER=x-forwarded-proto HOST_HEADER=x-forwarded-host node build
