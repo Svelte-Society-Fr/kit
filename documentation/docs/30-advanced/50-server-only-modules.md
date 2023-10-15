@@ -2,7 +2,7 @@
 title: Modules réservés serveur
 ---
 
-Tel un ami proche, SvelteKit sait garder vos secrets. Lorsque vous écrivez votre code <span class="vo">[backend](SVELTE_PUBLIC_SITE_URL/docs/web#backend)</span> et votre code <span class="vo">[frontend](SVELTE_PUBLIC_SITE_URL/docs/web#frontend)</span> dans le même projet, il est facile d'importer accidentellement des données sensibles dans votre code frontend (des variables d'environnement contenant des clés d'<span class="vo">[API](SVELTE_PUBLIC_SITE_URL/docs/developpement)</span> par exemple). SvelteKit fournit un moyen de vous protéger de ce problème : les modules réservés serveur.
+Tel un ami proche, SvelteKit sait garder vos secrets. Lorsque vous écrivez votre code <span class="vo">[backend](PUBLIC_SVELTE_SITE_URL/docs/web#backend)</span> et votre code <span class="vo">[frontend](PUBLIC_SVELTE_SITE_URL/docs/web#frontend)</span> dans le même projet, il est facile d'importer accidentellement des données sensibles dans votre code frontend (des variables d'environnement contenant des clés d'<span class="vo">[API](PUBLIC_SVELTE_SITE_URL/docs/developpement)</span> par exemple). SvelteKit fournit un moyen de vous protéger de ce problème : les modules réservés serveur.
 
 ## Variables d'environnement privées
 
