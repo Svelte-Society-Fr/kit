@@ -125,7 +125,7 @@ const sw = /** @type {ServiceWorkerGlobalScope} */ (/** @type {unknown} */ (self
 const sw = self as unknown as ServiceWorkerGlobalScope;
 ```
 
-Ceci désactive l'accès aux types du DOM comme `HTMLElement` qui ne sont pas disponibles dans un service worker, et instancie les bonnes variables globales. La réassignation de `self` en `sw` vous permet également de lui assigner le bon type (il y a plusieurs moyens pour faire cela, mais celui-ci est le plus simple sans rajouter de fichier). Utilisez `sw` au lieu de `self` dans le reste de votre fichier. La référence aux types de SvelteKit assure que l'import de `$service-worker` est correctement typé.
+Ceci désactive l'accès aux types du <span class="vo">[DOM](PUBLIC_SVELTE_SITE_URL/docs/web#dom)</span> comme `HTMLElement` qui ne sont pas disponibles dans un service worker, et instancie les bonnes variables globales. La réassignation de `self` en `sw` vous permet également de lui assigner le bon type (il y a plusieurs moyens pour faire cela, mais celui-ci est le plus simple sans rajouter de fichier). Utilisez `sw` au lieu de `self` dans le reste de votre fichier. La référence aux types de SvelteKit assure que l'import de `$service-worker` est correctement typé.
 
 ## Autres solutions
 
