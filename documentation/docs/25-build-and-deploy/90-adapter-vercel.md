@@ -26,7 +26,7 @@ export default {
 
 ## Configuration de déploiement
 
-Pour contrôler comment vos routes sont déployées en tant que fonctions Vercel, vous pouvez préciser une configuration de déploiement, soit au travers de l'option indiquée plus haut, ou bien avec [`export const config`](page-options#config) dans vos fichiers `+server.js`, `+page(.server).js` and `+layout(.server).js`.
+Pour contrôler comment vos routes sont déployées en tant que fonctions Vercel, vous pouvez préciser une configuration de déploiement, soit au travers de l'option indiquée plus haut, ou bien avec [`export const config`](page-options#config) dans vos fichiers `+server.js`, `+page(.server).js` et `+layout(.server).js`.
 
 Vous pouvez par exemple déployer des morceaux de votre application en tant que [Edge Functions](https://vercel.com/docs/concepts/functions/edge-functions)...
 

@@ -103,7 +103,7 @@ Si `ADDRESS_HEADER` vaut `X-Forwarded-For`, la valeur du <span class="vo">[heade
 <adresse du client>, <adresse du proxy 1>, <adresse du proxy 2>
 ```
 
-Certaines documentations vont indiqueront de lire l'adresse la plus à gauche, mais cela vous rend [vulnérable à l'usurpation](https://adam-p.ca/blog/2022/03/x-forwarded-for/) (en anglais) :
+Certaines documentations vous indiqueront de lire l'adresse la plus à gauche, mais cela vous rend [vulnérable à l'usurpation](https://adam-p.ca/blog/2022/03/x-forwarded-for/) (en anglais) :
 
 ```
 <adresse malveillante> <adresse du client>, <adresse du proxy 1>, <adresse du proxy 2>
@@ -149,7 +149,7 @@ Permet de précompresser en utilisant gzip et brotli pour les fichiers statiques
 
 ### `envPrefix`
 
-Si vous avez besoin de changer le nom des variables d'environnement utilisées pour configurer le déploiement (par exemple, pour les distinguer des variables d'environnement que vous ne contrôler pas), vous pouvez définir un préfixe :
+Si vous avez besoin de changer le nom des variables d'environnement utilisées pour configurer le déploiement (par exemple, pour les distinguer des variables d'environnement que vous ne contrôlez pas), vous pouvez définir un préfixe :
 
 ```js
 envPrefix: 'MY_CUSTOM_';

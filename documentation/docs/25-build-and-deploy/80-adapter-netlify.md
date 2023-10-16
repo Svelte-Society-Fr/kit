@@ -80,7 +80,7 @@ Pendant la compilation, les règles de redirection sont automatiquement ajoutée
 ### Formulaires Netlify
 
 1. Créez votre formulaire HTML Netlify comme décrit [ici](https://docs.netlify.com/forms/setup/#html-forms) (en anglais), par exemple sur la route `/routes/contact/+page.svelte`. (N'oubliez pas d'ajouter l'élément `<input>` caché `form-name` !)
-2. Le processus de compilation de Netlify traire votre HTML à la compilation, ce qui implique que votre formulaire doit être [prérendu](page-options#prerender) en tant que HTML. Vous pouvez soit ajouter `export const prerender = true` à votre `contact.svelte` pour prérendre uniquement cette page, soit définir l'option `kit.prerender.force: true` pour prérendre toutes les pages.
+2. Le processus de compilation de Netlify traite votre HTML au moment du déploiement, ce qui implique que votre formulaire doit être [prérendu](page-options#prerender) en tant que HTML. Vous pouvez soit ajouter `export const prerender = true` à votre `contact/+page.svelte` pour prérendre uniquement cette page, soit définir l'option `kit.prerender.force: true` pour prérendre toutes les pages.
 3. Si votre formulaire Netlify a un [message personnalisé de succès](https://docs.netlify.com/forms/setup/#success-messages) comme `<form netlify ... action="/success">`, assurez-vous alors que la route `/routes/success/+page.svelte` correspondante existe et est prérendue.
 
 ### Netlify Functions

@@ -39,7 +39,7 @@ export default {
 export const prerender = true;
 ```
 
-> Vous devez vous assurer que l'option de SvelteKit [`trailingSlash`](page-options#trailingslash) est correctement définie pour votre environnement. Si votre hôte ne renvoie pas `/a.html` pour requête demandant `/a`, vous aurez alors besoin de définir `trailingSlash: 'always'` dans votre <span class="vo">[layout](PUBLIC_SVELTE_SITE_URL/docs/web#layout)</span> racine pour renvoyer à la place `/a/index.html`.
+> Vous devez vous assurer que l'option de SvelteKit [`trailingSlash`](page-options#trailingslash) est correctement définie pour votre environnement. Si votre hôte ne renvoie pas `/a.html` pour une requête demandant `/a`, vous aurez alors besoin de définir `trailingSlash: 'always'` dans votre <span class="vo">[layout](PUBLIC_SVELTE_SITE_URL/docs/web#layout)</span> racine pour renvoyer à la place `/a/index.html`.
 
 ## Support sans configuration
 

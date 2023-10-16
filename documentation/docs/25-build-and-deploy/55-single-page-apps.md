@@ -1,5 +1,5 @@
 ---
-title: Single-page apps
+title: Applications de type SPA
 ---
 
 Vous pouvez transformer n'importe quelle application SvelteKit, en utilisant n'importe quel adaptateur, en une <span class="vo">[SPA](PUBLIC_SVELTE_SITE_URL/docs/web#spa)</span> intégralement rendue sur le client en désactivant le <span class="vo">[SSR](PUBLIC_SVELTE_SITE_URL/docs/web#server-side-rendering)</span> au niveau du <span class="vo">[layout](PUBLIC_SVELTE_SITE_URL/docs/web#layout)</span> racine :
