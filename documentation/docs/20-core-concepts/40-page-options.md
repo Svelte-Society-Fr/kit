@@ -74,7 +74,7 @@ C'est entre autres pour cette raison qu'il est recommandé de toujours inclure u
 
 Pour les _pages_, le problème ne se pose pas car SvelteKit écrit des fichiers `foo/index.html` plutôt que `foo`.
 
-### Troubleshooting
+### Résolution de problèmes
 
 Si vous rencontrez une erreur qui dit "The following routes were marked as prerenderable, but were not prerendered" ("_Les routes suivantes ont été définies comme candidates au prérendu, mais n'ont pas été prérendues_"), c'est parce que la route en question (ou un <span class="vo">[layout](PUBLIC_SVELTE_SITE_URL/docs/web#layout)</span> parent si c'est une page) a l'option `export const prerender = true`, mais la page n'a pas été prérendue, parce que elle n'a pas pu être atteinte par le moteur de prérendu.
 
