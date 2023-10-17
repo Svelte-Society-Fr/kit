@@ -8,7 +8,7 @@ Les erreurs sont inévitables dans le développement logiciel. SvelteKit gère l
 
 SvelteKit différencie les erreurs attendues et inattendues, les deux étant représentées comme de simples objets `{ message: string }` par défaut.
 
-Vous pouvez ajouter des propriétés supplémentaires, comme `code` ou un `id` de suivi, comme montré dans les exemples ci-dessous. (Lorsque vous utilisez TypeScript, ceci requiert que vous redéfinissiez le type `Error` comme décrit dans la section sur le [typage](errors#typage)).
+Vous pouvez ajouter des propriétés supplémentaires, comme un `code` ou un `id` de suivi, comme montré dans les exemples ci-dessous. (Lorsque vous utilisez TypeScript, ceci requiert que vous redéfinissiez le type `Error` comme décrit dans la section sur le [typage](errors#typage)).
 
 ## Erreurs attendues
 
