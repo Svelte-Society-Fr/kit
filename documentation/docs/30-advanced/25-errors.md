@@ -40,7 +40,7 @@ export async function load({ params }) {
 }
 ```
 
-Ceci dit à SvelteKit de définir le statut de réponse à 404 et de rendre un composant [`+error.svelte`](routing#error), où `$page.error` est un objet fourni comme second argument à `error(...)`.
+Ceci indique à SvelteKit de définir le statut de réponse à 404 et de rendre un composant [`+error.svelte`](routing#error), où `$page.error` est un objet fourni comme second argument à `error(...)`.
 
 ```svelte
 <!--- file: src/routes/+error.svelte --->
