@@ -196,7 +196,7 @@ Dans l'exemple au-dessus, la route `/admin` n'hérite pas des <span class="vo">[
 
 ### +page@
 
-Les pages peuvent s'échapper de la hiérarchie de <span class="vo">[layout](PUBLIC_SVELTE_SITE_URL/docs/web#layout)</span> courante route par route. Supposez que nous ayons une route `/item/[id]/embed` dans le groupe `(app)` de l'exemple précédent :
+Les pages peuvent s'échapper de la hiérarchie de <span class="vo">[layout](PUBLIC_SVELTE_SITE_URL/docs/web#layout)</span> courante, route par route. Supposez que nous ayons une route `/item/[id]/embed` dans le groupe `(app)` de l'exemple précédent :
 
 ```diff
 src/routes/
