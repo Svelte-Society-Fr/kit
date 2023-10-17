@@ -110,7 +110,7 @@ SvelteKit a besoin de savoir quelle route est en train d'être requêtée. Pour 
 
 - Les routes plus spécifiques ont une priorité plus élevée (par exemple, une route avec aucun paramètre est plus spécifique qu'une route avec un paramètre dynamique, et ainsi de suite)
 - Les paramètres avec des [fonctions `match`](#fonctions-match) (`[name=type]`) ont une priorité plus élevée que celles sans (`[name]`)
-- Les paramètres `[[optional]]` and `[...rest]` sont ignorés à moins qu'ils soient tout à la fin de la route, auquel cas ils sont traitées avec la priorité la plus faible. En d'autres mots `x/[[y]]/z` est traité de manière équivalente à `x/z` d'un point de vue du tri
+- Les paramètres `[[optional]]` et `[...rest]` sont ignorés à moins qu'ils soient tout à la fin de la route, auquel cas ils sont traitées avec la priorité la plus faible. En d'autres mots `x/[[y]]/z` est traité de manière équivalente à `x/z` d'un point de vue du tri
 - Les égalités sont résolues par ordre alphabétique
 
 ...ce qui donne l'ordre suivant, impliquant que `/foo-abc` va invoquer `src/routes/foo-abc/+page.svelte`, et `/foo-def` va invoquer `src/routes/foo-[c]/+page.svelte` plutôt que des routes moins spécifiques :
