@@ -26,7 +26,7 @@ Si le nombre de segments de route est inconnu, vous pouvez utiliser la syntaxe d
 
 ### Pages 404
 
-Les paramètres de reste vous permettent également d'afficher des pages 404s personnalisées. Étant données ces routes...
+Les paramètres de reste vous permettent également d'afficher des pages 404 personnalisées. Étant données ces routes...
 
 ```
 src/routes/
