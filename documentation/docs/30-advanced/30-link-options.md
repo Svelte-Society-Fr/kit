@@ -2,8 +2,7 @@
 title: Options de lien
 ---
 
-Dans une application SvelteKit, les éléments `<a>` sont utilisés pour naviguer entre les différentes routes de votre application, plutôt des composants `<Link>` spécifiques au <span class="vo">[framework](PUBLIC_SVELTE_SITE_URL/docs/web#framework)</span>. Si l
-'utilisateur ou l'utilisatrice clique sur un lien dont le `href` "appartient" à votre application (plutôt que de pointer vers un site extérieur par exemple), alors SvelteKit va naviguer vers la nouvelle page en important son code puis en appelant toute fonction `load` nécessaire pour le chargement des données de la page.
+Dans une application SvelteKit, les éléments `<a>` sont utilisés pour naviguer entre les différentes routes de votre application, plutôt qu'avec des composants `<Link>` spécifiques au <span class="vo">[framework](PUBLIC_SVELTE_SITE_URL/docs/web#framework)</span>. Si l'utilisateur ou l'utilisatrice clique sur un lien dontl l'attribut `href` "appartient" à votre application (plutôt que de pointer vers un site extérieur par exemple), alors SvelteKit va naviguer vers la nouvelle page en important son code puis en appelant toute fonction `load` nécessaire pour le chargement des données de la page.
 
 Vous pouvez personnaliser le comportement des liens avec des attributs `data-sveltekit-*`. Ces attributs peuvent être ajoutés à l'élément `<a>` lui-même, ou à un élément parent.
 
