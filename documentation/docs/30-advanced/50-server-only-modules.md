@@ -17,7 +17,7 @@ Vous pouvez rendre vos propres modules réservés au serveur de deux manières :
 
 ## Comment ça marche ?
 
-À chaque que du code prévu pour être affiché au public importe du code réservé au serveur (directement ou indirectement)...
+À chaque fois que du code prévu pour être affiché au public importe du code réservé au serveur (directement ou indirectement)...
 
 ```js
 // @errors: 7005
