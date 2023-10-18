@@ -87,7 +87,7 @@ Parfois, vous ne souhaitez pas [réinitialiser le focus](accessibility#focus-man
 </form>
 ```
 
-...va permettre à l'élément ayant le focus de le garder après la navigation. Il est en général recommandé d'éviter d'utiliser cet attribut sur des liens, puisque l'élément ayant le focus serait la balise `<a>` (et non un autre élément ayant eu précédemment le focus), et les lecteurs d'écran et les personnes utilisant des technologies d'assistance s'attendent à voir le focus se déplacer après une navigation. De plus, vous ne devriez utiliser cet attribut que sur des éléments qui existent toujours après la navigation, sinon, le focus sera perdu, entraînant de la confusion pour les personnes utilisant ce genre de technologies d'assistance.
+...va permettre à l'élément ayant le focus de le garder après la navigation. Il est en général recommandé d'éviter d'utiliser cet attribut sur des liens, puisque l'élément ayant le focus serait la balise `<a>` (et non un autre élément ayant eu précédemment le focus), et les lecteurs d'écran et les personnes utilisant des technologies d'assistance s'attendent à voir le focus se déplacer après une navigation. De plus, vous ne devriez utiliser cet attribut que sur des éléments qui existent toujours après la navigation, sinon, le focus sera perdu, entraînant de la confusion pour les personnes utilisant des technologies d'assistance.
 
 ## `data-sveltekit-noscroll`
 
