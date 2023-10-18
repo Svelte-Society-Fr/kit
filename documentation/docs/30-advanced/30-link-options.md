@@ -10,7 +10,7 @@ Ces options s'appliquent aussi aux éléments `<form>` avec un attribut [`method
 
 ## `data-sveltekit-preload-data`
 
-Avant que le navigateur se rende compte qu'un lien a été cliqué, nous pouvons détecter que le lien est en train d'être survolé (sur <span class="vo">[desktop](PUBLIC_SVELTE_SITE_URL/docs/web#desktop)</span>) ou qu'un évènement `touchstart` ou `mousedown` y a été déclenché. Dans les deux cas, nous pouvons supposer qu'un évènement `click` sur ce lien est probable.
+Avant que le navigateur se rende compte qu'un lien n'ait été cliqué, nous pouvons détecter que le lien est en train d'être survolé (sur ordinateur) ou qu'un évènement `touchstart` ou `mousedown` a été déclenché. Dans les deux cas, nous pouvons supposer qu'un évènement `click` sur ce lien est probable.
 
 SvelteKit peut utiliser cette information pour anticiper le téléchargement du code et des données de la page concernée, ce qui peut faire gagner quelques centaines de millisecondes – la différence entre une interface qui paraît lente et une interface qui paraît fluide.
 
