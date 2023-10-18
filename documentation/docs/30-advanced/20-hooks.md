@@ -19,7 +19,7 @@ Les hooks suivants peuvent être ajoutés au fichier `src/hooks.server.js` :
 
 ### `handle`
 
-Cette fonction est exécutée à chaque fois que le serveur SvelteKit reçoit une [requête](web-standards#apis-fetch-request) – que cette requête ait lieu pendant que l'application est en service ou pendant le processus de [prérendu](page-options#prerender) – et en détermine la [réponse](web-standards#apis-fetch-response). La fonction reçoit un objet `event` représentant la requête et une fonction appelée `resolve`, qui rend la route et génère une `Response`. Cela vous permet de modifier les <span class="vo">[headers](PUBLIC_SVELTE_SITE_URL/docs/web#header)</span> ou les <span class="vo">[bodys](PUBLIC_SVELTE_SITE_URL/docs/web#body)</span> de réponse, ou de complètement contourner SvelteKit (pour implémenter des routes programmatiquement par exemple).
+Cette fonction est exécutée à chaque fois que le serveur SvelteKit reçoit une [requête](web-standards#apis-fetch-request) – que cette requête ait lieu pendant que l'application est en service ou pendant le processus de [prérendu](page-options#prerender) – et en détermine la [réponse](web-standards#apis-fetch-response). La fonction reçoit un objet `event` représentant la requête et une fonction appelée `resolve`, qui rend la route et génère une `Response`. Cela vous permet de modifier les <span class="vo">[headers](PUBLIC_SVELTE_SITE_URL/docs/web#header)</span> ou le <span class="vo">[body](PUBLIC_SVELTE_SITE_URL/docs/web#body)</span> de réponse, ou de complètement contourner SvelteKit (pour implémenter des routes programmatiquement par exemple).
 
 ```js
 /// file: src/hooks.server.js
