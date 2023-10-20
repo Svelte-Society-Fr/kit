@@ -208,7 +208,7 @@ npm publish
 
 ## Mises en garde
 
-Tout import d'un fichier relatif doit être entièrement précisé, en adhérant à l'algorithme ESM de Node. Cela implique que pour un fichier tel que `src/lib/something/index.js`, vous devez inclure le nom du fichier ainsi que son extension :
+Tout import d'un fichier relatif doit être entièrement précisé, en respectant l'algorithme ESM de Node. Cela implique que pour un fichier tel que `src/lib/something/index.js`, vous devez inclure le nom du fichier ainsi que son extension :
 
 ```diff
 -import { something } from './something';
