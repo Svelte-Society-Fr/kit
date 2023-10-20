@@ -1,18 +1,18 @@
 ---
-title: Errors
+title: Erreurs
 ---
 
-Errors are an inevitable fact of software development. SvelteKit handles errors differently depending on where they occur, what kind of errors they are, and the nature of the incoming request.
+Les erreurs sont inévitables dans le développement logiciel. SvelteKit gère les erreurs différemment selon l'endroit où elles se produisent, leur type, et la nature de la requête entrante.
 
-## Error objects
+## Les objets d'erreur
 
-SvelteKit distinguishes between expected and unexpected errors, both of which are represented as simple `{ message: string }` objects by default.
+SvelteKit différencie les erreurs attendues et inattendues, les deux étant représentées comme de simples objets `{ message: string }` par défaut.
 
-You can add additional properties, like a `code` or a tracking `id`, as shown in the examples below. (When using TypeScript this requires you to redefine the `Error` type as described in  [type safety](errors#type-safety)).
+Vous pouvez ajouter des propriétés supplémentaires, comme un `code` ou un `id` de suivi, comme montré dans les exemples ci-dessous. (Lorsque vous utilisez TypeScript, ceci requiert que vous redéfinissiez le type `Error` comme décrit dans la section sur le [typage](errors#typage)).
 
-## Expected errors
+## Erreurs attendues
 
-An _expected_ error is one created with the [`error`](modules#sveltejs-kit-error) helper imported from `@sveltejs/kit`:
+Une erreur _attendue_ est une erreur créée avec l'utilitaire [`error`](modules#sveltejs-kit-error) importé depuis `@sveltejs/kit` :
 
 ```js
 /// file: src/routes/blog/[slug]/+page.server.js
@@ -32,7 +32,7 @@ export async function load({ params }) {
 
 	if (!post) {
 		throw error(404, {
-			message: 'Not found'
+			message: 'Introuvable'
 		});
 	}
 
@@ -40,7 +40,7 @@ export async function load({ params }) {
 }
 ```
 
-This tells SvelteKit to set the response status code to 404 and render an [`+error.svelte`](routing#error) component, where `$page.error` is the object provided as the second argument to `error(...)`.
+Ceci indique à SvelteKit de définir le statut de réponse à 404 et de rendre un composant [`+error.svelte`](routing#error), où `$page.error` est un objet fourni comme second argument à `error(...)`.
 
 ```svelte
 <!--- file: src/routes/+error.svelte --->
@@ -51,33 +51,33 @@ This tells SvelteKit to set the response status code to 404 and render an [`+err
 <h1>{$page.error.message}</h1>
 ```
 
-You can add extra properties to the error object if needed...
+Vous pouvez ajouter des propriétés supplémentaires à l'objet d'erreur si besoin...
 
 ```diff
 throw error(404, {
-	message: 'Not found',
+	message: 'Introuvable',
 +	code: 'NOT_FOUND'
 });
 ```
 
-...otherwise, for convenience, you can pass a string as the second argument:
+...ou sinon, par commodité, vous pouvez fournir une chaîne de caractères en deuxième argument :
 
 ```diff
 -throw error(404, { message: 'Not found' });
-+throw error(404, 'Not found');
++throw error(404, 'Introuvable');
 ```
 
-## Unexpected errors
+## Erreurs inattendues
 
-An _unexpected_ error is any other exception that occurs while handling a request. Since these can contain sensitive information, unexpected error messages and stack traces are not exposed to users.
+Une erreur _inattendue_ est toute autre exception qui se produit pendant qu'une requête est traitée. Puisqu'ils peuvent contenir des informations sensibles, les messages des erreurs inattendues et leur <span class="vo">[stack trace](PUBLIC_SVELTE_SITE_URL/docs/development#stack-trace)</span> ne sont pas exposés aux utilisateurs et utilisatrices.
 
-By default, unexpected errors are printed to the console (or, in production, your server logs), while the error that is exposed to the user has a generic shape:
+Par défaut, les erreurs inattendues sont affichées dans la console, (ou, en production, dans vos <span class="vo">[logs](PUBLIC_SVELTE_SITE_URL/docs/development#log)</span> de serveur), tandis que l'erreur exposée dans le client a la forme générique suivante :
 
 ```json
 { "message": "Internal Error" }
 ```
 
-Unexpected errors will go through the [`handleError`](hooks#shared-hooks-handleerror) hook, where you can add your own error handling — for example, sending errors to a reporting service, or returning a custom error object.
+Les erreurs inattendues passent par le [hook `handleError`](hooks#hooks-partag-s-handleerror), où vous pouvez ajouter votre propre gestion d'erreur – par exemple envoyer les erreurs à un service de suivi, ou renvoyer au client un objet d'erreur personnalisé.
 
 ```js
 /// file: src/hooks.server.js
@@ -96,23 +96,23 @@ Sentry.init({/*...*/})
 
 /** @type {import('@sveltejs/kit').HandleServerError} */
 export function handleError({ error, event }) {
-	// example integration with https://sentry.io/
+	// exemple d'intégration avec https://sentry.io/
 	Sentry.captureException(error, { extra: { event } });
 
 	return {
-		message: 'Whoops!',
+		message: 'Oups !',
 		code: error?.code ?? 'UNKNOWN'
 	};
 }
 ```
 
-> Make sure that `handleError` _never_ throws an error
+> Assurez-vous que `handleError` ne déclenche _jamais_ d'erreur.
 
-## Responses
+## Réponses
 
-If an error occurs inside `handle` or inside a [`+server.js`](routing#server) request handler, SvelteKit will respond with either a fallback error page or a JSON representation of the error object, depending on the request's `Accept` headers.
+Si une erreur se produit dans `handle` ou dans un <span class="vo">[endpoint](PUBLIC_SVELTE_SITE_URL/docs/web#endpoint)</span> de [`+server.js`](routing#server), SvelteKit répondra avec soit une page d'erreur par défaut, soit une représentation <span class="vo">[JSON](PUBLIC_SVELTE_SITE_URL/docs/web#json)</span> de l'objet d'erreur, en fonction des <span class="vo">[headers](PUBLIC_SVELTE_SITE_URL/docs/web#header)</span> `Accept` de la requête.
 
-You can customise the fallback error page by adding a `src/error.html` file:
+Vous pouvez personnaliser la page d'erreur par défaut en ajoutant un fichier `src/error.html` :
 
 ```html
 <!DOCTYPE html>
@@ -122,22 +122,22 @@ You can customise the fallback error page by adding a `src/error.html` file:
 		<title>%sveltekit.error.message%</title>
 	</head>
 	<body>
-		<h1>My custom error page</h1>
-		<p>Status: %sveltekit.status%</p>
+		<h1>Ma page d'erreur par défaut</h1>
+		<p>Statut: %sveltekit.status%</p>
 		<p>Message: %sveltekit.error.message%</p>
 	</body>
 </html>
 ```
 
-SvelteKit will replace `%sveltekit.status%` and `%sveltekit.error.message%` with their corresponding values.
+SvelteKit va remplacer `%sveltekit.status%` et `%sveltekit.error.message%` par leurs valeurs respectives.
 
-If the error instead occurs inside a `load` function while rendering a page, SvelteKit will render the [`+error.svelte`](routing#error) component nearest to where the error occurred. If the error occurs inside a `load` function in `+layout(.server).js`, the closest error boundary in the tree is an `+error.svelte` file _above_ that layout (not next to it).
+Si au contraire une erreur se produit dans une fonction `load` lors d'un rendu de page, SvelteKit va rendre le composant [`+error.svelte`] le plus proche de là où l'erreur s'est produite. Si l'erreur se produit dans une fonction `load` d'un `+layout(.server).js`, le fichier d'erreur le plus proche dans l'arborescence sera un fichier `+error.svelte` _au-dessus_ de ce <span class="vo">[layout](PUBLIC_SVELTE_SITE_URL/docs/web#layout)</span> (et pas au même niveau).
 
-The exception is when the error occurs inside the root `+layout.js` or `+layout.server.js`, since the root layout would ordinarily _contain_ the `+error.svelte` component. In this case, SvelteKit uses the fallback error page.
+L'exception à cette règle est lorsque l'erreur se produit dans le fichier `+layout.js` ou `+layout.server.js` racine, puisque le <span class="vo">[layout](PUBLIC_SVELTE_SITE_URL/docs/web#layout)</span> racine _contient_ en général le composant `+error.svelte`. Dans ce cas, SvelteKit affichera la page d'erreur par défaut.
 
-## Type safety
+## Typage
 
-If you're using TypeScript and need to customize the shape of errors, you can do so by declaring an `App.Error` interface in your app (by convention, in `src/app.d.ts`, though it can live anywhere that TypeScript can 'see'):
+Si vous utilisez TypeScript et avez besoin de personnaliser la forme de vos erreurs, vous pouvez le faire en déclarant une interface `App.Error` dans votre application (par convention, dans `src/app.d.ts`, même s'elle peut se trouver dans n'importe fichier que TypeScript peut "voir") :
 
 ```diff
 /// file: src/app.d.ts
@@ -153,9 +153,9 @@ declare global {
 export {};
 ```
 
-This interface always includes a `message: string` property.
+Cette interface incluera toujours une propriété `message: string`.
 
-## Further reading
+## Sur le même sujet
 
-- [Tutorial: Errors and redirects](https://learn.svelte.dev/tutorial/error-basics)
-- [Tutorial: Hooks](https://learn.svelte.dev/tutorial/handle)
+- [Tutoriel: Erreurs et redirections](PUBLIC_LEARN_SITE_URL/tutorial/error-basics)
+- [Tutoriel: Hooks](PUBLIC_LEARN_SITE_URL/tutorial/handle)

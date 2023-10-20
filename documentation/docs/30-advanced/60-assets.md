@@ -1,23 +1,23 @@
 ---
-title: Asset handling
+title: Gestion des fichiers statiques
 ---
 
-## Caching and inlining
+## Cache et <span class="vo">[inlining](PUBLIC_SVELTE_SITE_URL/docs/javascript#inline)</span>
 
-[Vite will automatically process imported assets](https://vitejs.dev/guide/assets.html) for improved performance. Hashes will be added to the filenames so that they can be cached and assets smaller than `assetsInlineLimit` will be inlined.
+[Vite traite automatiquement les fichiers statiques importés](https://vitejs.dev/guide/assets.html) (en anglais) pour améliorer les performances. Des <span class="vo">[hashes](PUBLIC_SVELTE_SITE_URL/docs/development#hash)</span> sont ajoutés aux noms de fichiers afin qu'ils puissent être mis en cache. Les fichiers statiques plus légers que la valeur précisée par `assetsInlineLimit` seront <span class="vo">[inlinés](PUBLIC_SVELTE_SITE_URL/docs/javascript#inline)</span>.
 
 ```html
 <script>
 	import logo from '$lib/assets/logo.png';
 </script>
 
-<img alt="The project logo" src={logo} />
+<img alt="Le logo du projet" src={logo} />
 ```
 
-If you prefer to reference assets directly in the markup, you can use a preprocessor such as [svelte-preprocess-import-assets](https://github.com/bluwy/svelte-preprocess-import-assets).
+Si vous préférez référencer vos fichiers statiques directement dans le <span class="vo">[markup](PUBLIC_SVELTE_SITE_URL/docs/web#markup)</span>, vous pouvez utiliser un préprocesseur comme [svelte-preprocess-import-assets](https://github.com/bluwy/svelte-preprocess-import-assets).
 
-For assets included via the CSS `url()` function, you may find [`vitePreprocess`](https://kit.svelte.dev/docs/integrations#preprocessors-vitepreprocess) useful.
+Pour les fichiers inclus via la fonction CSS `url()`, vous pourriez avoir besoin de [`vitePreprocess`](/docs/integrations#preprocessors-vitepreprocess).
 
-## Transforming
+## Transformations
 
-You may wish to transform your images to output compressed image formats such as `.webp` or `.avif`, responsive images with different sizes for different devices, or images with the EXIF data stripped for privacy. For images that are included statically, you may use a Vite plugin such as [vite-imagetools](https://github.com/JonasKruckenberg/imagetools). You may also consider a CDN, which can serve the appropriate transformed image based on the `Accept` HTTP header and query string parameters.
+Vous pourriez vouloir transformer vos images pour générer des formats d'image compressés comme `.webp` ou `.avif`, des images <span class="vo">[responsives](PUBLIC_SVELTE_SITE_URL/docs/web#responsive)</span> avec différentes tailles pour différents appareils, ou des images dont les données EXIF ont été supprimées pour respecter la vie privée. Pour les images qui sont incluses de manière statique, vous pouvez utiliser un <span class="vo">[plugin](PUBLIC_SVELTE_SITE_URL/docs/development#plugin)</span> Vite comme [vite-imagetools](https://github.com/JonasKruckenberg/imagetools). Vous pouvez aussi considérer l'utilisation d'un <span class="vo">[CDN](PUBLIC_SVELTE_SITE_URL/docs/web#cdn)</span>, qui sera capable de servir l'image transformée pertinente en fonction du <span class="vo">[header](PUBLIC_SVELTE_SITE_URL/docs/web#header)</span> HTTP `Accept` ainsi que des paramètres de recherche.

@@ -119,7 +119,7 @@ You access them differently in SvelteKit. `stores` is now `getStores`, but in mo
 
 ### Routing
 
-Regex routes are no longer supported. Instead, use [advanced route matching](advanced-routing#matching).
+Regex routes are no longer supported. Instead, use [advanced route matching](advanced-routing#fonctions-match).
 
 ### Segments
 
@@ -150,7 +150,7 @@ See [integrations](./integrations) for detailed information about integrations.
 
 ### HTML minifier
 
-Sapper includes `html-minifier` by default. SvelteKit does not include this, but you can add it as a prod dependency and then use it through a [hook](hooks#server-hooks-handle):
+Sapper includes `html-minifier` by default. SvelteKit does not include this, but you can add it as a prod dependency and then use it through a [hook](hooks#hooks-de-serveur-handle):
 
 ```js
 // @filename: ambient.d.ts
