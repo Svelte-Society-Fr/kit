@@ -72,7 +72,7 @@ La propriété `exports` contient les points d'entrée du paquet. Si vous initia
 }
 ```
 
-Celle indique aux <span class="vo">[bundlers](PUBLIC_SVELTE_SITE_URL/docs/development#bundler-packager)</span> et autres outillages que votre paquet n'a qu'un seul point d'entrée, la racine, et que tout le reste doit être importé via ce point d'entrée, de cette manière :
+Cela indique aux <span class="vo">[bundlers](PUBLIC_SVELTE_SITE_URL/docs/development#bundler-packager)</span> et autres outillages que votre paquet n'a qu'un seul point d'entrée, la racine, et que tout le reste doit être importé via ce point d'entrée, de cette manière :
 
 ```js
 // @errors: 2307
