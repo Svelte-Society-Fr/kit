@@ -84,7 +84,7 @@ Les propriétés `types` et `svelte` sont des [conditions d'export](https://node
 - TypeScript voit la condition `types`, et cherche le fichier de définitions de types. Si vous ne publiez pas de définitions de types, supprimez cette condition.
 - Les outils dédiés à Svelte voient la condition `svelte` et en déduisent qu'il s'agit d'une librairie de composants. Si vous publiez une librairie qui n'exporte pas de composants Svelte et pourrait également fonctionner dans des projets non-Svelte (comme par exemple une librairie de <span class="vo">[store](PUBLIC_SVELTE_SITE_URL/docs/sveltejs#store)</span> Svelte), vous pouvez remplacer cette condition par `default`.
 
-> Les versions antérieures de `@sveltejs/package` incluaient également un export `package.json`. Celui-ci ne fait plus partie du <span class="vo">[template](PUBLIC_SVELTE_SITE_URL/docs/development#template)</span> car les outillages sont maintenant prévus dans le cadre de fichiers `package.json` non explicitement exportés.
+> Les versions antérieures de `@sveltejs/package` incluaient également un export `package.json`. Celui-ci ne fait plus partie du <span class="vo">[template](PUBLIC_SVELTE_SITE_URL/docs/development#template)</span> car les outillages sont maintenant prévus pour fonctionner même si `package.json` n'est pas explicitement exporté.
 
 Vous pouvez ajuster `exports` selon vos besoins et fournir plus de points d'entrée. Par exemple, si à la place d'un fichier `src/lib/index.js` qui réexporte des composants vous souhaitez directement exposer un composant `src/lib/Foo.svelte`, vous pourriez avoir la propriété `exports` (aussi appelée "dictionnaire d'exports") suivante...
 
