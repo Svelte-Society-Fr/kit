@@ -198,7 +198,7 @@ La commande `svelte-package` accepte les options suivantes :
 - `-o`/`--o` — le dossier de sortie où les fichiers compilés sont écrits. La propriété `exports` de votre fichier `package.json` doit pointer vers des fichiers dans ce dossier, et le tableau `files` doit inclure ce dossier. Vaut par défaut `dist`
 - `-t`/`--types` — définit si oui ou non les définitions de types seront générées (les fichiers `.d.ts`). Nous recommandons fortement de l'activer car cela participe à l'amélioration de la qualité de l'écosystème. Vaut par défaut `true`
 
-## Publier votre paquer
+## Publier votre paquet
 
 Pour publier le paquet généré :
 
