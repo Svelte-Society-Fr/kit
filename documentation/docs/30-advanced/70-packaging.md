@@ -6,7 +6,7 @@ Vous pouvez utiliser SvelteKit pour construire aussi bien des applications que d
 
 Lorsque vous créez une _application_, le contenu de `src/routes` correspond à ce que vous affichez au public ; le dossier [`src/lib`](modules#$lib) contient la libraire interne de votre application.
 
-Une librairie de composants a exactement la même structure qu'une application SvelteKit, sauf c'est le dossier `src/lib` qui est ce que va consommer le public, et votre `package.json` sert à publier le paquet. Le dossier `src/routes` peut être une documentation ou un site de démo qui accompagne la librairie, ou bien simplement un bac à sable que vous utilisez pendant vos développements.
+Une _librairie de composants_ a exactement la même structure qu'une application SvelteKit, sauf que c'est le dossier `src/lib` qui sera consommé par le public, et votre `package.json` sert à publier le paquet. Le dossier `src/routes` peut être une documentation ou un site de démo qui accompagne la librairie, ou bien simplement un bac à sable que vous utilisez pendant vos développements.
 
 Exécuter la commande `svelte-package` de `@sveltejs/package` va prendre le contenu de `src/lib` et générer un dossier `dist` (qui peut être [configuré](#options)) contenant les choses suivantes :
 
