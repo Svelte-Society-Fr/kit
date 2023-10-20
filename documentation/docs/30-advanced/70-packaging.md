@@ -112,7 +112,7 @@ import Foo from 'votre-librairie/Foo.svelte';
 
 > Ayez conscience que faire cela implique un soin particulier si vous fournissez des définitions de types. Plus d'infos sur ce problème [ici](#typescript).
 
-En général, chaque propriété de le dictionnaire d'exports est le chemin qu'un utilisateur ou utilisatrice doit utiliser pour importer quelque chose depuis votre paquet, et la valeur est le chemin vers le fichier qui sera importé ou un dictionnaire de conditions d'exports qui lui-même contient ces chemins de fichiers.
+En général, chaque propriété du dictionnaire d'exports est le chemin qu'un utilisateur ou utilisatrice doit utiliser pour importer quelque chose depuis votre paquet, et la valeur est le chemin vers le fichier qui sera importé ou un dictionnaire de conditions d'exports qui lui-même contient ces chemins de fichiers.
 
 Plus d'infos sur les `exports` [ici](https://nodejs.org/docs/latest-v18.x/api/packages.html#package-entry-points) (en anglais).
 
