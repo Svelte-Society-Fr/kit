@@ -234,7 +234,7 @@ Pour obtenir des données d'une <span class="vo">[API](PUBLIC_SVELTE_SITE_URL/do
 - Elle peut être utilisée pour faire des requêtes authentifiées sur le serveur, puisqu'elle hérite des <span class="vo">[headers](PUBLIC_SVELTE_SITE_URL/docs/web#header)</span> `cookie` et `authorization` pour la requête de page.
 - Elle peut faire des requêtes relatives sur le serveur (ordinairement, `fetch` nécessite une URL avec une origine lorsqu'utilisée dans un contexte serveur).
 - Les requêtes internes (i.e. vers les routes `+server.js`) exécutent directement la fonction concernée lorsqu'émises depuis le serveur, sans appel HTTP supplémentaire.
-- Pendant le rendu côté serveur, la réponse sera capturée et <span class="vo">[inlinée](PUBLIC_SVELTE_SITE_URL/docs/javascript#inline)</span> dans le HTML construit en utilisant les méthodes `text` et `json` de l'objet `Response`. Notez que les headers ne sont _pas_ sérialisés, à moins d'avoir explicitement utilisé [`filterSerializedResponseHeaders`](hooks#server-hooks-handle).
+- Pendant le rendu côté serveur, la réponse sera capturée et <span class="vo">[inlinée](PUBLIC_SVELTE_SITE_URL/docs/javascript#inline)</span> dans le HTML construit en utilisant les méthodes `text` et `json` de l'objet `Response`. Notez que les headers ne sont _pas_ sérialisés, à moins d'avoir explicitement utilisé [`filterSerializedResponseHeaders`](hooks#hooks-de-serveur-handle).
 - Pendant l'hydratation, la réponse sera lue depuis le HTML, garantissant la consistance et évitant ainsi une requête réseau additionnelle — si vous recevez un avertissement dans votre console de navigateur après avoir utilisé `fetch` plutôt que le `fetch` de `load`, c'est la raison.
 
 ```js
@@ -281,7 +281,7 @@ Par exemple, si SvelteKit sert le domaine my.domain.com :
 - api.domain.dom NE RECEVRA PAS les cookies
 - sub.my.domain.com RECEVRA les cookies
 
-Les autres cookies ne seront pas passés lorsque `credentials: 'include'` est défini, parce que SvelteKit ne sait pas à quel domaine appartient tel ou tel cookie (le navigateur ne transmet pas cette information), il n'est donc pas sécurisé de les transférer. Vous pouvez contourner ce problème en utilisant le [hook handleFetch](hooks#server-hooks-handlefetch).
+Les autres cookies ne seront pas passés lorsque `credentials: 'include'` est défini, parce que SvelteKit ne sait pas à quel domaine appartient tel ou tel cookie (le navigateur ne transmet pas cette information), il n'est donc pas sécurisé de les transférer. Vous pouvez contourner ce problème en utilisant le [hook handleFetch](hooks#hooks-de-serveur-handlefetch).
 
 > Lorsque vous définissez des cookies, faites attention à la propriété `path`. Par défaut, le `path` d'un cookie est le chemin actuel. Si vous définissez par exemple un cookie sur la page `admin/user`, le cookie sera uniquement disponible par défaut dans les pages `admin`. Dans la plupart des cas vous voulez probablement définir le `path` à `'/'` pour rendre le cookie disponible sur toute votre application.
 
@@ -406,7 +406,7 @@ export function load({ locals }) {
 }
 ```
 
-Si une erreur _inattendue_ se produit, SvelteKit invoquera la fonction [`handleError`](hooks#shared-hooks-handleerror) et traitera l'erreur comme une 500 Internal Error.
+Si une erreur _inattendue_ se produit, SvelteKit invoquera la fonction [`handleError`](hooks#hooks-partag-s-handleerror) et traitera l'erreur comme une 500 Internal Error.
 
 ## Redirections
 

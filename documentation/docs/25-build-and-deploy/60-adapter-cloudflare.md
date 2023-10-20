@@ -98,7 +98,7 @@ Les fonctions contenues dans le dossier `/functions` à la racine de votre proje
 
 Les fichiers `_headers` et `_redirects` spécifiques à Cloudflare Pages peuvent être utilisés pour les réponses de fichiers statiques (comme les images) en les plaçant dans le dossier `/static`.
 
-Cependant, ils n'auront aucun effet sur les réponses dynamiquement générées par SvelteKit, qui renvoie des <span class="vo">[headers](PUBLIC_SVELTE_SITE_URL/docs/web#header)</span> personnalisés ou des réponses de redirections depuis les [endpoints de serveur](routing#server) ou le [hook `handle`](hooks#server-hooks-handle)
+Cependant, ils n'auront aucun effet sur les réponses dynamiquement générées par SvelteKit, qui renvoie des <span class="vo">[headers](PUBLIC_SVELTE_SITE_URL/docs/web#header)</span> personnalisés ou des réponses de redirections depuis les [endpoints de serveur](routing#server) ou le [hook `handle`](hooks#hooks-de-serveur-handle)
 
 ## Résolution de problèmes
 
