@@ -23,7 +23,7 @@ Puisque la navigation entre pages dans une application SvelteKit se produit sans
 </svelte:head>
 ```
 
-Ceci va permettre aux lecteurs d'écrans et autres technologies d'assistance d'identifier la nouvelle page après qu'une navigation a eu lieu. Fournir un titre descriptif est également important pour le [référencement](seo#manual-setup-title-and-meta).
+Ceci va permettre aux lecteurs d'écrans et autres technologies d'assistance d'identifier la nouvelle page après qu'une navigation a eu lieu. Fournir un titre descriptif est également important pour le [référencement](seo#gestion-manuelle-title-et-meta).
 
 ## Gestion du focus
 
