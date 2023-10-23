@@ -2,24 +2,24 @@ import 'svelte'; // pick up `declare module "*.svelte"`
 import 'vite/client'; // pick up `declare module "*.jpg"`, etc.
 import '../types/ambient.js';
 
+import type { PluginOptions } from '@sveltejs/vite-plugin-svelte';
 import { CompileOptions } from 'svelte/types/compiler/interfaces';
+import { BuildData, SSRNodeLoader, SSRRoute, ValidatedConfig } from 'types';
+import { ActionFailure } from '../runtime/control.js';
 import {
 	AdapterEntry,
 	CspDirectives,
 	HttpMethod,
 	Logger,
 	MaybePromise,
-	Prerendered,
 	PrerenderEntryGeneratorMismatchHandlerValue,
 	PrerenderHttpErrorHandlerValue,
 	PrerenderMissingIdHandlerValue,
 	PrerenderOption,
+	Prerendered,
 	RequestOptions,
 	RouteSegment
 } from '../types/private.js';
-import { ActionFailure } from '../runtime/control.js';
-import { BuildData, SSRNodeLoader, SSRRoute, ValidatedConfig } from 'types';
-import type { PluginOptions } from '@sveltejs/vite-plugin-svelte';
 
 export { PrerenderOption } from '../types/private.js';
 export { ActionFailure };
@@ -177,7 +177,7 @@ export interface Config {
 	extensions?: string[];
 	/** SvelteKit options */
 	kit?: KitConfig;
-	/** [`@sveltejs/package`](/docs/packaging) options. */
+	/** [`@sveltejs/package`](https://kit.sveltefr.dev/docs/packaging) options. */
 	package?: {
 		source?: string;
 		dir?: string;
@@ -244,12 +244,12 @@ export interface Cookies {
 
 export interface KitConfig {
 	/**
-	 * Your [adapter](https://kit.svelte.dev/docs/adapters) is run when executing `vite build`. It determines how the output is converted for different platforms.
+	 * * Votre [adaptateur](https://kit.sveltefr.dev/docs/adapters) est ce qui est exécuté lorsque vous lancez `vite build`. Il détermine comment votre projet est compilé selon différentes plateformes.
 	 * @default undefined
 	 */
 	adapter?: Adapter;
 	/**
-	 * An object containing zero or more aliases used to replace values in `import` statements. These aliases are automatically passed to Vite and TypeScript.
+	 * Un objet contenant zéro alias ou plus utilisés pour remplacer des valeurs dans déclarations `import`. Ces alias sont automatiquement passés à Vite et TypeScript.
 	 *
 	 * ```js
 	 * /// file: svelte.config.js
@@ -257,34 +257,34 @@ export interface KitConfig {
 	 * const config = {
 	 *   kit: {
 	 *     alias: {
-	 *       // this will match a file
+	 *       // ceci va correspondre à un fichier
 	 *       'my-file': 'path/to/my-file.js',
 	 *
-	 *       // this will match a directory and its contents
-	 *       // (`my-directory/x` resolves to `path/to/my-directory/x`)
+	 *       // ceci va correspondre à un dossier et son contenu
+	 *       // (`my-directory/x` va renvoyer vers `path/to/my-directory/x`)
 	 *       'my-directory': 'path/to/my-directory',
 	 *
-	 *       // an alias ending /* will only match
-	 *       // the contents of a directory, not the directory itself
+	 *       // un alias se terminant par /* va seulement correspondre
+	 * 			 // au contenu du dossier, pas au dossier lui-même
 	 *       'my-directory/*': 'path/to/my-directory/*'
 	 *     }
 	 *   }
 	 * };
 	 * ```
 	 *
-	 * > The built-in `$lib` alias is controlled by `config.kit.files.lib` as it is used for packaging.
+	 * > L'alias intégré `$lib` est contrôlé par `config.kit.files.lib` puisqu'il est utilisé pour le packaging.
 	 *
-	 * > You will need to run `npm run dev` to have SvelteKit automatically generate the required alias configuration in `jsconfig.json` or `tsconfig.json`.
+	 * > Vous aurez besoin de lancer `npm run dev` pour laisser SvelteKit générer automatiquement la configuration d'alias définie par `jsconfig.json` ou `tsconfig.json`.
 	 * @default {}
 	 */
 	alias?: Record<string, string>;
 	/**
-	 * The directory relative to `paths.assets` where the built JS and CSS (and imported assets) are served from. (The filenames therein contain content-based hashes, meaning they can be cached indefinitely). Must not start or end with `/`.
+	 * Le dossier relatif à `paths.assets` depuis lequel le JS et CSS compilés (ainsi que les fichiers statiques importés) sont servis. (Les noms de fichiers que vous y mettez contiennent des hashs basés sur leur contenu, ce qui signifie qu'ils peuvent être mis en cache indéfiniment). Ne doit pas commencer ou finir par `/`.
 	 * @default "_app"
 	 */
 	appDir?: string;
 	/**
-	 * [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) configuration. CSP helps to protect your users against cross-site scripting (XSS) attacks, by limiting the places resources can be loaded from. For example, a configuration like this...
+	 * La configuration [CSP](https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Content-Security-Policy). Les CSP vous aident à protéger vos utilisateurs et utilisatrices contre les attaques <span class='vo'>[XSS](https://sveltefr.dev/docs/web#xss)</span>, en limitant les endroits depuis lesquels les ressourcent peuvent être téléchargées. Par exemple, une configuration comme celle-ci...
 	 *
 	 * ```js
 	 * /// file: svelte.config.js
@@ -305,210 +305,210 @@ export interface KitConfig {
 	 * export default config;
 	 * ```
 	 *
-	 * ...would prevent scripts loading from external sites. SvelteKit will augment the specified directives with nonces or hashes (depending on `mode`) for any inline styles and scripts it generates.
+	 * ... empêche les scripts d'être téléchargés depuis des sites externes. SvelteKit ajoute aux directives spécifiées des nonces ou des hashs (en fonction du `mode`) pour tout style <span class='vo'>[inliné](https://sveltefr.dev/docs/web#inline)</span> et script qu'il génère.
 	 *
-	 * To add a nonce for scripts and links manually included in `src/app.html`, you may use the placeholder `%sveltekit.nonce%` (for example `<script nonce="%sveltekit.nonce%">`).
+	 * Pour ajouter un nonce aux scripts et links inclus manuellement dans le fichier `src/app.html`, vous pouvez utiliser le <span class='vo'>[placeholder](https://sveltefr.dev/docs/development#placeholder)</span> `%sveltekit.nonce%` (par exemple `<script nonce="%sveltekit.nonce%">`).
 	 *
-	 * When pages are prerendered, the CSP header is added via a `<meta http-equiv>` tag (note that in this case, `frame-ancestors`, `report-uri` and `sandbox` directives will be ignored).
+	 * Lorsque les pages sont prérendues, le <span class='vo'>[header](https://sveltefr.dev/docs/web#header)</span> CSP est ajouté via une balise `<meta http-equiv>` (notez que dans ce cas, les directives `frame-ancestors`, `report-uri` et `sandbox` sont ignorées).
 	 *
-	 * > When `mode` is `'auto'`, SvelteKit will use nonces for dynamically rendered pages and hashes for prerendered pages. Using nonces with prerendered pages is insecure and therefore forbidden.
+	 * > Lorsque `mode` vaut `'auto'`, SvelteKit utilise des nonces pour les pages dynamiquement rendues et des hashs pour les pages prérendues. Utiliser des nonces avec des pages prérendues n'est pas sécurisé et donc interdit.
 	 *
-	 * > Note that most [Svelte transitions](https://svelte.dev/tutorial/transition) work by creating an inline `<style>` element. If you use these in your app, you must either leave the `style-src` directive unspecified or add `unsafe-inline`.
+	 * > Notez que la plupart des [transitions Svelte](https://apprendre.sveltefr.dev/tutorial/transition) fonctionnent en créant un élément `<style>` <span class='vo'>[inliné](https://sveltefr.dev/docs/web#inline)</span>. Si vous les utilisez dans votre application, vous devez soit laisser la directive `style-src` non spécifiée, soit ajouter `unsafe-inline`.
 	 *
-	 * If this level of configuration is insufficient and you have more dynamic requirements, you can use the [`handle` hook](https://kit.svelte.dev/docs/hooks#server-hooks-handle) to roll your own CSP.
+	 * Si ce niveau de configuration est insuffisant et vous avez des besoins plus dynamiques, vous pouvez utiliser le [hook `handle`](https://kit.sveltefr.dev/hooks#hooks-de-serveur-handle) pour définir vous-même vos CSP.
 	 */
 	csp?: {
 		/**
-		 * Whether to use hashes or nonces to restrict `<script>` and `<style>` elements. `'auto'` will use hashes for prerendered pages, and nonces for dynamically rendered pages.
+		 * Mode indiquant d'utiliser des hashs ou des nonces pour restreindre les éléments `<script>` et `<style>`. `'auto'` utilisera les hashs pour les pages prérendues, et des nonces pour les pages rendues dynamiquement.
 		 */
 		mode?: 'hash' | 'nonce' | 'auto';
 		/**
-		 * Directives that will be added to `Content-Security-Policy` headers.
+		 * Les directives qui seront ajoutées aux <span class='vo'>[headers](https://sveltefr.dev/docs/web#header)</span> `Content-Security-Policy`.
 		 */
 		directives?: CspDirectives;
 		/**
-		 * Directives that will be added to `Content-Security-Policy-Report-Only` headers.
+		 * Les directives qui seront ajoutées aux <span class='vo'>[headers](https://sveltefr.dev/docs/web#header)</span> `Content-Security-Policy-Report-Only`.
 		 */
 		reportOnly?: CspDirectives;
 	};
 	/**
-	 * Protection against [cross-site request forgery (CSRF)](https://owasp.org/www-community/attacks/csrf) attacks.
+	 * Protection contre les attaques de type [CSRF](https://owasp.org/www-community/attacks/csrf).
 	 */
 	csrf?: {
 		/**
-		 * Whether to check the incoming `origin` header for `POST`, `PUT`, `PATCH`, or `DELETE` form submissions and verify that it matches the server's origin.
+		 * Vérifie ou non que le <span class='vo'>[header](https://sveltefr.dev/docs/web#header)</span> `origin` pour les soumissions de formulaire `POST`, `PUT`, `PATCH` ou `DELETE` correspond à l'origine du serveur.
 		 *
-		 * To allow people to make `POST`, `PUT`, `PATCH`, or `DELETE` requests with a `Content-Type` of `application/x-www-form-urlencoded`, `multipart/form-data`, or `text/plain` to your app from other origins, you will need to disable this option. Be careful!
+		 * Si vous souhaitez que des personnes puissent faire des requêtes `POST`, `PUT`, `PATCH` ou `DELETE` avec un `Content-Type` valant `application/x-www-form-urlencoded`, `multipart/form-data`, ou `text/plain` vers votre application depuis d'autres origines, vous devrez désactiver cette option. Soyez vigilants !
 		 * @default true
 		 */
 		checkOrigin?: boolean;
 	};
 	/**
-	 * Here be dragons. Enable at your peril.
+	 * La zone rouge. Activer à vos risques et périls.
 	 */
 	dangerZone?: {
 		/**
-		 * Automatically add server-side `fetch`ed URLs to the `dependencies` map of `load` functions. This will expose secrets
-		 * to the client if your URL contains them.
+		 * Ajoute automatiquement les URLs requêtées sur le serveur avec `fetch` au dictionnaire de `dependencies` des fonctions `load`.
+		 * Ceci expose les secrets au client si votre URL en contient.
 		 */
 		trackServerFetches?: boolean;
 	};
 	/**
-	 * Whether or not the app is embedded inside a larger app. If `true`, SvelteKit will add its event listeners related to navigation etc on the parent of `%sveltekit.body%` instead of `window`, and will pass `params` from the server rather than inferring them from `location.pathname`.
+	 * Si oui ou non l'application est embarquée dans une application plus grande. Si vaut `true`, SvelteKit ajoute les gestionnaires d'évènements liés à la navigation sur le parent du `%sveltekit.body%` plutôt que sur `window`, et passe les `params` depuis le serveur plutôt que de les inférer depuis `location.pathname`.
 	 * @default false
 	 */
 	embedded?: boolean;
 	/**
-	 * Environment variable configuration
+	 * Configuration des variables d'environnement
 	 */
 	env?: {
 		/**
-		 * The directory to search for `.env` files.
+		 * Le dossier dans lequel se trouve vos fichiers `.env`.
 		 * @default "."
 		 */
 		dir?: string;
 		/**
-		 * A prefix that signals that an environment variable is safe to expose to client-side code. See [`$env/static/public`](/docs/modules#$env-static-public) and [`$env/dynamic/public`](/docs/modules#$env-dynamic-public). Note that Vite's [`envPrefix`](https://vitejs.dev/config/shared-options.html#envprefix) must be set separately if you are using Vite's environment variable handling - though use of that feature should generally be unnecessary.
+		 * Un préfixe qui signale qu'une variable d'environnement est exposable en toute sécurité au code client. Voir [`$env/static/public`](https://kit.sveltefr.dev/docs/modules#$env-static-public) et [`$env/dynamic/public`](https://kit.sveltefr.dev/docs/modules#$env-dynamic-public). Notez que le préfixe [`envPrefix`](https://vitejs.dev/config/shared-options.html#envprefix) de Vite doit être défini à part si vous utilisez le gestionnaire de variables d'environnement de Vite – même si l'usage de cette fonctionnalité n'est en général pas nécessaire.
 		 * @default "PUBLIC_"
 		 */
 		publicPrefix?: string;
 		/**
-		 * A prefix that signals that an environment variable is unsafe to expose to client-side code. Environment variables matching neither the public nor the private prefix will be discarded completely. See [`$env/static/private`](/docs/modules#$env-static-private) and [`$env/dynamic/private`](/docs/modules#$env-dynamic-private).
+		 * Un préfixe qui signale qu'une variable d'environnement n'est pas exposable en toute sécurité au code client. Les variables d'environnement qui ne correspondent ni au préfixe publique ni au préfixe privé seront complètement ignorées. Voir [`$env/static/public`](https://kit.sveltefr.dev/docs/modules#$env-static-public) et [`$env/dynamic/public`](https://kit.sveltefr.dev/docs/modules#$env-dynamic-public).
 		 * @default ""
 		 */
 		privatePrefix?: string;
 	};
 	/**
-	 * Where to find various files within your project.
+	 * Les emplacements de différents fichiers dans votre projet.
 	 */
 	files?: {
 		/**
-		 * a place to put static files that should have stable URLs and undergo no processing, such as `favicon.ico` or `manifest.json`
+		 * un endroit pour placer les fichiers statiques qui doivent avoir des URLS stables et n'être soumis à aucun traitement, comme `favicon.ico` ou `manifest.json`
 		 * @default "static"
 		 */
 		assets?: string;
 		hooks?: {
 			/**
-			 * The location of your client [hooks](https://kit.svelte.dev/docs/hooks).
+			 * L'emplacement de vos [hooks](https://kit.sveltefr.dev/docs/hooks) client.
 			 * @default "src/hooks.client"
 			 */
 			client?: string;
 			/**
-			 * The location of your server [hooks](https://kit.svelte.dev/docs/hooks).
+			 * L'emplacement de vos [hooks](https://kit.sveltefr.dev/docs/hooks) serveur.
 			 * @default "src/hooks.server"
 			 */
 			server?: string;
 		};
 		/**
-		 * your app's internal library, accessible throughout the codebase as `$lib`
+		 * la librairie interne de votre application, accessible dans votre code via `$lib`
 		 * @default "src/lib"
 		 */
 		lib?: string;
 		/**
-		 * a directory containing [parameter matchers](https://kit.svelte.dev/docs/advanced-routing#matching)
+		 * un dossier contenant vos [fonctions `match`](https://kit.sveltefr.dev/docs/advanced-routing#matching)
 		 * @default "src/params"
 		 */
 		params?: string;
 		/**
-		 * the files that define the structure of your app (see [Routing](https://kit.svelte.dev/docs/routing))
+		 * les fichiers qui définissent la structure de votre application (voir [Routing](https://kit.sveltefr.dev/docs/routing))
 		 * @default "src/routes"
 		 */
 		routes?: string;
 		/**
-		 * the location of your service worker's entry point (see [Service workers](https://kit.svelte.dev/docs/service-workers))
+		 * l'emplacement du point d'entrée de vos service workers (voir [Service workers](https://kit.sveltefr.dev/docs/service-workers))
 		 * @default "src/service-worker"
 		 */
 		serviceWorker?: string;
 		/**
-		 * the location of the template for HTML responses
+		 * l'emplacement du <span class='vo'>[template](https://sveltefr.dev/docs/development#template)</span> pour les réponses HTML
 		 * @default "src/app.html"
 		 */
 		appTemplate?: string;
 		/**
-		 * the location of the template for fallback error responses
+		 * l'emplacement du <span class='vo'>[template](https://sveltefr.dev/docs/development#template)</span> pour les réponses d'erreur de secours
 		 * @default "src/error.html"
 		 */
 		errorTemplate?: string;
 	};
 	/**
-	 * Inline CSS inside a `<style>` block at the head of the HTML. This option is a number that specifies the maximum length of a CSS file in UTF-16 code units, as specified by the [String.length](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/length) property, to be inlined. All CSS files needed for the page and smaller than this value are merged and inlined in a `<style>` block.
+	 * <span class='vo'>[Inline](https://sveltefr.dev/docs/web#inline)</span> le CSS dans un bloc `<style>` en haut du HTML. Cette option est un nombre qui précise la longueur maximale d'un fichier CSS inliné en unités de code UTF-16, comme spécifié par la propriété [String.length](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/String/length). Tous les fichiers CSS requis pour la page plus petits que cette valeur sont fusionnés et inlinés dans un seul bloc `<style>`.
 	 *
-	 * > This results in fewer initial requests and can improve your [First Contentful Paint](https://web.dev/first-contentful-paint) score. However, it generates larger HTML output and reduces the effectiveness of browser caches. Use it advisedly.
+	 * > Ceci permet de réduire le nombre initial de requêtes et peut améliorer votre score [First Contentful Paint](https://web.dev/first-contentful-paint). Cependant, cela génère des fichiers HTML plus lourds et réduit l'efficacité des caches de navigateur. Servez-vous en avec précaution.
 	 * @default 0
 	 */
 	inlineStyleThreshold?: number;
 	/**
-	 * An array of file extensions that SvelteKit will treat as modules. Files with extensions that match neither `config.extensions` nor `config.kit.moduleExtensions` will be ignored by the router.
+	 * Un tableau d'extensions de fichiers que SvelteKit va traiter comme des modules. Les fichiers avec des extensions qui ne correspondent ni à `config.extensions` ni à `config.kit.moduleExtensions` seront ignorés par le routeur.
 	 * @default [".js", ".ts"]
 	 */
 	moduleExtensions?: string[];
 	/**
-	 * The directory that SvelteKit writes files to during `dev` and `build`. You should exclude this directory from version control.
+	 * Le dossier dans lequel SvelteKit écrit les fichiers lors de `dev` et `build`. Vous devriez exclure ce dossier de votre contrôle de version.
 	 * @default ".svelte-kit"
 	 */
 	outDir?: string;
 	/**
-	 * Options related to the build output format
+	 * Des options liées au format du dossier de compilation cible
 	 */
 	output?: {
 		/**
-		 * SvelteKit will preload the JavaScript modules needed for the initial page to avoid import 'waterfalls', resulting in faster application startup. There
-		 * are three strategies with different trade-offs:
-		 * - `modulepreload` - uses `<link rel="modulepreload">`. This delivers the best results in Chromium-based browsers, in Firefox 115+, and Safari 17+. It is ignored in older browsers.
-		 * - `preload-js` - uses `<link rel="preload">`. Prevents waterfalls in Chromium and Safari, but Chromium will parse each module twice (once as a script, once as a module). Causes modules to be requested twice in Firefox. This is a good setting if you want to maximise performance for users on iOS devices at the cost of a very slight degradation for Chromium users.
-		 * - `preload-mjs` - uses `<link rel="preload">` but with the `.mjs` extension which prevents double-parsing in Chromium. Some static webservers will fail to serve .mjs files with a `Content-Type: application/javascript` header, which will cause your application to break. If that doesn't apply to you, this is the option that will deliver the best performance for the largest number of users, until `modulepreload` is more widely supported.
+		 * SvelteKit va précharger les modules JavaScript nécessaires pour la page initiale pour éviter des "cascades", impliquant un démarrage plus rapide de l'application. Il y a
+		 * trois stratégies avec différents compromis :
+		 * - `modulepreload` - utilise `<link rel="modulepreload">`. Cette option fournit les meilleurs résultats dans les navigateurs basés sur Chromium, dans Firefox 115+, et Safari 17+. Elle est ignorée dans les navigateurs plus anciens.
+		 * - `preload-js` - utilise `<link rel="preload">`. Évite les cascades dans Chromium et Safari, mais Chromium va traiter chaque module deux fois (une fois en tant que script, une fois en tant que module). Implique que les modules sont requêtés deux fois dans Firefox. C'est une bonne option si vous souhaitez maximiser la performance sur les appareils iOS au prix d'une très légère dégradation sur Chromium.
+		 * - `preload-mjs` - utilise `<link rel="preload">` mais avec l'extension `.mjs` qui empêche le double traitement par Chromium. Certains serveurs web statiques échoueront à servir les fichiers `.mjs` avec un <span class='vo'>[header](https://sveltefr.dev/docs/web#header)</span> `Content-Type: application/javascript`, ce qui fera planter votre application. Si ceci ne s'applique pas pour vous, cette option fournira la meilleure performance pour le plus grand nombre de personnes, jusqu'à ce que `modulepreload` soit plus largement supporté.
 		 * @default "modulepreload"
 		 */
 		preloadStrategy?: 'modulepreload' | 'preload-js' | 'preload-mjs';
 	};
 	paths?: {
 		/**
-		 * An absolute path that your app's files are served from. This is useful if your files are served from a storage bucket of some kind.
+		 * Un chemin absolu depuis lequel les fichiers statiques de votre application sont servis. Ceci est utile si vos fichiers sont servis depuis un espace de stockage.
 		 * @default ""
 		 */
 		assets?: '' | `http://${string}` | `https://${string}`;
 		/**
-		 * A root-relative path that must start, but not end with `/` (e.g. `/base-path`), unless it is the empty string. This specifies where your app is served from and allows the app to live on a non-root path. Note that you need to prepend all your root-relative links with the base value or they will point to the root of your domain, not your `base` (this is how the browser works). You can use [`base` from `$app/paths`](/docs/modules#$app-paths-base) for that: `<a href="{base}/your-page">Link</a>`. If you find yourself writing this often, it may make sense to extract this into a reusable component.
+		 * Un chemin relatif à la racine qui doit commencer, mais pas se terminer par `/` (par ex. `/base-path`), à moins que ce ne soit la chaîne de caractères vide. Ceci précise d'où votre application est servie et lui permet d'exister sur un chemin non racine. Notez que vous aurez besoin de préfixer tous vos liens relatifs à la racine avec la valeur de base, au risque de les faire pointer vers la racine de votre domaine, et non vers votre `base` (les navigateurs fonctionnent ainsi). Vous pouvez utiliser [`base` importée depuis `$app/paths`](https://kit.sveltefr.dev/docs/modules#$app-paths-base) pour faire cela: `<a href="{base}/votre-page">Lien</a>`. Si vous devez faire souvent ce remplacement, il peut être utile d'extraire cette logique dans un composant réutilisable.
 		 * @default ""
 		 */
 		base?: '' | `/${string}`;
 		/**
-		 * Whether to use relative asset paths. By default, if `paths.assets` is not external, SvelteKit will replace `%sveltekit.assets%` with a relative path and use relative paths to reference build artifacts, but `base` and `assets` imported from `$app/paths` will be as specified in your config.
+		 * Si oui ou non utiliser des chemins de fichiers statiques relatifs. Par défaut, si `paths.assets` n'est pas externe, SvelteKit va remplacer `%sveltekit.assets%` avec un chemin relatif et utiliser des chemins relatifs pour référencer les artefacts de compilation, mais `base` et `assets` importées depuis `$app/paths` resteront tels que spécifiées dans votre configuration.
 		 *
-		 * If `true`, `base` and `assets` imported from `$app/paths` will be replaced with relative asset paths during server-side rendering, resulting in portable HTML.
-		 * If `false`, `%sveltekit.assets%` and references to build artifacts will always be root-relative paths, unless `paths.assets` is an external URL
+		 * Si `true`, `base` et `assets` importées depuis `$app/paths` seront remplacées avec des chemins de fichiers statiques relatifs lors du rendu côté serveur, impliquant du HTML portable.
+		 * Si `false`, `%sveltekit.assets%` et les références vers les artefacts de compilation seront toujours des chemins relatifs à la racine, à moins que `paths.assets` soit une URL externe.
 		 *
-		 * If your app uses a `<base>` element, you should set this to `false`, otherwise asset URLs will incorrectly be resolved against the `<base>` URL rather than the current page.
+		 * Si votre application utilise un élément `<base>`, vous devriez définir cette option à `false`, sinon les URLs de fichiers statiques seront mal résolues (c'est-à-dire par rapport à l'URL `<base>` plutôt que celle de la page courante).
 		 * @default undefined
 		 */
 		relative?: boolean | undefined;
 	};
 	/**
-	 * See [Prerendering](https://kit.svelte.dev/docs/page-options#prerender).
+	 * Voir la section [Prerendering](https://kit.sveltefr.dev/docs/options-de-page#prerender).
 	 */
 	prerender?: {
 		/**
-		 * How many pages can be prerendered simultaneously. JS is single-threaded, but in cases where prerendering performance is network-bound (for example loading content from a remote CMS) this can speed things up by processing other tasks while waiting on the network response.
+		 * Nombre de pages pouvant être prérendues simultanément. JS ne s'exécute que sur un seul <span class='vo'>[thread](https://sveltefr.dev/docs/development#thread)</span>, mais dans les cas où la performance de prérendu est liée au réseau (par exemple en chargeant du contenu depuis un <span class='vo'>[CMS](https://sveltefr.dev/docs/web#cms)</span> distant) ceci peut accélérer le processus en effectuant d'autres tâches pendant que les requêtes se terminent.
 		 * @default 1
 		 */
 		concurrency?: number;
 		/**
-		 * Whether SvelteKit should find pages to prerender by following links from `entries`.
+		 * Si oui ou non SvelteKit devrait trouver des pages à prérendre en suivant des liens depuis les entrées `entries`.
 		 * @default true
 		 */
 		crawl?: boolean;
 		/**
-		 * An array of pages to prerender, or start crawling from (if `crawl: true`). The `*` string includes all non-dynamic routes (i.e. pages with no `[parameters]`, because SvelteKit doesn't know what value the parameters should have).
+		 * Un tableau de pages à prérendre, ou depuis lequel commencer à chercher des liens (si `crawl: true`). La chaîne de caractères `*` permet d'inclure toutes les routes non dynamiques (c'est-à-dire les pages sans `[parametres]`, car SvelteKit ne sait pas d'avance les valeurs que vos paramètres peuvent avoir).
 		 * @default ["*"]
 		 */
 		entries?: Array<'*' | `/${string}`>;
 		/**
-		 * How to respond to HTTP errors encountered while prerendering the app.
+		 * Comportement de SvelteKit lors d'erreurs HTTP rencontrées pendant le prérendu de l'application.
 		 *
-		 * - `'fail'` — fail the build
-		 * - `'ignore'` - silently ignore the failure and continue
-		 * - `'warn'` — continue, but print a warning
-		 * - `(details) => void` — a custom error handler that takes a `details` object with `status`, `path`, `referrer`, `referenceType` and `message` properties. If you `throw` from this function, the build will fail
+		 * - `'fail'` — fait échouer la compilation
+		 * - `'ignore'` - ignore l'erreur en silence et continue
+		 * - `'warn'` — continue, mais affiche un avertissement
+		 * - `(details) => void` — un gestionnaire d'erreur personnalisé qui prend en entrée un objet `details` possédant les propriétés `status`, `path`, `referrer`, `referenceType` et `message`. Si vous utilisez `throw` depuis cette fonction, la compilation échouera
 		 *
 		 * ```js
 		 * /// file: svelte.config.js
@@ -517,12 +517,12 @@ export interface KitConfig {
 		 *   kit: {
 		 *     prerender: {
 		 *       handleHttpError: ({ path, referrer, message }) => {
-		 *         // ignore deliberate link to shiny 404 page
+		 *         // ignore délibérément le lien vers une page 404
 		 *         if (path === '/not-found' && referrer === '/blog/how-we-built-our-404-page') {
 		 *           return;
 		 *         }
 		 *
-		 *         // otherwise fail the build
+		 *         // sinon fait échouer la compilation
 		 *         throw new Error(message);
 		 *       }
 		 *     }
@@ -534,58 +534,58 @@ export interface KitConfig {
 		 */
 		handleHttpError?: PrerenderHttpErrorHandlerValue;
 		/**
-		 * How to respond when hash links from one prerendered page to another don't correspond to an `id` on the destination page.
+		 * Comportement de SvelteKit lorsque les liens d'une page prérendue vers une autre ne correspondent pas à l'`id` de la page cible.
 		 *
-		 * - `'fail'` — fail the build
-		 * - `'ignore'` - silently ignore the failure and continue
-		 * - `'warn'` — continue, but print a warning
-		 * - `(details) => void` — a custom error handler that takes a `details` object with `path`, `id`, `referrers` and `message` properties. If you `throw` from this function, the build will fail
+		 * - `'fail'` — fait échouer la compilation
+		 * - `'ignore'` - ignore l'erreur en silence et continue
+		 * - `'warn'` — continue, mais affiche un avertissement
+		 * - `(details) => void` — un gestionnaire d'erreur personnalisé qui prend en entrée un objet `details` possédant les propriétés `path`, `id`, `referrers` et `message`. Si vous utilisez `throw` depuis cette fonction, la compilation échouera
 		 *
 		 * @default "fail"
 		 */
 		handleMissingId?: PrerenderMissingIdHandlerValue;
 		/**
-		 * How to respond when an entry generated by the `entries` export doesn't match the route it was generated from.
+		 * Comportement de SvelteKit lorsqu'une entrée générée par l'export `entries` ne correspond pas à la route depuis laquelle elle a été générée.
 		 *
-		 * - `'fail'` — fail the build
-		 * - `'ignore'` - silently ignore the failure and continue
-		 * - `'warn'` — continue, but print a warning
-		 * - `(details) => void` — a custom error handler that takes a `details` object with `generatedFromId`, `entry`, `matchedId` and `message` properties. If you `throw` from this function, the build will fail
+		 * - `'fail'` — fait échouer la compilation
+		 * - `'ignore'` - ignore l'erreur en silence et continue
+		 * - `'warn'` — continue, mais affiche un avertissement
+		 * - `(details) => void` — un gestionnaire d'erreur personnalisé qui prend en entrée un objet `details` possédant les propriétés `generatedFromId`, `entry`, `matchedId` et `message`. Si vous utilisez `throw` depuis cette fonction, la compilation échouera
 		 *
 		 * @default "fail"
 		 */
 		handleEntryGeneratorMismatch?: PrerenderEntryGeneratorMismatchHandlerValue;
 		/**
-		 * The value of `url.origin` during prerendering; useful if it is included in rendered content.
+		 * La valeur de `url.origin` pendant le prérendu ; utile si l'origine est incluse dans le contenu généré.
 		 * @default "http://sveltekit-prerender"
 		 */
 		origin?: string;
 	};
 	serviceWorker?: {
 		/**
-		 * Whether to automatically register the service worker, if it exists.
+		 * Si oui ou non utiliser automatiquement le <span class='vo'>[service worker](https://sveltefr.dev/docs/web#service-worker)</span>, s'il existe.
 		 * @default true
 		 */
 		register?: boolean;
 		/**
-		 * Determine which files in your `static` directory will be available in `$service-worker.files`.
+		 * Détermine quels fichiers de votre dossier `static` seront disponibles dans `$service-worker.files`.
 		 * @default (filename) => !/\.DS_Store/.test(filename)
 		 */
 		files?(filepath: string): boolean;
 	};
 	typescript?: {
 		/**
-		 * A function that allows you to edit the generated `tsconfig.json`. You can mutate the config (recommended) or return a new one.
-		 * This is useful for extending a shared `tsconfig.json` in a monorepo root, for example.
+		 * Une fonction qui permet d'éditer le fichier `tsconfig.json` généré. Vous pouvez muter la configuration (recommandé) ou en renvoyer une nouvelle.
+		 * Ceci est utile pour étender un fichier `tsconfig.json` partagé à la racine d'un <span class='vo'>[monorepo](https://sveltefr.dev/docs/development#monorepo)</span>, par exemple.
 		 * @default (config) => config
 		 */
 		config?: (config: Record<string, any>) => Record<string, any> | void;
 	};
 	/**
-	 * Client-side navigation can be buggy if you deploy a new version of your app while people are using it. If the code for the new page is already loaded, it may have stale content; if it isn't, the app's route manifest may point to a JavaScript file that no longer exists.
-	 * SvelteKit helps you solve this problem through version management.
-	 * If SvelteKit encounters an error while loading the page and detects that a new version has been deployed (using the `name` specified here, which defaults to a timestamp of the build) it will fall back to traditional full-page navigation.
-	 * Not all navigations will result in an error though, for example if the JavaScript for the next page is already loaded. If you still want to force a full-page navigation in these cases, use techniques such as setting the `pollInterval` and then using `beforeNavigate`:
+	 * Les navigations côté client peuvent être impactées si vous déployez une nouvelle version de votre application pendant que des gens sont en train de l'utiliser. Si le code de la nouvelle page est déjà chargé, il se peut qu'il ait du contenu périmé ; s'il n'est pas encore chargé, le manifeste de routes de votre application peut pointer vers un fichier JavaScript qui n'existe plus.
+	 * SvelteKit vous aide à résoudre ce problème via une gestion de version.
+	 * Si Sveltekit rencontre une erreur pendant le chargement de la page et détecte qu'une nouvelle version est déployée (en utilisant le `name` spécifié ici, qui par défaut a pour valeur le <span class='vo'>[timestamp](https://sveltefr.dev/docs/development#timestamp)</span> de compilation), il choisit de passer par une navigation traditionnelle qui recharge entièrement la page.
+	 * Mais toutes les navigations ne débouchent pas toujours sur une erreur, par exemple si le code JavaScript de la nouvelle page est déjà chargé. Si vous souhaitez toujours forcer une navigation qui recharge toute la page dans ces cas-là, vous pouvez utiliser des techniques telles que définir l'option `pollInterval` puis utiliser `beforeNavigate` :
 	 * ```html
 	 * /// file: +layout.svelte
 	 * <script>
@@ -600,13 +600,13 @@ export interface KitConfig {
 	 * </script>
 	 * ```
 	 *
-	 * If you set `pollInterval` to a non-zero value, SvelteKit will poll for new versions in the background and set the value of the [`updated`](/docs/modules#$app-stores-updated) store to `true` when it detects one.
+	 * Si vous définissez `pollInterval` comme étant une valeur différente de zéro, SvelteKit va régulièrement vérifier en tâche de fond si une nouvelle version de votre application existe, et mettre la valeur du [store `updated`](https://kit.sveltefr.dev/docs/modules#$app-stores-updated) à `true` s'il détecte une nouvelle version.
 	 */
 	version?: {
 		/**
-		 * The current app version string. If specified, this must be deterministic (e.g. a commit ref rather than `Math.random()` or `Date.now().toString()`), otherwise defaults to a timestamp of the build.
+		 * La version actuelle de votre application. Si précisée, cette valeur doit être déterministe (c'est-à-dire une référence de <span class='vo'>[commit](https://sveltefr.dev/docs/development#commit)</span> plutôt qu'un `Math.random()` ou `Date.now().toString()`). Si non précisée, cette valeur vaut le <span class='vo'>[timestamp](https://sveltefr.dev/docs/development#timestamp)</span> de la dernière compilation.
 		 *
-		 * For example, to use the current commit hash, you could do use `git rev-parse HEAD`:
+		 * Par exemple, pour utiliser le <span class='vo'>[hash](https://sveltefr.dev/docs/development#hash)</span> du dernier <span class='vo'>[commit](https://sveltefr.dev/docs/development#commit)</span>, vous pouvez utiliser `git rev-parse HEAD` :
 		 *
 		 * ```js
 		 * /// file: svelte.config.js
@@ -623,7 +623,7 @@ export interface KitConfig {
 		 */
 		name?: string;
 		/**
-		 * The interval in milliseconds to poll for version changes. If this is `0`, no polling occurs.
+		 * Un intervalle en millisecondes pour vérifier l'existence de nouvelles version. Si cette valeur vaut `0`, aucune vérification n'est faite.
 		 * @default 0
 		 */
 		pollInterval?: number;
@@ -743,7 +743,7 @@ export interface LoadEvent<
 	 */
 	parent(): Promise<ParentData>;
 	/**
-	 * This function declares that the `load` function has a _dependency_ on one or more URLs or custom identifiers, which can subsequently be used with [`invalidate()`](/docs/modules#$app-navigation-invalidate) to cause `load` to rerun.
+	 * This function declares that the `load` function has a _dependency_ on one or more URLs or custom identifiers, which can subsequently be used with [`invalidate()`](https://kit.sveltefr.dev/docs/modules#$app-navigation-invalidate) to cause `load` to rerun.
 	 *
 	 * Most of the time you won't need this, as `fetch` calls `depends` on your behalf — it's only necessary if you're using a custom API client that bypasses `fetch`.
 	 *
@@ -1144,7 +1144,7 @@ export interface ServerLoadEvent<
 	 */
 	parent(): Promise<ParentData>;
 	/**
-	 * This function declares that the `load` function has a _dependency_ on one or more URLs or custom identifiers, which can subsequently be used with [`invalidate()`](/docs/modules#$app-navigation-invalidate) to cause `load` to rerun.
+	 * This function declares that the `load` function has a _dependency_ on one or more URLs or custom identifiers, which can subsequently be used with [`invalidate()`](https://kit.sveltefr.dev/docs/modules#$app-navigation-invalidate) to cause `load` to rerun.
 	 *
 	 * Most of the time you won't need this, as `fetch` calls `depends` on your behalf — it's only necessary if you're using a custom API client that bypasses `fetch`.
 	 *
