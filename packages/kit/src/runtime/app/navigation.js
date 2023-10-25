@@ -1,15 +1,15 @@
 import { client_method } from '../client/singletons.js';
 
 /**
- * If called when the page is being updated following a navigation (in `onMount` or `afterNavigate` or an action, for example), this disables SvelteKit's built-in scroll handling.
- * This is generally discouraged, since it breaks user expectations.
+ * Si appelée lorsque la page est en train d'être mise à jour à la suite d'une navigation (dans `onMount` ou `afterNavigate` ou une action, par exemple), cette méthode désactive le comportement de défilement par défaut de SvelteKit.
+ * Ceci n'est en général pas recommandé, puisque cela diffère des attentes des utilisateurs et utilisatrices.
  * @returns {void}
  */
 export const disableScrollHandling = /* @__PURE__ */ client_method('disable_scroll_handling');
 
 /**
- * Returns a Promise that resolves when SvelteKit navigates (or fails to navigate, in which case the promise rejects) to the specified `url`.
- * For external URLs, use `window.location = url` instead of calling `goto(url)`.
+ * Renvoie une `Promise` qui est résolue lorsque SvelteKit navigue (or échoue à naviguer, auquel cas la promesse est rejetée) vers l'`url` fournie.
+ * Pour les URLs externes, utilisez `window.location = url` plutôt que `goto(url)`.
  *
  * @type {(url: string | URL, opts?: {
  *   replaceState?: boolean;
@@ -30,13 +30,13 @@ export const disableScrollHandling = /* @__PURE__ */ client_method('disable_scro
 export const goto = /* @__PURE__ */ client_method('goto');
 
 /**
- * Causes any `load` functions belonging to the currently active page to re-run if they depend on the `url` in question, via `fetch` or `depends`. Returns a `Promise` that resolves when the page is subsequently updated.
+ * Déclenche l'exécution de toute fonction `load` appartenant à la page active si elle dépend de l'`url` en question, via `fetch` ou `depends`. Renvoie une `Promise` qui est résolue lorsque la page est mise à jour.
  *
- * If the argument is given as a `string` or `URL`, it must resolve to the same URL that was passed to `fetch` or `depends` (including query parameters).
- * To create a custom identifier, use a string beginning with `[a-z]+:` (e.g. `custom:state`) — this is a valid URL.
+ * Si l'argument est fourni en tant que `string` ou `URL`, il doit correspondre à la même URL qui a été passée à `fetch` ou `depends` (en incluant les paramètres de recherche).
+ * Pour créer un identifiant personnalisé, vous devez utiliser une chaîne de caractère commençant par `[a-z]+:` (par ex. `custom:state`) – ce qui en fait une URL valide.
  *
- * The `function` argument can be used define a custom predicate. It receives the full `URL` and causes `load` to rerun if `true` is returned.
- * This can be useful if you want to invalidate based on a pattern instead of a exact match.
+ * Un argument de type fonction peut être utilisé pour définir un prédicat personnalisé. Il recevra l'`URL` complète et déclenchera l'exécution des fonctions `load` si `true` est renvoyée.
+ * Ceci est utile si vous souhaitez invalider des données en fonction d'un motif plutôt qu'une URL précise.
  *
  * ```ts
  * // Example: Match '/path' regardless of the query parameters
@@ -51,20 +51,20 @@ export const goto = /* @__PURE__ */ client_method('goto');
 export const invalidate = /* @__PURE__ */ client_method('invalidate');
 
 /**
- * Causes all `load` functions belonging to the currently active page to re-run. Returns a `Promise` that resolves when the page is subsequently updated.
+ * Déclenche l'exécution de toutes les fonctions `load` appartenant à la page active. Renvoie une `Promise` qui est résolue lorsque la page est mise à jour.
  * @type {() => Promise<void>}
  * @returns {Promise<void>}
  */
 export const invalidateAll = /* @__PURE__ */ client_method('invalidate_all');
 
 /**
- * Programmatically preloads the given page, which means
- *  1. ensuring that the code for the page is loaded, and
- *  2. calling the page's load function with the appropriate options.
+ * Précharge programmatiquement une page donnée, ce qui permet
+ *  1. de s'assurer que le code de la page est bien chargé, et
+ *  2. d'appeler la fonction `load` de la page avec les options appropriées.
  *
- * This is the same behaviour that SvelteKit triggers when the user taps or mouses over an `<a>` element with `data-sveltekit-preload-data`.
- * If the next navigation is to `href`, the values returned from load will be used, making navigation instantaneous.
- * Returns a Promise that resolves when the preload is complete.
+ * Ce comportement est le même que SvelteKit déclenche lorsque l'utilisateur ou l'utilisatrice survole un élément `<a>` avec `data-sveltekit-preload-data`.
+ * Si la navigation à venir cible `href`, les valeurs renvoyées par `load` seront utilisées, rendant la navigation instantanée.
+ * Renvoie une `Promise` qui est résolue lorsque le préchargement est terminé.
  *
  * @type {(href: string) => Promise<void>}
  * @param {string} href Page to preload
@@ -73,13 +73,13 @@ export const invalidateAll = /* @__PURE__ */ client_method('invalidate_all');
 export const preloadData = /* @__PURE__ */ client_method('preload_data');
 
 /**
- * Programmatically imports the code for routes that haven't yet been fetched.
- * Typically, you might call this to speed up subsequent navigation.
+ * Importe programmatiquement le code des routes qui n'ont pas encore été récupérées.
+ * Vous pouvez typiquement utiliser cette méthode pour accélérer les navigations à venir.
  *
- * You can specify routes by any matching pathname such as `/about` (to match `src/routes/about/+page.svelte`) or `/blog/*` (to match `src/routes/blog/[slug]/+page.svelte`).
+ * Vous pouvez spécifier des routes correspondant à n'importe quel chemin  comme `/about` (pour correspondre à `src/routes/about/+page.svelte`) ou `/blog/*` (pour correspondre à `src/routes/blog/[slug]/+page.svelte`).
  *
- * Unlike `preloadData`, this won't call `load` functions.
- * Returns a Promise that resolves when the modules have been imported.
+ * À la différence de `preloadData`, cette fonction ne va pas appeler de fonctions `load`.
+ * Renvoie une `Promise` qui est résolue lorsque les modules ont été importés.
  *
  * @type {(...urls: string[]) => Promise<void>}
  * @param {...string[]} urls
@@ -88,13 +88,13 @@ export const preloadData = /* @__PURE__ */ client_method('preload_data');
 export const preloadCode = /* @__PURE__ */ client_method('preload_code');
 
 /**
- * A navigation interceptor that triggers before we navigate to a new URL, whether by clicking a link, calling `goto(...)`, or using the browser back/forward controls.
- * Calling `cancel()` will prevent the navigation from completing. If the navigation would have directly unloaded the current page, calling `cancel` will trigger the native
- * browser unload confirmation dialog. In these cases, `navigation.willUnload` is `true`.
+ * Un intercepteur de navigation qui se déclenche avant toute navigation vers une nouvelle URL, que ce soit via un clic sur un lien, via `goto(...)`, ou via les bouton retour/suivant du navigateur.
+ * Appeler `cancel()` va empêcher la navigation de se terminer. Si la navigation aurait du directement décharger la page courante, appeler `cancel` va déclencher la boîte de dialogue correspodante du navigateur.
+ * Dans ce cas-là, `navigation.willUnload` is `true`.
  *
- * When a navigation isn't client side, `navigation.to.route.id` will be `null`.
+ * Lorsque la navigation n'est pas faite côté client, `navigation.to.route.id` aura pour valeur `null`.
  *
- * `beforeNavigate` must be called during a component initialization. It remains active as long as the component is mounted.
+ * `beforeNavigate` doit être exécutée pendant l'initialisation du composant. Elle reste active tant que le composant est monté.
  * @type {(callback: (navigation: import('@sveltejs/kit').BeforeNavigate) => void) => void}
  * @param {(navigation: import('@sveltejs/kit').BeforeNavigate) => void} callback
  * @returns {void}
@@ -102,13 +102,13 @@ export const preloadCode = /* @__PURE__ */ client_method('preload_code');
 export const beforeNavigate = /* @__PURE__ */ client_method('before_navigate');
 
 /**
- * A lifecycle function that runs the supplied `callback` immediately before we navigate to a new URL.
+ * Une fonction de cycle de vie qui exécute immédiatement le <span class='vo'>[`callback`](https://sveltefr.dev/docs/development#callback)</span> fourni, avant de naviguer vers la nouvelle URL.
  *
- * If you return a `Promise`, SvelteKit will wait for it to resolve before completing the navigation. This allows you to — for example — use `document.startViewTransition`. Avoid promises that are slow to resolve, since navigation will appear stalled to the user.
+ * Si vous renvoyez une `Promise`, SvelteKit va attendre sa résolution avant de terminer la navigation. Ceci vous permet – par exemple – d'utiliser `document.startViewTransition`. Évitez les promesses trop lentes à résoudre, qui rendraient la navigation saccadée.
  *
- * If a function (or a `Promise` that resolves to a function) is returned from the callback, it will be called once the DOM has updated.
+ * Si une fonction (ou une `Promise` qui résout une fonction) est renvoyée du callback, celle-ci sera appelée une fois que le <span class='vo'>[DOM](https://sveltefr.dev/docs/web#dom)</span> aura été mis à jour.
  *
- * `onNavigate` must be called during a component initialization. It remains active as long as the component is mounted.
+ * `onNavigate` doit être exécutée pendant l'initialisation du composant. Elle reste active tant que le composant est monté.
  * @type {(callback: (navigation: import('@sveltejs/kit').OnNavigate) => import('../../types/internal.js').MaybePromise<(() => void) | void>) => void}
  * @param {(navigation: import('@sveltejs/kit').OnNavigate) => void} callback
  * @returns {void}
@@ -116,9 +116,9 @@ export const beforeNavigate = /* @__PURE__ */ client_method('before_navigate');
 export const onNavigate = /* @__PURE__ */ client_method('on_navigate');
 
 /**
- * A lifecycle function that runs the supplied `callback` when the current component mounts, and also whenever we navigate to a new URL.
+ * Une fonction de cycle de vie qui exécute le <span class='vo'>[`callback`](https://sveltefr.dev/docs/development#callback)</span> fourni lorsque le composant est monté, ainsi qu'à chaque fois que l'on navigue vers une nouvelle URL.
  *
- * `afterNavigate` must be called during a component initialization. It remains active as long as the component is mounted.
+ * `afterNavigate` doit être exécutée pendant l'initialisation du composant. Elle reste active tant que le composant est monté.
  * @type {(callback: (navigation: import('@sveltejs/kit').AfterNavigate) => void) => void}
  * @param {(navigation: import('@sveltejs/kit').AfterNavigate) => void} callback
  * @returns {void}

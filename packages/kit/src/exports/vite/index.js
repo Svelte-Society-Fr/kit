@@ -5,13 +5,19 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 import colors from 'kleur';
 import * as vite from 'vite';
 
-import { copy, mkdirp, posixify, read, resolve_entry, rimraf } from '../../utils/filesystem.js';
-import { create_static_module, create_dynamic_module } from '../../core/env.js';
-import * as sync from '../../core/sync/sync.js';
-import { create_assets } from '../../core/sync/create_manifest_data/index.js';
-import { runtime_directory, logger } from '../../core/utils.js';
 import { load_config } from '../../core/config/index.js';
+import { create_dynamic_module, create_static_module } from '../../core/env.js';
 import { generate_manifest } from '../../core/generate_manifest/index.js';
+import analyse from '../../core/postbuild/analyse.js';
+import prerender from '../../core/postbuild/prerender.js';
+import { create_assets } from '../../core/sync/create_manifest_data/index.js';
+import * as sync from '../../core/sync/sync.js';
+import { dedent } from '../../core/sync/utils.js';
+import { write_client_manifest } from '../../core/sync/write_client_manifest.js';
+import { logger, runtime_directory } from '../../core/utils.js';
+import { hash } from '../../runtime/hash.js';
+import { copy, mkdirp, posixify, read, resolve_entry, rimraf } from '../../utils/filesystem.js';
+import { s } from '../../utils/misc.js';
 import { build_server_nodes } from './build/build_server.js';
 import { build_service_worker } from './build/build_service_worker.js';
 import { assets_base, find_deps } from './build/utils.js';
@@ -19,12 +25,6 @@ import { dev } from './dev/index.js';
 import { is_illegal, module_guard, normalize_id } from './graph_analysis/index.js';
 import { preview } from './preview/index.js';
 import { get_config_aliases, get_env, strip_virtual_prefix } from './utils.js';
-import { write_client_manifest } from '../../core/sync/write_client_manifest.js';
-import prerender from '../../core/postbuild/prerender.js';
-import analyse from '../../core/postbuild/analyse.js';
-import { s } from '../../utils/misc.js';
-import { hash } from '../../runtime/hash.js';
-import { dedent } from '../../core/sync/utils.js';
 
 export { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
@@ -112,7 +112,7 @@ const warning_preprocessor = {
 };
 
 /**
- * Returns the SvelteKit Vite plugins.
+ * Renvoie les <span class='vo'>[plugins](https://sveltefr.dev/docs/development#plugin)</span> Vite de SvelteKit.
  * @returns {Promise<import('vite').Plugin[]>}
  */
 export async function sveltekit() {
