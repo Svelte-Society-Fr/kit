@@ -25,16 +25,17 @@ export { PrerenderOption } from '../types/private.js';
 export { ActionFailure };
 
 /**
- * [Adapters](https://kit.svelte.dev/docs/adapters) are responsible for taking the production build and turning it into something that can be deployed to a platform of your choosing.
+ * Les [adaptateurs](https://kit.sveltefr.dev/docs/adapters) sont responsables de transformer votre <span class='vo'>[build](https://sveltefr.dev/docs/development#build)</span>
+ * de production en quelque chose qui pourra être déployé sur une plateforme de votre choix.
  */
 export interface Adapter {
 	/**
-	 * The name of the adapter, using for logging. Will typically correspond to the package name.
+	 * Le nom de l'adaptateur, utile pour <span class='vo'>[logguer](https://sveltefr.dev/docs/development#log)</span>. Correspond normalement au nom du paquet.
 	 */
 	name: string;
 	/**
-	 * This function is called after SvelteKit has built your app.
-	 * @param builder An object provided by SvelteKit that contains methods for adapting the app
+	 * Cette fonction est exécutée après que SvelteKit a compilé votre application.
+	 * @param builder Un objet fourni par SvelteKit contenant des méthodes pour adpater votre application
 	 */
 	adapt(builder: Builder): MaybePromise<void>;
 }
@@ -74,79 +75,79 @@ type UnpackValidationError<T> = T extends ActionFailure<infer X>
 	: T;
 
 /**
- * This object is passed to the `adapt` function of adapters.
- * It contains various methods and properties that are useful for adapting the app.
+ * Cet objet est passé à la fonction `adapt` des adaptateurs.
+ * Il contient différentes méthodes et propriétés qui sont utiles pour adapter votre application.
  */
 export interface Builder {
-	/** Print messages to the console. `log.info` and `log.minor` are silent unless Vite's `logLevel` is `info`. */
+	/** Affiche des messages dans la console. `log.info` et `log.minor` sont silencieux à moins que l'option `logLevel` de Vite soit `info`. */
 	log: Logger;
-	/** Remove `dir` and all its contents. */
+	/** Supprime `dir` et tout son contenu. */
 	rimraf(dir: string): void;
-	/** Create `dir` and any required parent directories. */
+	/** Crée un dossier `dir` et tout dossier parent nécessaire. */
 	mkdirp(dir: string): void;
 
-	/** The fully resolved `svelte.config.js`. */
+	/** Le contenu du fichier `svelte.config.js`. */
 	config: ValidatedConfig;
-	/** Information about prerendered pages and assets, if any. */
+	/** Des informations sur les pages prérendues et ses fichiers statiques, s'il y en a. */
 	prerendered: Prerendered;
-	/** An array of all routes (including prerendered) */
+	/** Un tableau de toutes les routes (en incluant les routes prérendues). */
 	routes: RouteDefinition[];
 
 	/**
-	 * Create separate functions that map to one or more routes of your app.
-	 * @param fn A function that groups a set of routes into an entry point
-	 * @deprecated Use `builder.routes` instead
+	 * Crée différentes fonctions qui correspondent à une ou plusieurs routes de votre application.
+	 * @param fn Une fonction qui regroupe un ensemble de routes en un point d'entrée
+	 * @deprecated Utilisez plutôt `builder.routes`
 	 */
 	createEntries(fn: (route: RouteDefinition) => AdapterEntry): Promise<void>;
 
 	/**
-	 * Generate a fallback page for a static webserver to use when no route is matched. Useful for single-page apps.
+	 * Génère une page par défaut qu'un serveur web statique peut utiliser lorsqu'aucune route ne correspond à la page demandée. Utile pour les applications de type <span class='vo'>[SPA](https://sveltefr.dev/docs/web#spa)</span>.
 	 */
 	generateFallback(dest: string): Promise<void>;
 
 	/**
-	 * Generate a server-side manifest to initialise the SvelteKit [server](https://kit.svelte.dev/docs/types#public-types-server) with.
-	 * @param opts a relative path to the base directory of the app and optionally in which format (esm or cjs) the manifest should be generated
+	 * Génère un manifeste côté serveur avec lequel initialiser le [serveur](https://kit.sveltefr.dev/docs/types#public-types-server) SvelteKit.
+	 * @param opts un chemin relatif vers le dossier de base de l'application, et en option le format (esm ou cjs) dans lequel le manifeste doit être généré
 	 */
 	generateManifest(opts: { relativePath: string; routes?: RouteDefinition[] }): string;
 
 	/**
-	 * Resolve a path to the `name` directory inside `outDir`, e.g. `/path/to/.svelte-kit/my-adapter`.
-	 * @param name path to the file, relative to the build directory
+	 * Résout le chemin vers le fichier `name` dans `outDir`, par ex. `/path/to/.svelte-kit/my-adapter`.
+	 * @param name chemin vers le fichier, relatif au dossier compilé
 	 */
 	getBuildDirectory(name: string): string;
-	/** Get the fully resolved path to the directory containing client-side assets, including the contents of your `static` directory. */
+	/** Récupère le chemin résolu complet vers le dossier contenant les fichiers statiques client, incluant le contenu de votre dossier `static`. */
 	getClientDirectory(): string;
-	/** Get the fully resolved path to the directory containing server-side code. */
+	/** Récupère le chemin résolu complet vers le dossier contenant le code serveur. */
 	getServerDirectory(): string;
-	/** Get the application path including any configured `base` path, e.g. `my-base-path/_app`. */
+	/** Récupère le chemin de l'application en incluant un éventuel chemin configuré par `base`, par ex. `my-base-path/_app`. */
 	getAppPath(): string;
 
 	/**
-	 * Write client assets to `dest`.
-	 * @param dest the destination folder
-	 * @returns an array of files written to `dest`
+	 * Écrit les fichiers statiques client dans `dest`.
+	 * @param dest le dossier de destination
+	 * @returns un tableau des fichiers écrits dans `dest`
 	 */
 	writeClient(dest: string): string[];
 	/**
-	 * Write prerendered files to `dest`.
-	 * @param dest the destination folder
-	 * @returns an array of files written to `dest`
+	 * Écrit les fichiers prérendus dans `dest`.
+	 * @param dest le dossier de destination
+	 * @returns un tableau des fichiers écrits dans `dest`
 	 */
 	writePrerendered(dest: string): string[];
 	/**
-	 * Write server-side code to `dest`.
-	 * @param dest the destination folder
-	 * @returns an array of files written to `dest`
+	 * Écrit les fichiers prérendus dans `dest`.
+	 * @param dest le dossier de destination
+	 * @returns un tableau des fichiers écrits dans `dest`
 	 */
 	writeServer(dest: string): string[];
 	/**
-	 * Copy a file or directory.
-	 * @param from the source file or directory
-	 * @param to the destination file or directory
-	 * @param opts.filter a function to determine whether a file or directory should be copied
-	 * @param opts.replace a map of strings to replace
-	 * @returns an array of files that were copied
+	 * Copie un fichier ou un dossier.
+	 * @param from le fichier ou dossier source
+	 * @param to le fichier ou dossier de destination
+	 * @param opts.filter une fonction qui détermine si un fichier ou un dossier doit être copié
+	 * @param opts.replace un dictionnaire de chaînes de caractères à remplacer
+	 * @returns un tableau des fichiers qui ont été copiés
 	 */
 	copy(
 		from: string,
@@ -158,8 +159,8 @@ export interface Builder {
 	): string[];
 
 	/**
-	 * Compress files in `directory` with gzip and brotli, where appropriate. Generates `.gz` and `.br` files alongside the originals.
-	 * @param {string} directory The directory containing the files to be compressed
+	 * Compresse les fichiers dans `directory` avec gzip et brotli, lorsque pertinent. Génère des fichiers `.gz` et `.br` au même endroit que les originaux.
+	 * @param {string} directory Le dossier contenant les fichiers à compresser
 	 */
 	compress(directory: string): Promise<void>;
 }
@@ -195,49 +196,49 @@ export interface Config {
 
 export interface Cookies {
 	/**
-	 * Gets a cookie that was previously set with `cookies.set`, or from the request headers.
-	 * @param name the name of the cookie
-	 * @param opts the options, passed directly to `cookie.parse`. See documentation [here](https://github.com/jshttp/cookie#cookieparsestr-options)
+	 * Récupère un cookie qui a été précédemment défini avec `cookies.set`, ou depuis les <span class='vo'>[headers](https://sveltefr.dev/docs/web#header)</span> de requête.
+	 * @param name le nom du cookie
+	 * @param opts les options, passées directement à `cookie.parse`. Voir la documentation [sur cette page](https://github.com/jshttp/cookie#cookieparsestr-options) (en anglais).
 	 */
 	get(name: string, opts?: import('cookie').CookieParseOptions): string | undefined;
 
 	/**
-	 * Gets all cookies that were previously set with `cookies.set`, or from the request headers.
-	 * @param opts the options, passed directly to `cookie.parse`. See documentation [here](https://github.com/jshttp/cookie#cookieparsestr-options)
+	 * Récupère tous les cookies qui ont été précédemment définis avec `cookies.set`, ou depuis les <span class='vo'>[headers](https://sveltefr.dev/docs/web#header)</span> de requête.
+	 * @param opts les options, passées directement à `cookie.parse`. Voir la documentation [sur cette page](https://github.com/jshttp/cookie#cookieparsestr-options) (en anglais).
 	 */
 	getAll(opts?: import('cookie').CookieParseOptions): Array<{ name: string; value: string }>;
 
 	/**
-	 * Sets a cookie. This will add a `set-cookie` header to the response, but also make the cookie available via `cookies.get` or `cookies.getAll` during the current request.
+	 * Définit un cookie. Ceci va ajouter un <span class='vo'>[header](https://sveltefr.dev/docs/web#header)</span> `set-cookie` à la réponse, mais aussi rendre le cookie disponible via `cookies.get` ou `cookies.getAll` pendant la requête courante.
 	 *
-	 * The `httpOnly` and `secure` options are `true` by default (except on http://localhost, where `secure` is `false`), and must be explicitly disabled if you want cookies to be readable by client-side JavaScript and/or transmitted over HTTP. The `sameSite` option defaults to `lax`.
+	 * Les options `httpOnly` et `secure` valent par défaut `true` (sauf sur http://localhost, où `secure` vaut `false`), et doivent être explicitement désactivées si vous voulez que les cookies soient lisibles par du code JavaScript côté client et/ou transmis via HTTP. L'option `sameSite` vaut par défaut `lax`.
 	 *
-	 * By default, the `path` of a cookie is the 'directory' of the current pathname. In most cases you should explicitly set `path: '/'` to make the cookie available throughout your app.
-	 * @param name the name of the cookie
-	 * @param value the cookie value
-	 * @param opts the options, passed directly to `cookie.serialize`. See documentation [here](https://github.com/jshttp/cookie#cookieserializename-value-options)
+	 * Par défaut, le `path` d'un cookie est le dossier `directory` du chemin courant. Dans la plupart des cas, vous devriez explicitement définir `path: '/'` pour rendre le cookie disponible dans toute votre application.
+	 * @param name le nom du cookie
+	 * @param value la valeur du cookie
+	 * @param opts les options, passées directement à `cookie.serialize`. Voir la documentation [sur cette page](https://github.com/jshttp/cookie#cookieserializename-value-options) (en anglais).
 	 */
 	set(name: string, value: string, opts?: import('cookie').CookieSerializeOptions): void;
 
 	/**
-	 * Deletes a cookie by setting its value to an empty string and setting the expiry date in the past.
+	 * Supprime un cookie en définissant sa valeur comme une chaîne de caractères vide et sa date d'expiration à une valeur dans le passé.
 	 *
-	 * By default, the `path` of a cookie is the 'directory' of the current pathname. In most cases you should explicitly set `path: '/'` to make the cookie available throughout your app.
-	 * @param name the name of the cookie
-	 * @param opts the options, passed directly to `cookie.serialize`. The `path` must match the path of the cookie you want to delete. See documentation [here](https://github.com/jshttp/cookie#cookieserializename-value-options)
+	 * Par défaut, le `path` d'un cookie est le dossier `directory` du chemin courant. Dans la plupart des cas, vous devriez explicitement définir `path: '/'` pour rendre le cookie disponible dans toute votre application.
+	 * @param name le nom du cookie
+	 * @param opts les options, passées directement à `cookie.serialize`. Voir la documentation [ici](https://github.com/jshttp/cookie#cookieserializename-value-options) (en anglais).
 	 */
 	delete(name: string, opts?: import('cookie').CookieSerializeOptions): void;
 
 	/**
-	 * Serialize a cookie name-value pair into a `Set-Cookie` header string, but don't apply it to the response.
+	 * Sérialise une paire nom-valeur de cookie en une chaîne de caractères de <span class='vo'>[header](https://sveltefr.dev/docs/web#header)</span> `Set-Cookie`, mais ne l'applique pas à la réponse.
 	 *
-	 * The `httpOnly` and `secure` options are `true` by default (except on http://localhost, where `secure` is `false`), and must be explicitly disabled if you want cookies to be readable by client-side JavaScript and/or transmitted over HTTP. The `sameSite` option defaults to `lax`.
+	 * Les options `httpOnly` et `secure` valent par défaut `true` (sauf sur http://localhost, où `secure` vaut `false`), et doivent être explicitement désactivées si vous voulez que les cookies soient lisibles par du code JavaScript côté client et/ou transmis via HTTP. L'option `sameSite` vaut par défaut `lax`.
 	 *
-	 * By default, the `path` of a cookie is the current pathname. In most cases you should explicitly set `path: '/'` to make the cookie available throughout your app.
+	 * Par défaut, le `path` d'un cookie est le dossier `directory` du chemin courant. Dans la plupart des cas, vous devriez explicitement définir `path: '/'` pour rendre le cookie disponible dans toute votre application.
 	 *
-	 * @param name the name of the cookie
-	 * @param value the cookie value
-	 * @param opts the options, passed directly to `cookie.serialize`. See documentation [here](https://github.com/jshttp/cookie#cookieserializename-value-options)
+	 * @param name le nom du cookie
+	 * @param value la valeur du cookie
+	 * @param opts les options, passées directement à `cookie.serialize`. Voir la documentation [sur cette page](https://github.com/jshttp/cookie#cookieserializename-value-options) (en anglais).
 	 */
 	serialize(name: string, value: string, opts?: import('cookie').CookieSerializeOptions): string;
 }
@@ -631,10 +632,11 @@ export interface KitConfig {
 }
 
 /**
- * The [`handle`](https://kit.svelte.dev/docs/hooks#server-hooks-handle) hook runs every time the SvelteKit server receives a [request](https://kit.svelte.dev/docs/web-standards#fetch-apis-request) and
- * determines the [response](https://kit.svelte.dev/docs/web-standards#fetch-apis-response).
- * It receives an `event` object representing the request and a function called `resolve`, which renders the route and generates a `Response`.
- * This allows you to modify response headers or bodies, or bypass SvelteKit entirely (for implementing routes programmatically, for example).
+ * Le [hook `handle`](https://kit.sveltefr.dev/docs/hooks#server-hooks-handle) est exécuté à chaque fois que le serveur SvelteKit reçoit une [requête](https://kit.sveltefr.dev/docs/web-standards#fetch-apis-request)
+ * et détermine la [réponse](https://kit.sveltefr.dev/docs/web-standards#fetch-apis-response).
+ * Il reçoit un objet `event` représentant la requête et un fonction appelée `resolve`, qui rend la route et génère une `Response`.
+ * Ceci vous permet de modifier les <span class='vo'>[headers](https://sveltefr.dev/docs/web#header)</span> et <span class='vo'>[body](https://sveltefr.dev/docs/web#body)</span> de réponse,
+ * ou de complètement contourner SvelteKit (par exemple pour implémenter certaines routes programmatiquement).
  */
 export type Handle = (input: {
 	event: RequestEvent;
@@ -642,10 +644,10 @@ export type Handle = (input: {
 }) => MaybePromise<Response>;
 
 /**
- * The server-side [`handleError`](https://kit.svelte.dev/docs/hooks#shared-hooks-handleerror) hook runs when an unexpected error is thrown while responding to a request.
+ * Le <span class='vo'>[hook](https://sveltefr.dev/docs/sveltejs#hook)</span> [`handleError`](https://kit.sveltefr.dev/docs/hooks#shared-hooks-handleerror) est exécuté sur le serveur lorsqu'une erreur inattendue se produit pendant que SvelteKit répond à une requête.
  *
- * If an unexpected error is thrown during loading or rendering, this function will be called with the error and the event.
- * Make sure that this function _never_ throws an error.
+ * Si une erreur inattendue est levée pendant le chargement ou le rendu, cette fonction est appelée avec l'erreur et un objet `RequestEvent`.
+ * Assurez-vous que cette fonction ne lève _jamais_ d'erreur.
  */
 export type HandleServerError = (input: {
 	error: unknown;
@@ -653,10 +655,11 @@ export type HandleServerError = (input: {
 }) => MaybePromise<void | App.Error>;
 
 /**
- * The client-side [`handleError`](https://kit.svelte.dev/docs/hooks#shared-hooks-handleerror) hook runs when an unexpected error is thrown while navigating.
+ * Le <span class='vo'>[hook](https://sveltefr.dev/docs/sveltejs#hook)</span> [`handleError`](https://kit.sveltefr.dev/docs/hooks#shared-hooks-handleerror) est exécuté côté client lorsqu'une erreur inattendue se produit pendant la navigation.
  *
- * If an unexpected error is thrown during loading or the following render, this function will be called with the error and the event.
- * Make sure that this function _never_ throws an error.
+ *
+ * Si une erreur inattendue est levée pendant le chargement ou après le rendu, cette fonction est appelée avec l'erreur et un objet `RequestEvent`.
+ * Assurez-vous que cette fonction ne lève _jamais_ d'erreur.
  */
 export type HandleClientError = (input: {
 	error: unknown;
@@ -664,7 +667,7 @@ export type HandleClientError = (input: {
 }) => MaybePromise<void | App.Error>;
 
 /**
- * The [`handleFetch`](https://kit.svelte.dev/docs/hooks#server-hooks-handlefetch) hook allows you to modify (or replace) a `fetch` request that happens inside a `load` function that runs on the server (or during pre-rendering)
+ * Le <span class='vo'>[hook](https://sveltefr.dev/docs/sveltejs#hook)</span> [`handleFetch`](https://kit.sveltefr.dev/docs/hooks#server-hooks-handlefetch) vous permet de modifier (ou remplacer) une requête `fetch` qui se produit dans une fonction `load` exécutée sur le serveur (ou durant le prérendu).
  */
 export type HandleFetch = (input: {
 	event: RequestEvent;
@@ -673,8 +676,8 @@ export type HandleFetch = (input: {
 }) => MaybePromise<Response>;
 
 /**
- * The generic form of `PageLoad` and `LayoutLoad`. You should import those from `./$types` (see [generated types](https://kit.svelte.dev/docs/types#generated-types))
- * rather than using `Load` directly.
+ * La forme générique de `PageLoad` et `LayoutLoad`. Vous devriez importer ces derniers depuis `./$types` (voir la section [Types générés](https://kit.sveltefr.dev/docs/types#generated-types))
+ * plutôt que d'utiliser `Load` directement.
  */
 export type Load<
 	Params extends Partial<Record<string, string>> = Partial<Record<string, string>>,
@@ -685,8 +688,8 @@ export type Load<
 > = (event: LoadEvent<Params, InputData, ParentData, RouteId>) => MaybePromise<OutputData>;
 
 /**
- * The generic form of `PageLoadEvent` and `LayoutLoadEvent`. You should import those from `./$types` (see [generated types](https://kit.svelte.dev/docs/types#generated-types))
- * rather than using `LoadEvent` directly.
+ * La forme générique de `PageLoadEvent` et `LayoutLoadEvent`. Vous devriez importer ces derniers depuis `./$types` (voir la section [Types générés](https://kit.sveltefr.dev/docs/types#generated-types))
+ * plutôt que d'utiliser `LoadEvent` directement.
  */
 export interface LoadEvent<
 	Params extends Partial<Record<string, string>> = Partial<Record<string, string>>,
@@ -695,23 +698,23 @@ export interface LoadEvent<
 	RouteId extends string | null = string | null
 > extends NavigationEvent<Params, RouteId> {
 	/**
-	 * `fetch` is equivalent to the [native `fetch` web API](https://developer.mozilla.org/en-US/docs/Web/API/fetch), with a few additional features:
+	 * La méthode `fetch` est équivalente à l'[API web native `fetch`](https://developer.mozilla.org/fr/docs/Web/API/fetch), avec quelques fonctionnalités additionnelles :
 	 *
-	 * - It can be used to make credentialed requests on the server, as it inherits the `cookie` and `authorization` headers for the page request.
-	 * - It can make relative requests on the server (ordinarily, `fetch` requires a URL with an origin when used in a server context).
-	 * - Internal requests (e.g. for `+server.js` routes) go directly to the handler function when running on the server, without the overhead of an HTTP call.
-	 * - During server-side rendering, the response will be captured and inlined into the rendered HTML by hooking into the `text` and `json` methods of the `Response` object. Note that headers will _not_ be serialized, unless explicitly included via [`filterSerializedResponseHeaders`](https://kit.svelte.dev/docs/hooks#server-hooks-handle)
-	 * - During hydration, the response will be read from the HTML, guaranteeing consistency and preventing an additional network request.
+	 * - Vous pouvez l'utiliser pour faire des requêtes authentifiées sur le serveur, puisqu'elle hérite des <span class='vo'>[headers](https://sveltefr.dev/docs/web#header)</span> `cookie` et `authorization` de la requête de page.
+	 * - Elle peut faire des requêtes relatives sur votre serveur (d'habitude, `fetch` nécessite une URL avec une origine lorsqu'utilisée dans un contexte serveur).
+	 * - Les requêtes internes (par ex. vers des routes `+server.js`) vont directement vers la fonction concernée si `fetch` est exécutée sur le serveur, sans la surcharge d'une requête HTTP.
+	 * - Pendant le rendu côté serveur, la réponse est capturée et <span class='vo'>[inlinée](https://sveltefr.dev/docs/javascript#inline)</span> dans le HTML rendu en utilisant les méthodes `text` et `json` de l'objet `Response`. Notez que les <span class='vo'>[headers](https://sveltefr.dev/docs/web#header)</span> ne seront _pas_ sérialisés, à moins d'être inclus explicitement via [`filterSerializedResponseHeaders`](https://kit.sveltefr.dev/docs/hooks#hooks-de-serveur-handle)
+	 * - Pendant l'hydratation, la réponse est lue depuis le HTML, en garantissant la consistance et évitant une requête réseau supplémentaire.
 	 *
-	 * You can learn more about making credentialed requests with cookies [here](https://kit.svelte.dev/docs/load#cookies)
+	 * Vous pouvez en apprendre plus sur les requêtes authentifiées avec cookies [ici](https://kit.sveltefr.dev/docs/load#cookies).
 	 */
 	fetch: typeof fetch;
 	/**
-	 * Contains the data returned by the route's server `load` function (in `+layout.server.js` or `+page.server.js`), if any.
+	 * Contient les données renvoyées par la fonction `load` serveur de votre route (dans `+layout.server.js` ou `+page.server.js`), si elle existe.
 	 */
 	data: Data;
 	/**
-	 * If you need to set headers for the response, you can do so using the this method. This is useful if you want the page to be cached, for example:
+	 * Si vous avez besoin de définir des <span class='vo'>[headers](https://sveltefr.dev/docs/web#header)</span> de réponse, vous pouvez le faire en utilisant cette méthode. Cela est utile si vous souhaitez changer la page à mettre en cache, par exemple :
 	 *
 	 *	```js
 	 *	/// file: src/routes/blog/+page.js
@@ -728,30 +731,29 @@ export interface LoadEvent<
 	 *	}
 	 *	```
 	 *
-	 * Setting the same header multiple times (even in separate `load` functions) is an error — you can only set a given header once.
+	 * Définir le même <span class='vo'>[header](https://sveltefr.dev/docs/web#header)</span> plusieurs fois (même dans des fonctions `load` différentes) est une erreur – vous pouvez définir un header donné seulement une seule fois.
+	 * Vous ne pouvez pas ajouter un header `set-cookie` en même temps que vous utilisez `setHeaders` – utilisez plutôt l'<span class='vo'>[API](https://sveltefr.dev/docs/development#api)</span> [`cookies`](https://kit.sveltefr.dev/docs/types#public-types-cookies) dans une fonction `load` de serveur.
 	 *
-	 * You cannot add a `set-cookie` header with `setHeaders` — use the [`cookies`](https://kit.svelte.dev/docs/types#public-types-cookies) API in a server-only `load` function instead.
-	 *
-	 * `setHeaders` has no effect when a `load` function runs in the browser.
+	 * `setHeaders` n'a pas d'effet lorsque la fonction `load` est exécutée dans le navigateur.
 	 */
 	setHeaders(headers: Record<string, string>): void;
 	/**
-	 * `await parent()` returns data from parent `+layout.js` `load` functions.
-	 * Implicitly, a missing `+layout.js` is treated as a `({ data }) => data` function, meaning that it will return and forward data from parent `+layout.server.js` files.
+	 * `await parent()` renvoie les données des fonctions `load` des fichiers `+layout.js` parents.
+	 * Implicitement, un fichier `+layout.js` manquant est traité comme une fonction `({ data }) => data`, ce qui implique qu'elle va relayer les données des fichiers `+layout.server.js` parents.
 	 *
-	 * Be careful not to introduce accidental waterfalls when using `await parent()`. If for example you only want to merge parent data into the returned output, call it _after_ fetching your other data.
+	 * Faites attention à ne pas introduire de "cascade" de chargement accidentelle lorsque vous utilisez `await parent()`. Si par exemple vous voulez uniquement fusionner les données du parent dans un objet à renvoyer, appelez cette fonction _après_ avoir téléchargé vos autres données.
 	 */
 	parent(): Promise<ParentData>;
 	/**
-	 * This function declares that the `load` function has a _dependency_ on one or more URLs or custom identifiers, which can subsequently be used with [`invalidate()`](https://kit.sveltefr.dev/docs/modules#$app-navigation-invalidate) to cause `load` to rerun.
+	 * Cette fonction déclare que la fonction `load` a comme _dépendances_ une ou plusieurs URLs ou identifiants personnalisés, qui peuvent donc être utilisés avec [`invalidate()`](https://kit.sveltefr.dev/docs/modules#$app-navigation-invalidate) déclencher la réexécution de `load`.
 	 *
-	 * Most of the time you won't need this, as `fetch` calls `depends` on your behalf — it's only necessary if you're using a custom API client that bypasses `fetch`.
+	 * La plupart du temps vous n'avez pas besoin d'utiliser ceci, puisque `fetch` appelle `depends` pour vous – c'est uniquement nécessaire si vous utilisez un client d'<span class='vo'>[API](https://sveltefr.dev/docs/development#api)</span> personnalisé qui contourne `fetch`.
 	 *
-	 * URLs can be absolute or relative to the page being loaded, and must be [encoded](https://developer.mozilla.org/en-US/docs/Glossary/percent-encoding).
+	 * Les URLs peuvent être absolues ou relatives à la page qui est en train d'être chargée, et doivent être [encodées](https://developer.mozilla.org/fr/docs/Glossary/percent-encoding).
 	 *
-	 * Custom identifiers have to be prefixed with one or more lowercase letters followed by a colon to conform to the [URI specification](https://www.rfc-editor.org/rfc/rfc3986.html).
+	 * Les identifiants personnaliés doivent être préfixés avec une ou plusieurs lettres en minuscules suivies d'un `:` pour satisfaire la [spécification URI](https://www.rfc-editor.org/rfc/rfc3986.html).
 	 *
-	 * The following example shows how to use `depends` to register a dependency on a custom identifier, which is `invalidate`d after a button click, making the `load` function rerun.
+	 * L'exemple suivant vous montre comment utiliser `depends` pour déclarer une dépendance à un identifiant personnalisé, qui sera invalidé  avec `invalidate` après un clic sur un bouton, déclenchant la réexécution de la fonction `load`.
 	 *
 	 * ```js
 	 * /// file: src/routes/+page.js
@@ -776,7 +778,7 @@ export interface LoadEvent<
 	 * </script>
 	 *
 	 * <p>{data.count}<p>
-	 * <button on:click={increase}>Increase Count</button>
+	 * <button on:click={increase}>Augmenter le compteur</button>
 	 * ```
 	 */
 	depends(...deps: string[]): void;
@@ -787,177 +789,177 @@ export interface NavigationEvent<
 	RouteId extends string | null = string | null
 > {
 	/**
-	 * The parameters of the current page - e.g. for a route like `/blog/[slug]`, a `{ slug: string }` object
+	 * Les paramètres de la page courante – par ex. un objet `{ slug: string }` pour la route `/blog/[slug]`
 	 */
 	params: Params;
 	/**
-	 * Info about the current route
+	 * Des informations sur la route courante
 	 */
 	route: {
 		/**
-		 * The ID of the current route - e.g. for `src/routes/blog/[slug]`, it would be `/blog/[slug]`
+		 * L'ID de la route courante – par ex. `/blog/[slug]` pour la route `src/routes/blog/[slug]`
 		 */
 		id: RouteId;
 	};
 	/**
-	 * The URL of the current page
+	 * L'URL de la page courante
 	 */
 	url: URL;
 }
 
 /**
- * Information about the target of a specific navigation.
+ * Des informations sur la cible d'une navigation.
  */
 export interface NavigationTarget {
 	/**
-	 * Parameters of the target page - e.g. for a route like `/blog/[slug]`, a `{ slug: string }` object.
-	 * Is `null` if the target is not part of the SvelteKit app (could not be resolved to a route).
+	 * Les paramètres de la page cible – pax ex. un objet `{ slug: string }` pour la route `/blog/[slug]`.
+	 * Vaut `null` si la cible ne fait pas partie de votre application SvelteKit (car ne correspond à aucune de vos routes).
 	 */
 	params: Record<string, string> | null;
 	/**
-	 * Info about the target route
+	 * Des informations sur la route cible
 	 */
 	route: { id: string | null };
 	/**
-	 * The URL that is navigated to
+	 * L'URL vers laquelle la navigation se dirige
 	 */
 	url: URL;
 }
 
 /**
- * - `enter`: The app has hydrated
- * - `form`: The user submitted a `<form>` with a GET method
- * - `leave`: The user is leaving the app by closing the tab or using the back/forward buttons to go to a different document
- * - `link`: Navigation was triggered by a link click
- * - `goto`: Navigation was triggered by a `goto(...)` call or a redirect
- * - `popstate`: Navigation was triggered by back/forward navigation
+ * - `enter`: L'application a été hydratée
+ * - `form`: Un élément `<form>` a été soumis avec une méthode GET
+ * - `leave`: L'utilisateur ou utilisatrice quitte l'application en fermant l'onglet ou en utilisant les boutons retour/suivant du navigateur pour aller sur un document différent
+ * - `link`: La navigation a été déclenchée par un clic sur un lien
+ * - `goto`: La navigation a été déclenchée par un appel à `goto(...)` ou une redirection
+ * - `popstate`: La navigation a été déclenchée par un navigation avec les boutons retour/suivant du navigateur
  */
 export type NavigationType = 'enter' | 'form' | 'leave' | 'link' | 'goto' | 'popstate';
 
 export interface Navigation {
 	/**
-	 * Where navigation was triggered from
+	 * L'endroit d'où la navigation a été déclenchée
 	 */
 	from: NavigationTarget | null;
 	/**
-	 * Where navigation is going to/has gone to
+	 * L'endroit vers lequel la navigation est dirigée
 	 */
 	to: NavigationTarget | null;
 	/**
-	 * The type of navigation:
-	 * - `form`: The user submitted a `<form>`
-	 * - `leave`: The user is leaving the app by closing the tab or using the back/forward buttons to go to a different document
-	 * - `link`: Navigation was triggered by a link click
-	 * - `goto`: Navigation was triggered by a `goto(...)` call or a redirect
-	 * - `popstate`: Navigation was triggered by back/forward navigation
+	 * Le type de navigation :
+	 * - `form`: Un élément `<form>` a été soumis
+	 * - `leave`: L'utilisateur ou utilisatrice quitte l'application en fermant l'onglet ou en utilisant les boutons retour/suivant du navigateur pour aller sur un document différent
+	 * - `link`: La navigation a été déclenchée par un clic sur un lien
+	 * - `goto`: La navigation a été déclenchée par un appel à `goto(...)` ou une redirection
+	 * - `popstate`: La navigation a été déclenchée par un navigation avec les boutons retour/suivant du navigateur
 	 */
 	type: Exclude<NavigationType, 'enter'>;
 	/**
-	 * Whether or not the navigation will result in the page being unloaded (i.e. not a client-side navigation)
+	 * Si oui ou non la navigation va déclencher le déchargement de la page (c'est-à-dire pas une navigation client)
 	 */
 	willUnload: boolean;
 	/**
-	 * In case of a history back/forward navigation, the number of steps to go back/forward
+	 * Dans les cas d'une navigation via les boutons retour/suivant du navigateur, le nombre d'étapes vers l'avant ou l'arrière de l'historique
 	 */
 	delta?: number;
 	/**
-	 * A promise that resolves once the navigation is complete, and rejects if the navigation
-	 * fails or is aborted. In the case of a `willUnload` navigation, the promise will never resolve
+	 * Un promesse qui se résout une fois la navigation terminée, et qui est rejetée si la navigation
+	 * échoue ou est annulée. Dans le cas d'une navigation de type `willUnload`, la promise ne sera jamais résolue
 	 */
 	complete: Promise<void>;
 }
 
 /**
- * The argument passed to [`beforeNavigate`](https://kit.svelte.dev/docs/modules#$app-navigation-beforenavigate) callbacks.
+ * L'argument passé aux <span class='vo'>[callbacks](https://sveltefr.dev/docs/development#callback)</span> [`beforeNavigate`](https://kit.svelte.dev/docs/modules#$app-navigation-beforenavigate).
  */
 export interface BeforeNavigate extends Navigation {
 	/**
-	 * Call this to prevent the navigation from starting.
+	 * Appelez cette méthode pour empêcher la navigation de démarrer.
 	 */
 	cancel(): void;
 }
 
 /**
- * The argument passed to [`onNavigate`](https://kit.svelte.dev/docs/modules#$app-navigation-onnavigate) callbacks.
+ * L'argument passé aux <span class='vo'>[callbacks](https://sveltefr.dev/docs/development#callback)</span> [`onNavigate`](https://kit.svelte.dev/docs/modules#$app-navigation-onnavigate).
  */
 export interface OnNavigate extends Navigation {
 	/**
-	 * The type of navigation:
-	 * - `form`: The user submitted a `<form>`
-	 * - `link`: Navigation was triggered by a link click
-	 * - `goto`: Navigation was triggered by a `goto(...)` call or a redirect
-	 * - `popstate`: Navigation was triggered by back/forward navigation
+	 * Le type de navigation :
+	 * - `form`: L'utilisateur ou utilisatrice a soumis un `<form>`
+	 * - `link`: La navigation a été déclenchée par un clic sur un lien
+	 * - `goto`: La navigation a été déclenchée par un appel à `goto(...)` ou une redirection
+	 * - `popstate`: La navigation a été déclenchée par les boutons précédent/suivant du navigateur
 	 */
 	type: Exclude<NavigationType, 'enter' | 'leave'>;
 	/**
-	 * Since `onNavigate` callbacks are called immediately before a client-side navigation, they will never be called with a navigation that unloads the page.
+	 * Puisque les <span class='vo'>[callbacks](https://sveltefr.dev/docs/development#callback)</span> `onNavigate` sont exécutés immédiatement avant une navigation côté client, ils ne seront jamais appelés lorsqu'une navigation décharge la page.
 	 */
 	willUnload: false;
 }
 
 /**
- * The argument passed to [`afterNavigate`](https://kit.svelte.dev/docs/modules#$app-navigation-afternavigate) callbacks.
+ * L'argument passé aux <span class='vo'>[callbacks](https://sveltefr.dev/docs/development#callback)</span> [`afterNavigate`](https://kit.sveltefr.dev/docs/modules#$app-navigation-afternavigate).
  */
 export interface AfterNavigate extends Omit<Navigation, 'type'> {
 	/**
-	 * The type of navigation:
-	 * - `enter`: The app has hydrated
-	 * - `form`: The user submitted a `<form>`
-	 * - `link`: Navigation was triggered by a link click
-	 * - `goto`: Navigation was triggered by a `goto(...)` call or a redirect
-	 * - `popstate`: Navigation was triggered by back/forward navigation
+	 * Le type de navigation :
+	 * - `enter`: L'application a été hydratée
+	 * - `form`: L'utilisateur ou utilisatrice a soumis un `<form>`
+	 * - `link`: La navigation a été déclenchée par un clic sur un lien
+	 * - `goto`: La navigation a été déclenchée par un appel à `goto(...)` ou une redirection
+	 * - `popstate`: La navigation a été déclenchée par les boutons précédent/suivant du navigateur
 	 */
 	type: Exclude<NavigationType, 'leave'>;
 	/**
-	 * Since `afterNavigate` callbacks are called after a navigation completes, they will never be called with a navigation that unloads the page.
+	 * Puisque les <span class='vo'>[callbacks](https://sveltefr.dev/docs/development#callback)</span> `afterNavigate` sont exécutés après la fin d'une navigation, ils ne seront jamais appelés lorsqu'une navigation décharge la page.
 	 */
 	willUnload: false;
 }
 
 /**
- * The shape of the `$page` store
+ * La forme du <span class='vo'>[store](https://sveltefr.dev/docs/sveltejs#store)</span> `$page`
  */
 export interface Page<
 	Params extends Record<string, string> = Record<string, string>,
 	RouteId extends string | null = string | null
 > {
 	/**
-	 * The URL of the current page
+	 * L'URL de la page courante
 	 */
 	url: URL;
 	/**
-	 * The parameters of the current page - e.g. for a route like `/blog/[slug]`, a `{ slug: string }` object
+	 * Les paramètres de la page courante – par ex. un objet `{ slug: string }` pour la route `/blog/[slug]`
 	 */
 	params: Params;
 	/**
-	 * Info about the current route
+	 * Des informations sur la route courante
 	 */
 	route: {
 		/**
-		 * The ID of the current route - e.g. for `src/routes/blog/[slug]`, it would be `/blog/[slug]`
+		 * L'ID de la route courante – par ex. `/blog/[slug]` pour la route `src/routes/blog/[slug]`
 		 */
 		id: RouteId;
 	};
 	/**
-	 * Http status code of the current page
+	 * Le code de statut HTTP pour la page courante
 	 */
 	status: number;
 	/**
-	 * The error object of the current page, if any. Filled from the `handleError` hooks.
+	 * L'objet d'erreur pour la page courante, si pertinent. Rempli grâce aux <span class='vo'>[hooks](https://sveltefr.dev/docs/sveltejs#hook)</span> `handleError`.
 	 */
 	error: App.Error | null;
 	/**
-	 * The merged result of all data from all `load` functions on the current page. You can type a common denominator through `App.PageData`.
+	 * Le résultat de la fusion de toutes les données renvoyées par toutes les fonctions `load` de la page courante. Vous pouvez typer un dénominateur commun grâce à `App.PageData`.
 	 */
 	data: App.PageData & Record<string, any>;
 	/**
-	 * Filled only after a form submission. See [form actions](https://kit.svelte.dev/docs/form-actions) for more info.
+	 * Rempli uniquement après la soumission d'un formulaire. Voir la section sur les [actions de formulaire](https://kit.sveltefr.dev/docs/form-actions) pour plus d'informations.
 	 */
 	form: any;
 }
 
 /**
- * The shape of a param matcher. See [matching](https://kit.svelte.dev/docs/advanced-routing#matching) for more info.
+ * La forme d'une fonction `match`. Voir la section sur les [fonctions `match`](https://kit.svelte.dev/docs/advanced-routing#fonctions-match) pour plus d'informations.
  */
 export type ParamMatcher = (param: string) => boolean;
 
@@ -966,52 +968,52 @@ export interface RequestEvent<
 	RouteId extends string | null = string | null
 > {
 	/**
-	 * Get or set cookies related to the current request
+	 * Définit ou récupère les cookies liés à la requête courante
 	 */
 	cookies: Cookies;
 	/**
-	 * `fetch` is equivalent to the [native `fetch` web API](https://developer.mozilla.org/en-US/docs/Web/API/fetch), with a few additional features:
+	 * La méthode `fetch` est équivalente à l'[API web native `fetch`](https://developer.mozilla.org/fr/docs/Web/API/fetch), avec quelques fonctionnalités additionnelles :
 	 *
-	 * - It can be used to make credentialed requests on the server, as it inherits the `cookie` and `authorization` headers for the page request.
-	 * - It can make relative requests on the server (ordinarily, `fetch` requires a URL with an origin when used in a server context).
-	 * - Internal requests (e.g. for `+server.js` routes) go directly to the handler function when running on the server, without the overhead of an HTTP call.
-	 * - During server-side rendering, the response will be captured and inlined into the rendered HTML by hooking into the `text` and `json` methods of the `Response` object. Note that headers will _not_ be serialized, unless explicitly included via [`filterSerializedResponseHeaders`](https://kit.svelte.dev/docs/hooks#server-hooks-handle)
-	 * - During hydration, the response will be read from the HTML, guaranteeing consistency and preventing an additional network request.
+	 * - Vous pouvez l'utiliser pour faire des requêtes authentifiées sur le serveur, puisqu'elle hérite des <span class='vo'>[headers](https://sveltefr.dev/docs/web#header)</span> `cookie` et `authorization` de la requête de page.
+	 * - Elle peut faire des requêtes relatives sur votre serveur (d'habitude, `fetch` nécessite une URL avec une origine lorsqu'utilisée dans un contexte serveur).
+	 * - Les requêtes internes (par ex. vers des routes `+server.js`) vont directement vers la fonction concernée si `fetch` est exécutée sur le serveur, sans la surcharge d'une requête HTTP.
+	 * - Pendant le rendu côté serveur, la réponse est capturée et <span class='vo'>[inlinée](https://sveltefr.dev/docs/javascript#inline)</span> dans le HTML rendu en utilisant les méthodes `text` et `json` de l'objet `Response`. Notez que les <span class='vo'>[headers](https://sveltefr.dev/docs/web#header)</span> ne seront _pas_ sérialisés, à moins d'être inclus explicitement via [`filterSerializedResponseHeaders`](https://kit.sveltefr.dev/docs/hooks#hooks-de-serveur-handle)
+	 * - Pendant l'hydratation, la réponse est lue depuis le HTML, en garantissant la consistance et évitant une requête réseau supplémentaire.
 	 *
-	 * You can learn more about making credentialed requests with cookies [here](https://kit.svelte.dev/docs/load#cookies)
+	 * Vous pouvez en apprendre plus sur les requêtes authentifiées avec cookies [ici](https://kit.sveltefr.dev/docs/load#cookies).
 	 */
 	fetch: typeof fetch;
 	/**
-	 * The client's IP address, set by the adapter.
+	 * L'adresse IP du client, définie par l'adaptateur.
 	 */
 	getClientAddress(): string;
 	/**
-	 * Contains custom data that was added to the request within the [`handle hook`](https://kit.svelte.dev/docs/hooks#server-hooks-handle).
+	 * Contient les données personnalisées qui ont été ajoutées à la requête via le [hook `handle`](https://kit.sveltefr.dev/docs/hooks#hooks-serveur-handle).
 	 */
 	locals: App.Locals;
 	/**
-	 * The parameters of the current route - e.g. for a route like `/blog/[slug]`, a `{ slug: string }` object
+	 * Les paramètres de la route courante – par ex. un objet `{ slug: string }` pour la route `/blog/[slug]`.
 	 */
 	params: Params;
 	/**
-	 * Additional data made available through the adapter.
+	 * Des données supplémentaire rendues disponibles via l'adaptateur.
 	 */
 	platform: Readonly<App.Platform> | undefined;
 	/**
-	 * The original request object
+	 * L'objet de la requête originale.
 	 */
 	request: Request;
 	/**
-	 * Info about the current route
+	 * Des informations sur la route courante.
 	 */
 	route: {
 		/**
-		 * The ID of the current route - e.g. for `src/routes/blog/[slug]`, it would be `/blog/[slug]`
+		 * L'ID de la route courante – par ex. `/blog/[slug]` pour la route `src/routes/blog/[slug]`
 		 */
 		id: RouteId;
 	};
 	/**
-	 * If you need to set headers for the response, you can do so using the this method. This is useful if you want the page to be cached, for example:
+	 * Si vous avez besoin de définir des <span class='vo'>[headers](https://sveltefr.dev/docs/web#header)</span> de réponse, vous pouvez le faire en utilisant cette méthode. Cela est utile si vous souhaitez changer la page à mettre en cache, par exemple :
 	 *
 	 *	```js
 	 *	/// file: src/routes/blog/+page.js
@@ -1028,30 +1030,31 @@ export interface RequestEvent<
 	 *	}
 	 *	```
 	 *
-	 * Setting the same header multiple times (even in separate `load` functions) is an error — you can only set a given header once.
+	 * Définir le même <span class='vo'>[header](https://sveltefr.dev/docs/web#header)</span> plusieurs fois (même dans des fonctions `load` différentes) est une erreur – vous pouvez définir un header donné seulement une seule fois.
 	 *
-	 * You cannot add a `set-cookie` header with `setHeaders` — use the [`cookies`](https://kit.svelte.dev/docs/types#public-types-cookies) API instead.
+	 * Vous ne pouvez pas ajouter un header `set-cookie` en même temps que vous utilisez `setHeaders` – utilisez plutôt l'<span class='vo'>[API](https://sveltefr.dev/docs/development#api)</span> [`cookies`](https://kit.sveltefr.dev/docs/types#public-types-cookies) dans une fonction `load` de serveur.
+	 *
 	 */
 	setHeaders(headers: Record<string, string>): void;
 	/**
-	 * The requested URL.
+	 * L'URL demandée.
 	 */
 	url: URL;
 	/**
-	 * `true` if the request comes from the client asking for `+page/layout.server.js` data. The `url` property will be stripped of the internal information
-	 * related to the data request in this case. Use this property instead if the distinction is important to you.
+	 * Vaut `true` si la requête vient du client demandant les données de `+page/layout.server.js`. La propriété `url` ne contiendra pas dans ce cas les informations internes liées à la requête de données.
+	 * Utilisez cette propriété si cette distinction est importante pour vous.
 	 */
 	isDataRequest: boolean;
 	/**
-	 * `true` for `+server.js` calls coming from SvelteKit without the overhead of actually making an HTTP request. This happens when you make same-origin `fetch` requests on the server.
+	 * Vaut `true` pour les requêtes `+server.js` venant de SvelteKit sans avoir généré de requête HTTP au sens propre. Ceci se produit lorsque vous faites depuis le serveur des requêtes `fetch` venant de la même origine.
 	 */
 	isSubRequest: boolean;
 }
 
 /**
- * A `(event: RequestEvent) => Response` function exported from a `+server.js` file that corresponds to an HTTP verb (`GET`, `PUT`, `PATCH`, etc) and handles requests with that method.
+ * Une fonction `(event: RequestEvent) => Response` exportée depuis un fichier `+server.js` et correspondant à un verbe HTTP (`GET`, `PUT`, `PATCH`, etc), permettant de gérer les requêtes avec cette méthode.
  *
- * It receives `Params` as the first generic argument, which you can skip by using [generated types](https://kit.svelte.dev/docs/types#generated-types) instead.
+ * Elle reçoit un objet `Params` comme type par défaut du premier argument, ce que vous pouvez éviter en utilisant plutôt des [types générés](https://kit.sveltefr.dev/docs/types#generated-types).
  */
 export type RequestHandler<
 	Params extends Partial<Record<string, string>> = Partial<Record<string, string>>,
@@ -1060,23 +1063,23 @@ export type RequestHandler<
 
 export interface ResolveOptions {
 	/**
-	 * Applies custom transforms to HTML. If `done` is true, it's the final chunk. Chunks are not guaranteed to be well-formed HTML
-	 * (they could include an element's opening tag but not its closing tag, for example)
-	 * but they will always be split at sensible boundaries such as `%sveltekit.head%` or layout/page components.
-	 * @param input the html chunk and the info if this is the last chunk
+	 * Applique des transformations personnalisées au HTML. Si `done` vaut `true`, il s'agit du dernier morceau (_chunk_) de HTML. Les morceaux
+	 * ne sont pas forcément du HTML bien formé (ils peuvent inclure la balise ouvrante d'un élément mais pas la balise fermante, par exemple),
+	 * mais ils seront toujours découpés en fonctions de frontières sensibles, comme `%sveltekit.head%` ou les composants de page ou de <span class="vo">[layout](https://sveltefr.dev/docs/web#layout)</span>.
+	 * @param input le morceau de HTML et l'information de s'il s'agit du dernier morceau
 	 */
 	transformPageChunk?(input: { html: string; done: boolean }): MaybePromise<string | undefined>;
 	/**
-	 * Determines which headers should be included in serialized responses when a `load` function loads a resource with `fetch`.
-	 * By default, none will be included.
-	 * @param name header name
-	 * @param value header value
+	 * Détermine quels <span class="vo">[headers](https://sveltefr.dev/docs/web#header)</span> doivent être inclus dans les réponses sérialisées lorsqu'une fonction `load` charge une ressource avec `fetch`.
+	 * Par défaut, aucun ne sera inclus.
+	 * @param name nom du header
+	 * @param value valeur du header
 	 */
 	filterSerializedResponseHeaders?(name: string, value: string): boolean;
 	/**
-	 * Determines what should be added to the `<head>` tag to preload it.
-	 * By default, `js` and `css` files will be preloaded.
-	 * @param input the type of the file and its path
+	 * Détermine quels fichiers doivent être ajoutés à la balise `<head>` pour les précharger.
+	 * Par défaut, les fichiers `js` et `css` seront préchargés.
+	 * @param input le type de fichier et son chemin
 	 */
 	preload?(input: { type: 'font' | 'css' | 'js' | 'asset'; path: string }): boolean;
 }
@@ -1112,7 +1115,7 @@ export interface SSRManifest {
 	assets: Set<string>;
 	mimeTypes: Record<string, string>;
 
-	/** private fields */
+	/** propriétés privées */
 	_: {
 		client: NonNullable<BuildData['client']>;
 		nodes: SSRNodeLoader[];
@@ -1122,8 +1125,8 @@ export interface SSRManifest {
 }
 
 /**
- * The generic form of `PageServerLoad` and `LayoutServerLoad`. You should import those from `./$types` (see [generated types](https://kit.svelte.dev/docs/types#generated-types))
- * rather than using `ServerLoad` directly.
+ * La forme générique de `PageServerLoad` et `LayoutServerLoad`. Vous devriez importer ces derniers depuis `./$types` (voir la section [Types générés](https://kit.sveltefr.dev/docs/types#generated-types))
+ * plutôt que d'utiliser `ServerEvent` directement.
  */
 export type ServerLoad<
 	Params extends Partial<Record<string, string>> = Partial<Record<string, string>>,
@@ -1138,21 +1141,21 @@ export interface ServerLoadEvent<
 	RouteId extends string | null = string | null
 > extends RequestEvent<Params, RouteId> {
 	/**
-	 * `await parent()` returns data from parent `+layout.server.js` `load` functions.
+	 * `await parent()` renvoie les données des fonctions `load` des fichiers `+layout.server.js` parents.
 	 *
-	 * Be careful not to introduce accidental waterfalls when using `await parent()`. If for example you only want to merge parent data into the returned output, call it _after_ fetching your other data.
+	 * Faites attention à ne pas introduire de "cascade" de chargement accidentelle lorsque vous utilisez `await parent()`. Si par exemple vous voulez uniquement fusionner les données du parent dans un objet à renvoyer, appelez cette fonction _après_ avoir téléchargé vos autres données.
 	 */
 	parent(): Promise<ParentData>;
 	/**
-	 * This function declares that the `load` function has a _dependency_ on one or more URLs or custom identifiers, which can subsequently be used with [`invalidate()`](https://kit.sveltefr.dev/docs/modules#$app-navigation-invalidate) to cause `load` to rerun.
+	 * Cette fonction déclare que la fonction `load` a comme _dépendances_ une ou plusieurs URLs ou identifiants personnalisés, qui peuvent donc être utilisés avec [`invalidate()`](https://kit.sveltefr.dev/docs/modules#$app-navigation-invalidate) déclencher la réexécution de `load`.
 	 *
-	 * Most of the time you won't need this, as `fetch` calls `depends` on your behalf — it's only necessary if you're using a custom API client that bypasses `fetch`.
+	 * La plupart du temps vous n'avez pas besoin d'utiliser ceci, puisque `fetch` appelle `depends` pour vous – c'est uniquement nécessaire si vous utilisez un client d'<span class='vo'>[API](https://sveltefr.dev/docs/development#api)</span> personnalisé qui contourne `fetch`.
 	 *
-	 * URLs can be absolute or relative to the page being loaded, and must be [encoded](https://developer.mozilla.org/en-US/docs/Glossary/percent-encoding).
+	 * Les URLs peuvent être absolues ou relatives à la page qui est en train d'être chargée, et doivent être [encodées](https://developer.mozilla.org/fr/docs/Glossary/percent-encoding).
 	 *
-	 * Custom identifiers have to be prefixed with one or more lowercase letters followed by a colon to conform to the [URI specification](https://www.rfc-editor.org/rfc/rfc3986.html).
+	 * Les identifiants personnaliés doivent être préfixés avec une ou plusieurs lettres en minuscules suivies d'un `:` pour satisfaire la [spécification URI](https://www.rfc-editor.org/rfc/rfc3986.html).
 	 *
-	 * The following example shows how to use `depends` to register a dependency on a custom identifier, which is `invalidate`d after a button click, making the `load` function rerun.
+	 * L'exemple suivant vous montre comment utiliser `depends` pour déclarer une dépendance à un identifiant personnalisé, qui sera invalidé  avec `invalidate` après un clic sur un bouton, déclenchant la réexécution de la fonction `load`.
 	 *
 	 * ```js
 	 * /// file: src/routes/+page.js
@@ -1177,15 +1180,15 @@ export interface ServerLoadEvent<
 	 * </script>
 	 *
 	 * <p>{data.count}<p>
-	 * <button on:click={increase}>Increase Count</button>
+	 * <button on:click={increase}>Augmenter le compteur</button>
 	 * ```
 	 */
 	depends(...deps: string[]): void;
 }
 
 /**
- * Shape of a form action method that is part of `export const actions = {..}` in `+page.server.js`.
- * See [form actions](https://kit.svelte.dev/docs/form-actions) for more information.
+ * Forme d'une action de formulaire qui fait partie de l'objet `export const actions = {..}` dans `+page.server.js`.
+ * Voir la section [actions de formulaire](https://kit.sveltefr.dev/docs/form-actions) pour plus d'informations.
  */
 export type Action<
 	Params extends Partial<Record<string, string>> = Partial<Record<string, string>>,
@@ -1194,8 +1197,8 @@ export type Action<
 > = (event: RequestEvent<Params, RouteId>) => MaybePromise<OutputData>;
 
 /**
- * Shape of the `export const actions = {..}` object in `+page.server.js`.
- * See [form actions](https://kit.svelte.dev/docs/form-actions) for more information.
+ * Forme de l'objet `export const actions = {..}` dans `+page.server.js`..
+ * Voir la section [actions de formulaire](https://kit.sveltefr.dev/docs/form-actions) pour plus d'informations.
  */
 export type Actions<
 	Params extends Partial<Record<string, string>> = Partial<Record<string, string>>,
@@ -1204,7 +1207,7 @@ export type Actions<
 > = Record<string, Action<Params, OutputData, RouteId>>;
 
 /**
- * When calling a form action via fetch, the response will be one of these shapes.
+ * Lorsque vous exécutez une action de formulaire via `fetch`, la réponse aura une de ces formes.
  * ```svelte
  * <form method="post" use:enhance={() => {
  *   return ({ result }) => {
@@ -1223,22 +1226,22 @@ export type ActionResult<
 	| { type: 'error'; status?: number; error: any };
 
 /**
- * The object returned by the [`error`](https://kit.svelte.dev/docs/modules#sveltejs-kit-error) function.
+ * L'objet renvoyé par la fonction [`error`](https://kit.sveltefr.dev/docs/modules#sveltejs-kit-error)
  */
 export interface HttpError {
-	/** The [HTTP status code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#client_error_responses), in the range 400-599. */
+	/** Le [code représentant le statut HTTP](https://developer.mozilla.org/fr/docs/Web/HTTP/Status#client_error_responses), entre 400 et 599. */
 	status: number;
-	/** The content of the error. */
+	/** Le contenu de l'erreur. */
 	body: App.Error;
 }
 
 /**
- * The object returned by the [`redirect`](https://kit.svelte.dev/docs/modules#sveltejs-kit-redirect) function
+ * L'objet renvoyé par la fonction [`redirect`](https://kit.sveltefr.dev/docs/modules#sveltejs-kit-redirect)
  */
 export interface Redirect {
-	/** The [HTTP status code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#redirection_messages), in the range 300-308. */
+	/** Le [code représentant le statut HTTP](https://developer.mozilla.org/fr/docs/Web/HTTP/Status#client_error_responses), entre 400 et 599. */
 	status: 300 | 301 | 302 | 303 | 304 | 305 | 306 | 307 | 308;
-	/** The location to redirect to. */
+	/** L'emplacement vers lequel rediriger. */
 	location: string;
 }
 
@@ -1248,13 +1251,13 @@ export type SubmitFunction<
 > = (input: {
 	action: URL;
 	/**
-	 * use `formData` instead of `data`
+	 * utilisez `formData` plutôt que `data`
 	 * @deprecated
 	 */
 	data: FormData;
 	formData: FormData;
 	/**
-	 * use `formElement` instead of `form`
+	 * utilisez `formElement` plutôt que `form`
 	 * @deprecated
 	 */
 	form: HTMLFormElement;
@@ -1266,13 +1269,13 @@ export type SubmitFunction<
 	| void
 	| ((opts: {
 			/**
-			 * use `formData` instead of `data`
+			 * utilisez `formData` plutôt que `data`
 			 * @deprecated
 			 */
 			data: FormData;
 			formData: FormData;
 			/**
-			 * use `formElement` instead of `form`
+			 * utilisez `formElement` plutôt que `form`
 			 * @deprecated
 			 */
 			form: HTMLFormElement;
@@ -1280,16 +1283,15 @@ export type SubmitFunction<
 			action: URL;
 			result: ActionResult<Success, Failure>;
 			/**
-			 * Call this to get the default behavior of a form submission response.
-			 * @param options Set `reset: false` if you don't want the `<form>` values to be reset after a successful submission.
-			 * @param invalidateAll Set `invalidateAll: false` if you don't want the action to call `invalidateAll` after submission.
+			 * Appelez cette fonction pour récupérer le comportement par défaut d'une soumission de formulaire.
+			 * @param options Définissez `reset: false` si vous ne souhaitez pas que les valeurs de l'élément `<form>` soient réinitialisées si la soumission du formulaire s'est bien passée.
 			 */
 			update(options?: { reset?: boolean; invalidateAll?: boolean }): Promise<void>;
 	  }) => void)
 >;
 
 /**
- * The type of `export const snapshot` exported from a page or layout component.
+ * Le type de la variable `export const snapshot` exportée d'un composant de page ou de <span class="vo">[layout](https://sveltefr.dev/docs/web#layout)</span>.
  */
 export interface Snapshot<T = any> {
 	capture: () => T;

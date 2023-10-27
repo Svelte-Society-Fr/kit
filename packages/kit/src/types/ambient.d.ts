@@ -21,26 +21,27 @@
  */
 declare namespace App {
 	/**
-	 * Defines the common shape of expected and unexpected errors. Expected errors are thrown using the `error` function. Unexpected errors are handled by the `handleError` hooks which should return this shape.
+	 * Définit la forme commune des erreurs attendues et inattendues. Les erreurs attendues sont levées en utilisant la fonction `error`. Les erreurs inattendues sont gérées par le [hook](https://kit.sveltefr.dev/docs/hooks) `handleError` qui doit renvoyer cette forme.
 	 */
 	export interface Error {
 		message: string;
 	}
 
 	/**
-	 * The interface that defines `event.locals`, which can be accessed in [hooks](https://kit.svelte.dev/docs/hooks) (`handle`, and `handleError`), server-only `load` functions, and `+server.js` files.
+	 * L'interface qui définit `event.locals`, qui est accessible dans les [hooks](https://kit.sveltefr.dev/docs/hooks) (`handle`, et `handleError`), les fonctions `load` de serveur, et les fichiers `+server.js`.
 	 */
 	export interface Locals {}
 
 	/**
-	 * Defines the common shape of the [$page.data store](https://kit.svelte.dev/docs/modules#$app-stores-page) - that is, the data that is shared between all pages.
-	 * The `Load` and `ServerLoad` functions in `./$types` will be narrowed accordingly.
-	 * Use optional properties for data that is only present on specific pages. Do not add an index signature (`[key: string]: any`).
+	 *
+	 * Définit la forme commune du [store $page.data](/docs/modules#$app-stores-page) - c'est-à-dire les données qui sont partagées entre toutes les pages.
+	 * Les types des fonctions `Load` et `ServerLoad` dans `./$types` seront affinés en fonction.
+	 * Utilisez des propriétés optionnelles pour des données uniquement présentes dans certaines pages. N'ajoutez pas de signature d'indice (`[key: string]: any`).
 	 */
 	export interface PageData {}
 
 	/**
-	 * If your adapter provides [platform-specific context](https://kit.svelte.dev/docs/adapters#platform-specific-context) via `event.platform`, you can specify it here.
+	 * Si votre adaptateur fournit un [contexte spécifique à sa plateforme](/docs/adapters#contexte-sp-cifique-chaque-plateforme) via `event.platform`, vous pouvez le spécifier ici.
 	 */
 	export interface Platform {}
 }
