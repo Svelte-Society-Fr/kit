@@ -340,7 +340,7 @@ Sans argument, `use:enhance` va simuler le comportement natif du navigateur, sau
 - invalider toutes les données en utilisant `invalidateAll` si la réponse est un succès
 - appeler `goto` lors d'une réponse de redirection
 - rendre le composant `+error` le plus proche si une erreur se produit
-- [réinitialiser le focus](accessibility#focus-management) sur l'élément approprié
+- [réinitialiser le focus](accessibility#gestion-du-focus) sur l'élément approprié
 
 ### Personnaliser `use:enhance`
 
@@ -400,7 +400,7 @@ Le comportement de `applyAction(result)` dépend de `result.type` :
 - `redirect` — appelle `goto(result.location, { invalidateAll: true })`
 - `error` — rend le composant `+error` le plus proche avec `result.error`
 
-Dans tous les cas, le [focus sera réinitialisé](accessibility#focus-management).
+Dans tous les cas, le [focus sera réinitialisé](accessibility#gestion-du-focus).
 
 ### Gestionnaire d'évènement personnalisé
 

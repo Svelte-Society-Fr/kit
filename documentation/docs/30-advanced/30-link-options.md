@@ -79,7 +79,7 @@ Parfois, vous ne souhaitez pas que la navigation crée une nouvelle entrée dans
 
 ## `data-sveltekit-keepfocus`
 
-Parfois, vous ne souhaitez pas [réinitialiser le focus](accessibility#focus-management) après la navigation. Par exemple, vous avez peut-être un formulaire de recherche qui est soumis au fur et à mesure que l'utilisateur ou l'utilisatrice entre du texte, et vous souhaitez donc garder le focus sur l'élément `<input>` de texte. L'ajout de l'attribut `data-sveltekit-keepfocus` sur le formulaire...
+Parfois, vous ne souhaitez pas [réinitialiser le focus](accessibility#gestion-du-focus) après la navigation. Par exemple, vous avez peut-être un formulaire de recherche qui est soumis au fur et à mesure que l'utilisateur ou l'utilisatrice entre du texte, et vous souhaitez donc garder le focus sur l'élément `<input>` de texte. L'ajout de l'attribut `data-sveltekit-keepfocus` sur le formulaire...
 
 ```html
 <form data-sveltekit-keepfocus>
