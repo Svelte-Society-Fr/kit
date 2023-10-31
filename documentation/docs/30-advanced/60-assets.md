@@ -16,7 +16,7 @@ title: Gestion des fichiers statiques
 
 Si vous préférez référencer vos fichiers statiques directement dans le <span class="vo">[markup](PUBLIC_SVELTE_SITE_URL/docs/web#markup)</span>, vous pouvez utiliser un préprocesseur comme [svelte-preprocess-import-assets](https://github.com/bluwy/svelte-preprocess-import-assets).
 
-Pour les fichiers inclus via la fonction CSS `url()`, vous pourriez avoir besoin de [`vitePreprocess`](/docs/integrations#preprocessors-vitepreprocess).
+Pour les fichiers inclus via la fonction CSS `url()`, vous pourriez avoir besoin de [`vitePreprocess`](/docs/integrations#pr-processeurs-vitepreprocess).
 
 ## Transformations
 

@@ -12,7 +12,7 @@ title: Introduction
 
 SvelteKit est un <span class="vo">[framework](PUBLIC_SVELTE_SITE_URL/docs/web#framework)</span> permettant de développer des applications web robustes et performantes avec [Svelte](PUBLIC_SVELTE_SITE_URL). Si vous êtes habitué•e à React, SvelteKit est comparable à Next. Si vous êtes habitué•e à Vue, SvelteKit est comparable à Nuxt.
 
-Pour en apprendre plus sur les types d'application que vous pouvez construire avec SvelteKit, rendez-vous sur la [FàQ](/docs/faq#what-can-i-make-with-sveltekit)
+Pour en apprendre plus sur les types d'application que vous pouvez construire avec SvelteKit, rendez-vous sur la [FàQ](/docs/faq#quoi-sert-sveltekit)
 
 ## C'est quoi Svelte ?
 

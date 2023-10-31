@@ -117,7 +117,10 @@ export {};
 
 ### Limites de taille de Worker
 
-Lorsque vous déployez sur des <span class="vo">[workers](PUBLIC_SVELTE_SITE_URL/docs/development#worker)</span>, le serveur généré par SvelteKit est compilé en un seul fichier. Wrangler échouera à publier votre worker s'il excède la [limite de taille](https://developers.cloudflare.com/workers/platform/limits/#worker-size) après minification. Vous ne devriez normalement pas dépasser cette limite, mais certaines grosses librairies peuvent vous faire rencontrer ce problème. Dans ce cas, essayez de réduire la taille de votre worker en important ce type de librairie uniquement côté client. Lire la [FÀQ](./faq#how-do-i-use-x-with-sveltekit-how-do-i-use-a-client-side-only-library-that-depends-on-document-or-window) (en anglais) pour plus d'informations.
+Lorsque vous déployez sur des <span class="vo">[workers](PUBLIC_SVELTE_SITE_URL/docs/development#worker)</span>, le serveur généré par SvelteKit est compilé en un seul fichier. Wrangler échouera à publier votre worker s'il excède la [limite de taille](https://developers.cloudflare.com/workers/platform/limits/#worker-size) après minification. Vous ne devriez normalement pas dépasser cette limite, mais certaines grosses librairies peuvent vous faire rencontrer ce problème. Dans ce cas, essayez de réduire la taille de votre worker en important ce type de librairie uniquement côté client. Lire la [FÀQ](./faq#comment-utiliser-x-avec-sveltekit-comment-utiliser-une-librairie-r-serv-e-au-client-qui-d-pend-de-document-ou-de-window) pour plus d'informations.
+
+
+
 
 ### Accès au système de fichiers
 
