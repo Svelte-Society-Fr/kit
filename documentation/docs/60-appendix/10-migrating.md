@@ -87,7 +87,7 @@ Votre composant de page d'erreur doit être renommé de `_error.svelte` en `+err
 
 Les imports `goto`, `prefetch` et `prefetchRoutes` depuis `@sapper/app` doivent être remplacés par les imports `goto`, `preloadData` et `preloadCode` respectivement depuis [`$app/navigation`](modules#$app-navigation).
 
-L'import `stores` depuis `@sapper/app` doit être remplacé – voir la section sur les [Stores](migrating#pages-and-layouts-stores) plus bas.
+L'import `stores` depuis `@sapper/app` doit être remplacé – voir la section sur les [Stores](#pages-et-layouts-stores) plus bas.
 
 Tout fichier que vous importiez précédemment depuis des dossiers de `src/node_modules` doit maintenant être importé depuis [`$lib`](modules#$lib).
 

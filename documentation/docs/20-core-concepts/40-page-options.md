@@ -2,7 +2,7 @@
 title: Options de page
 ---
 
-Par défaut, SvelteKit va effectuer un rendu (ou [un prérendu](glossary#prerendering)) de chaque composant d'abord sur le serveur, et l'envoyer au client en tant que HTML. Les composants seront rendus de nouveau dans le navigateur pour les rendre interactifs dans un processus appelé [**hydratation**](glossary#hydration). Pour cette raison, vous devez vous assurez que vos composants puissent être exécutés dans les deux contextes. SvelteKit va ensuite initialiser un [**routeur**](routing) qui prend la main sur les navigations suivantes.
+Par défaut, SvelteKit va effectuer un rendu (ou [un prérendu](glossary#pr-rendu)) de chaque composant d'abord sur le serveur, et l'envoyer au client en tant que HTML. Les composants seront rendus de nouveau dans le navigateur pour les rendre interactifs dans un processus appelé [**hydratation**](glossary#hydratation). Pour cette raison, vous devez vous assurez que vos composants puissent être exécutés dans les deux contextes. SvelteKit va ensuite initialiser un [**routeur**](routing) qui prend la main sur les navigations suivantes.
 
 Vous pouvez contrôler chacune de ces navigations, page par page, en exportant des options depuis [`+page.js`](routing#page-page-js), depuis [`+page.server.js`](routing#page-page-server-js), ou pour des groupes de pages depuis un [`+layout.js`](routing#layout-layout-js) ou un [`+layout.server.js`](routing#layout-layout-server-js) partagé. Pour définir une option s'appliquant à toute votre application, exportez la depuis le <span class="vo">[layout](PUBLIC_SVELTE_SITE_URL/docs/web#layout)</span> racine. Les layouts et pages enfantes écrasent les valeurs d'options définies dans les layouts parents, vous pouvez donc — par exemple — activer le prérendu pour toute votre application, la désactiver pour les pages qui ont besoin d'être rendues dynamiquement.
 
@@ -10,7 +10,7 @@ Vous pouvez définir ces options comme vous le souhaitez à différents endroits
 
 ## `prerender`
 
-Il est probable qu'au moins quelques routes de votre application peuvent être représentées comme des simples fichiers HTML générés une fois pour toute à la compilation. Ces routes peuvent être [prérendues](glossary#prerendering).
+Il est probable qu'au moins quelques routes de votre application peuvent être représentées comme des simples fichiers HTML générés une fois pour toute à la compilation. Ces routes peuvent être [prérendues](glossary#pr-rendu).
 
 ```js
 /// file: +page.js/+page.server.js/+server.js
@@ -116,7 +116,7 @@ Vous pouvez définir la fonction `entries` comme étant `async`, vous permettant
 
 ## `ssr`
 
-Normalement, SvelteKit construit votre page d'abord sur le serveur, et envoie son HTML au client où il sera [hydraté](glossary#hydration). Si vous définissez `ssr` à `false`, le serveur va plutôt construire une page "vide". C'est utile si votre page est incapable d'être rendue sur le serveur (parce que vous utilisez des variables globales uniquement définies dans le navigateur comme `document` par exemple), mais dans la plupart des situations ce n'est pas recommandé ([voir l'annexe](glossary#ssr)).
+Normalement, SvelteKit construit votre page d'abord sur le serveur, et envoie son HTML au client où il sera [hydraté](glossary#hydratation). Si vous définissez `ssr` à `false`, le serveur va plutôt construire une page "vide". C'est utile si votre page est incapable d'être rendue sur le serveur (parce que vous utilisez des variables globales uniquement définies dans le navigateur comme `document` par exemple), mais dans la plupart des situations ce n'est pas recommandé ([voir l'annexe](glossary#ssr)).
 
 ```js
 /// file: +page.js
@@ -127,7 +127,7 @@ Si vous ajoutez `export const ssr = false` à votre fichier `+layout.js` racine,
 
 ## `csr`
 
-Ordinairement, SvelteKit [hydrate](glossary#hydration) votre HTML construit côté serveur en une page rendue sur le client ("client-side rendering" ou <span class="vo">[CSR](PUBLIC_SVELTE_SITE_URL/docs/web#client-side-rendering)</span>). Certaines pages n'ont pas du tout besoin de JavaScript — la plupart des articles de blog et des pages "à propos" sont dans ce cas. Vous pouvez alors désactiver le CSR :
+Ordinairement, SvelteKit [hydrate](glossary#hydratation) votre HTML construit côté serveur en une page rendue sur le client ("client-side rendering" ou <span class="vo">[CSR](PUBLIC_SVELTE_SITE_URL/docs/web#client-side-rendering)</span>). Certaines pages n'ont pas du tout besoin de JavaScript — la plupart des articles de blog et des pages "à propos" sont dans ce cas. Vous pouvez alors désactiver le CSR :
 
 ```js
 /// file: +page.js
