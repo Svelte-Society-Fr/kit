@@ -704,7 +704,7 @@ export interface LoadEvent<
 	 * - Elle peut faire des requêtes relatives sur votre serveur (d'habitude, `fetch` nécessite une URL avec une origine lorsqu'utilisée dans un contexte serveur).
 	 * - Les requêtes internes (par ex. vers des routes `+server.js`) vont directement vers la fonction concernée si `fetch` est exécutée sur le serveur, sans la surcharge d'une requête HTTP.
 	 * - Pendant le rendu côté serveur, la réponse est capturée et <span class='vo'>[inlinée](https://sveltefr.dev/docs/javascript#inline)</span> dans le HTML rendu en utilisant les méthodes `text` et `json` de l'objet `Response`. Notez que les <span class='vo'>[headers](https://sveltefr.dev/docs/web#header)</span> ne seront _pas_ sérialisés, à moins d'être inclus explicitement via [`filterSerializedResponseHeaders`](https://kit.sveltefr.dev/docs/hooks#hooks-de-serveur-handle)
-	 * - Pendant l'hydratation, la réponse est lue depuis le HTML, en garantissant la consistance et évitant une requête réseau supplémentaire.
+	 * - Pendant l'hydratation, la réponse est lue depuis le HTML, en garantissant la cohérence et évitant une requête réseau supplémentaire.
 	 *
 	 * Vous pouvez en apprendre plus sur les requêtes authentifiées avec cookies [ici](https://kit.sveltefr.dev/docs/load#cookies).
 	 */
@@ -745,7 +745,7 @@ export interface LoadEvent<
 	 */
 	parent(): Promise<ParentData>;
 	/**
-	 * Cette fonction déclare que la fonction `load` a comme _dépendances_ une ou plusieurs URLs ou identifiants personnalisés, qui peuvent donc être utilisés avec [`invalidate()`](https://kit.sveltefr.dev/docs/modules#$app-navigation-invalidate) déclencher la réexécution de `load`.
+	 * Cette fonction déclare que la fonction `load` a comme _dépendances_ une ou plusieurs URLs ou identifiants personnalisés, qui peuvent donc être utilisés avec [`invalidate()`](https://kit.sveltefr.dev/docs/modules#$app-navigation-invalidate) pour déclencher la réexécution de la méthode `load`.
 	 *
 	 * La plupart du temps vous n'avez pas besoin d'utiliser ceci, puisque `fetch` appelle `depends` pour vous – c'est uniquement nécessaire si vous utilisez un client d'<span class='vo'>[API](https://sveltefr.dev/docs/development#api)</span> personnalisé qui contourne `fetch`.
 	 *
@@ -832,7 +832,7 @@ export interface NavigationTarget {
  * - `leave`: L'utilisateur ou utilisatrice quitte l'application en fermant l'onglet ou en utilisant les boutons retour/suivant du navigateur pour aller sur un document différent
  * - `link`: La navigation a été déclenchée par un clic sur un lien
  * - `goto`: La navigation a été déclenchée par un appel à `goto(...)` ou une redirection
- * - `popstate`: La navigation a été déclenchée par un navigation avec les boutons retour/suivant du navigateur
+ * - `popstate`: La navigation a été déclenchée par une navigation avec les boutons retour/suivant du navigateur
  */
 export type NavigationType = 'enter' | 'form' | 'leave' | 'link' | 'goto' | 'popstate';
 
@@ -978,7 +978,7 @@ export interface RequestEvent<
 	 * - Elle peut faire des requêtes relatives sur votre serveur (d'habitude, `fetch` nécessite une URL avec une origine lorsqu'utilisée dans un contexte serveur).
 	 * - Les requêtes internes (par ex. vers des routes `+server.js`) vont directement vers la fonction concernée si `fetch` est exécutée sur le serveur, sans la surcharge d'une requête HTTP.
 	 * - Pendant le rendu côté serveur, la réponse est capturée et <span class='vo'>[inlinée](https://sveltefr.dev/docs/javascript#inline)</span> dans le HTML rendu en utilisant les méthodes `text` et `json` de l'objet `Response`. Notez que les <span class='vo'>[headers](https://sveltefr.dev/docs/web#header)</span> ne seront _pas_ sérialisés, à moins d'être inclus explicitement via [`filterSerializedResponseHeaders`](https://kit.sveltefr.dev/docs/hooks#hooks-de-serveur-handle)
-	 * - Pendant l'hydratation, la réponse est lue depuis le HTML, en garantissant la consistance et évitant une requête réseau supplémentaire.
+	 * - Pendant l'hydratation, la réponse est lue depuis le HTML, en garantissant la cohérence et évitant une requête réseau supplémentaire.
 	 *
 	 * Vous pouvez en apprendre plus sur les requêtes authentifiées avec cookies [ici](https://kit.sveltefr.dev/docs/load#cookies).
 	 */
@@ -1147,7 +1147,7 @@ export interface ServerLoadEvent<
 	 */
 	parent(): Promise<ParentData>;
 	/**
-	 * Cette fonction déclare que la fonction `load` a comme _dépendances_ une ou plusieurs URLs ou identifiants personnalisés, qui peuvent donc être utilisés avec [`invalidate()`](https://kit.sveltefr.dev/docs/modules#$app-navigation-invalidate) déclencher la réexécution de `load`.
+	 * Cette fonction déclare que la fonction `load` a comme _dépendances_ une ou plusieurs URLs ou identifiants personnalisés, qui peuvent donc être utilisés avec [`invalidate()`](https://kit.sveltefr.dev/docs/modules#$app-navigation-invalidate) pour déclencher la réexécution de la méthode `load`.
 	 *
 	 * La plupart du temps vous n'avez pas besoin d'utiliser ceci, puisque `fetch` appelle `depends` pour vous – c'est uniquement nécessaire si vous utilisez un client d'<span class='vo'>[API](https://sveltefr.dev/docs/development#api)</span> personnalisé qui contourne `fetch`.
 	 *
@@ -1187,7 +1187,7 @@ export interface ServerLoadEvent<
 }
 
 /**
- * Forme d'une action de formulaire qui fait partie de l'objet `export const actions = {..}` dans `+page.server.js`.
+ * Type d'une action de formulaire qui fait partie de l'objet `export const actions = {..}` dans `+page.server.js`.
  * Voir la section [actions de formulaire](https://kit.sveltefr.dev/docs/form-actions) pour plus d'informations.
  */
 export type Action<
@@ -1197,7 +1197,7 @@ export type Action<
 > = (event: RequestEvent<Params, RouteId>) => MaybePromise<OutputData>;
 
 /**
- * Forme de l'objet `export const actions = {..}` dans `+page.server.js`..
+ * Type de l'objet `export const actions = {..}` dans `+page.server.js`..
  * Voir la section [actions de formulaire](https://kit.sveltefr.dev/docs/form-actions) pour plus d'informations.
  */
 export type Actions<
