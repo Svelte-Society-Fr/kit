@@ -8,7 +8,7 @@ import { client_method } from '../client/singletons.js';
 export const disableScrollHandling = /* @__PURE__ */ client_method('disable_scroll_handling');
 
 /**
- * Renvoie une `Promise` qui est résolue lorsque SvelteKit navigue (or échoue à naviguer, auquel cas la promesse est rejetée) vers l'`url` fournie.
+ * Renvoie une `Promise` qui est résolue lorsque SvelteKit navigue (ou échoue à naviguer, auquel cas la promesse est rejetée) vers l'`url` fournie.
  * Pour les URLs externes, utilisez `window.location = url` plutôt que `goto(url)`.
  *
  * @type {(url: string | URL, opts?: {

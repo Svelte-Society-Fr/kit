@@ -31,7 +31,7 @@ export async function GET({ params }) {
 }
 ```
 
-Il évident que ceci est lourd à écrire, et peu versatil (si vous êtes amené•e à renommer le dossier `[foo]` en `[qux]`, le type ne reflèterait plus la réalité).
+Il est évident que ceci est lourd à écrire, et peu versatile (si vous êtes amené•e à renommer le dossier `[foo]` en `[qux]`, le type ne reflèterait plus la réalité).
 
 Pour résoudre ce problème, SvelteKit génère des fichiers `.d.ts` pour chacun de vos <span class='vo'>[endpoints](PUBLIC_SVELTE_SITE_URL/docs/web#endpoint)</span> et chacune de vos pages :
 
@@ -102,7 +102,7 @@ export async function load({ params, fetch }) {
 
 ### `tsconfig.json` par défaut
 
-Le fichier généré `.svelte-kit/tsconfig.json` contient un mélange d'options. Certaines sont générées programmatiquement en fonction de votre configuration de projet, et ne devraient pas être écrasées sans une bonne raison :
+Le fichier généré `.svelte-kit/tsconfig.json` contient un mélange d'options. Certaines sont générées programmatiquement en fonction de votre configuration de projet, et ne devraient pas être redéfinies sans une bonne raison :
 
 ```json
 /// file: .svelte-kit/tsconfig.json
@@ -120,7 +120,7 @@ Le fichier généré `.svelte-kit/tsconfig.json` contient un mélange d'options.
 }
 ```
 
-D'autres sont requises pour que SvelteKit fonctionne correctement, et devraient également laissées telles quelles sauf si vous savez ce que vous faites :
+D'autres sont requises pour que SvelteKit fonctionne correctement, et devraient également être laissées telles quelles sauf si vous savez ce que vous faites :
 
 ```json
 /// file: .svelte-kit/tsconfig.json
