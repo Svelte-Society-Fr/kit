@@ -2,11 +2,11 @@ import { BROWSER, DEV } from 'esm-env';
 export { building, version } from '__sveltekit/environment';
 
 /**
- * `true` if the app is running in the browser.
+ * `true` si l'application est exécutée dans le navigateur.
  */
 export const browser = BROWSER;
 
 /**
- * Whether the dev server is running. This is not guaranteed to correspond to `NODE_ENV` or `MODE`.
+ * `true` si le serveur de développement est lancé. Ne correspond pas nécessairement à ce que peut indiquer `NODE_ENV` ou `MODE`.
  */
 export const dev = DEV;

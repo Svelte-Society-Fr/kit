@@ -1,5 +1,5 @@
-import { HttpError, Redirect, ActionFailure } from '../runtime/control.js';
 import { BROWSER, DEV } from 'esm-env';
+import { ActionFailure, HttpError, Redirect } from '../runtime/control.js';
 import { get_route_segments } from '../utils/routing.js';
 
 export { VERSION } from '../version.js';
@@ -35,8 +35,8 @@ export function error(status, body) {
 }
 
 /**
- * Create a `Redirect` object. If thrown during request handling, SvelteKit will return a redirect response.
- * Make sure you're not catching the thrown redirect, which would prevent SvelteKit from handling it.
+ * Crée un objet `Redirect`. Si levé pendant le traitement d'une requête, Sveltekit va retourner une réponse de redirection.
+ * Assurez-vous de ne pas "attraper" la redirection levée, ce qui empêcherait SvelteKit de la gérer.
  * @param {300 | 301 | 302 | 303 | 304 | 305 | 306 | 307 | 308} status The [HTTP status code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#redirection_messages). Must be in the range 300-308.
  * @param {string | URL} location The location to redirect to.
  */
@@ -49,7 +49,7 @@ export function redirect(status, location) {
 }
 
 /**
- * Create a JSON `Response` object from the supplied data.
+ * Crée un objet `Response` en <span class='vo'>[JSON](https://sveltefr.dev/docs/web#json)</span> à partir des données fournies.
  * @param {any} data The value that will be serialized as JSON.
  * @param {ResponseInit} [init] Options such as `status` and `headers` that will be added to the response. `Content-Type: application/json` and `Content-Length` headers will be added automatically.
  */
@@ -79,7 +79,7 @@ export function json(data, init) {
 const encoder = new TextEncoder();
 
 /**
- * Create a `Response` object from the supplied body.
+ * Crée un objet `Response` à partir du <span class='vo'>[body](https://sveltefr.dev/docs/web#body)</span> fournit.
  * @param {string} body The value that will be used as-is.
  * @param {ResponseInit} [init] Options such as `status` and `headers` that will be added to the response. A `Content-Length` header will be added automatically.
  */
@@ -101,7 +101,7 @@ export function text(body, init) {
 }
 
 /**
- * Create an `ActionFailure` object.
+ * Crée un objet `ActionFailure`.
  * @template {Record<string, unknown> | undefined} [T=undefined]
  * @param {number} status The [HTTP status code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#client_error_responses). Must be in the range 400-599.
  * @param {T} [data] Data associated with the failure (e.g. validation errors)
@@ -114,7 +114,7 @@ export function fail(status, data) {
 const basic_param_pattern = /\[(\[)?(\.\.\.)?(\w+?)(?:=(\w+))?\]\]?/g;
 
 /**
- * Populate a route ID with params to resolve a pathname.
+ * Remplit un identifiant de route avec les paramètres pour construire un chemin.
  * @example
  * ```js
  * resolvePath(
