@@ -164,7 +164,7 @@ export interface Prerendered {
 	pages: Map<
 		string,
 		{
-			/** L'emplacement du fichier `.html` relativement au dossier de compilation */
+			/** L'emplacement du fichier `.html`, relatif au dossier de compilation */
 			file: string;
 		}
 	>;
