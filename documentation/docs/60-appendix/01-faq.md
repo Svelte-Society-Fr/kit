@@ -1,10 +1,10 @@
 ---
-title: Foire À Questions
+title: Foire aux questions
 ---
 
 ## Autres ressources
 
-Merci de consulter [la FÀQ de Svelte](PUBLIC_SVELTE_SITE_URL/faq) ainsi que la [FÀQ de `vite-plugin-svelte`](https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/faq.md) (en anglais) pour vos questions relatives à ces librairies.
+Merci de consulter [la FAQ de Svelte](PUBLIC_SVELTE_SITE_URL/faq) ainsi que la [FAQ de `vite-plugin-svelte`](https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/faq.md) (en anglais) pour vos questions relatives à ces librairies.
 
 ## À quoi sert SvelteKit ?
 
@@ -33,7 +33,7 @@ SvelteKit propose le <span class='vo'>[HMR](PUBLIC_SVELTE_SITE_URL/docs/web#hmr)
 
 ## Comment inclure les détails de mon `package.json` dans mon application ?
 
-Vous ne pouvez pas importer directement des fichiers <span class='vo'>[JSON](PUBLIC_SVELTE_SITE_URL/docs/web#json)</span>, puisque SvelteKit attend que le fichier [`svelte.config.js`](./configuration) soit un module ECMAScript. Si vous souhaitez inclure le number de version de votre application ou toute autre information de votre fichier `package.json` dans votre application, vous pouvez charger le JSON de cette manière :
+Vous ne pouvez pas importer directement des fichiers <span class='vo'>[JSON](PUBLIC_SVELTE_SITE_URL/docs/web#json)</span>, puisque SvelteKit attend que le fichier [`svelte.config.js`](./configuration) soit un module ECMAScript. Si vous souhaitez inclure le numéro de version de votre application ou toute autre information de votre fichier `package.json` dans votre application, vous pouvez charger le JSON de cette manière :
 
 ```js
 /// file: svelte.config.js
@@ -124,7 +124,7 @@ onMount(async () => {
 });
 ```
 
-Si la librairie que vous souhaitez utiliser n'a pas d'effets de bord, vous pouvez aussi l'importer de manière statique, elle sera alors retirée lors de la compilation (grâce au <span class='vo'>[tree shaking](PUBLIC_SVELTE_SITE_URL/docs/development#tree-shaking)</span>) du code serveur compilé dans lequel `onMount` est automatiquement remplacé par une fonction inerte :
+Si la librairie que vous souhaitez utiliser n'a pas d'effet de bord, vous pouvez aussi l'importer de manière statique, elle sera alors retirée lors de la compilation (grâce au <span class='vo'>[tree shaking](PUBLIC_SVELTE_SITE_URL/docs/development#tree-shaking)</span>) du code serveur compilé dans lequel `onMount` est automatiquement remplacé par une fonction inerte :
 
 ```js
 // @filename: ambient.d.ts
