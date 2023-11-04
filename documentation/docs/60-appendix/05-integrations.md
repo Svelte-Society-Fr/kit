@@ -33,6 +33,6 @@ Vous aurez besoin d'installer `svelte-preprocess` avec `npm install --save-dev s
 
 Puisque les projets SvelteKit sont compilés avec Vite, vous pouvez utiliser les <span class='vo'>[plugins](PUBLIC_SVELTE_SITE_URL/docs/development#plugin)</span> Vite pour améliorer votre projet. Vous trouverez sur [`vitejs/awesome-vite`](https://github.com/vitejs/awesome-vite) une liste complète des plugins disponibles.
 
-## FÀQ des intégrations
+## FAQ des intégrations
 
-La FÀQ de SvelteKit a une section [Comment utiliser X avec SvelteKit](./faq#comment-utiliser-x-avec-sveltekit), qui peut vous aider si vous avez encore des questions.
+La FAQ de SvelteKit a une section [Comment utiliser X avec SvelteKit](./faq#comment-utiliser-x-avec-sveltekit), qui peut vous aider si vous avez encore des questions.

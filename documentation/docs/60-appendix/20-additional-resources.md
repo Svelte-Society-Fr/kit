@@ -2,11 +2,11 @@
 title: Ressources supplémentaires
 ---
 
-## FÀQs
+## FAQ
 
-Merci de vous rendre sur [la FÀQ de SvelteKit](../faq) pour trouver des astuces ainsi que des solutions à des problèmes communs.
+Vous trouverez des astuces et des solutions aux problèmes communs sur [la FAQ de SvelteKit](../faq).
 
-[La FÀQ de Svelte](PUBLIC_SVELTE_SITE_URL/faq) et celle de [`vite-plugin-svelte`](https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/faq.md) (en anglais) peuvent également être utiles pour des questions relatives à ces librairies.
+[La FAQ de Svelte](PUBLIC_SVELTE_SITE_URL/faq) et celle de [`vite-plugin-svelte`](https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/faq.md) (en anglais) peuvent également être utiles pour des questions relatives à ces librairies.
 
 ## Exemples
 
@@ -20,4 +20,4 @@ Les utilisateurs et utilisatrices de SvelteKit ont aussi publié plusieurs exemp
 
 ## Support
 
-Vous pouvez demander de l'aide sur le [serveur Discord officiel](https://svelte.dev/chat) ou sur le [serveur Discord francophone](PUBLIC_SVELTE_SITE_URL/chat), ainsi que sur [StackOverflow](https://stackoverflow.com/questions/tagged/sveltekit). Merci de d'abord chercher des informations sur votre problème dans la FÀQ, sur Google, ou tout autre moteur de recherche, gestionnaire de tickets ou historique Discord afin de rester dans le respect du temps d'autrui. Il y a beaucoup plus de personnes qui posent des questions que de personnes qui y répondent, vous aiderez ainsi la communauté à se développer de manière fluide.
+Vous pouvez demander de l'aide sur le [serveur Discord officiel](https://svelte.dev/chat) ou sur le [serveur Discord francophone](PUBLIC_SVELTE_SITE_URL/chat), ainsi que sur [StackOverflow](https://stackoverflow.com/questions/tagged/sveltekit). Merci de d'abord chercher des informations sur votre problème dans la FAQ, sur Google, ou tout autre moteur de recherche, gestionnaire de tickets ou historique Discord afin de rester dans le respect du temps d'autrui. Il y a beaucoup plus de personnes qui posent des questions que de personnes qui y répondent, vous aiderez ainsi la communauté à se développer de manière fluide.
