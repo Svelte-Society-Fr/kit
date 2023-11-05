@@ -15,11 +15,11 @@ Ajoutez `"type": "module"` dans votre fichier `package.json`. Vous pouvez faire 
 
 ### `dependencies`
 
-Supprimer `polka` ou `express` si vous les utilisez, et tout <span class='vo'>[middleware](PUBLIC_SVELTE_SITE_URL/docs/web#middleware)</span> tel que `sirv` ou `compression`.
+Supprimez `polka` ou `express` si vous les utilisez, et tout <span class='vo'>[middleware](PUBLIC_SVELTE_SITE_URL/docs/web#middleware)</span> tel que `sirv` ou `compression`.
 
 ### `devDependencies`
 
-Supprimer `sapper` de vos `devDependencies` et remplacez-le par `@sveltejs/kit` et tout [adaptateur](adapters) que vous prévoyez d'utiliser (voir [section suivante](migrating#fichiers-de-projet-configuration)).
+Supprimez `sapper` de vos `devDependencies` et remplacez-le par `@sveltejs/kit` et tout [adaptateur](adapters) que vous prévoyez d'utiliser (voir [section suivante](migrating#fichiers-de-projet-configuration)).
 
 ### `scripts`
 
@@ -53,7 +53,6 @@ Ce fichier est l'équivalent d'un [serveur personnalisé](adapter-node#serveur-p
 ### `src/service-worker.js`
 
 La plupart des imports depuis `@sapper/service-worker` ont des équivalents dans [`$service-worker`](modules#$service-worker) :
-Most imports from `@sapper/service-worker` have equivalents in [`$service-worker`](modules#$service-worker):
 
 - `files` est inchangé
 - `routes` a été supprimé
@@ -129,7 +128,7 @@ Auparavant, les composants de <span class='vo'>[layout](PUBLIC_SVELTE_SITE_URL/d
 
 Avec Sapper, toutes les URLs relatives étaient résolues par rapport à l'URL de base – en général `/`, à moins que l'option `basepath` ait été utilisée – plutôt que par rapport à la page courante.
 
-Ceci a causé des problèmes et n'est donc plus le cas avec SvelteKit. À la place, les URLs relatives sont résolues par rapport à la page courante (ou la page de destination, pour les URLs `fetch`ées des fonctions `load`). Dans la plupart des cas, il est plus simple d'utiliser des URLs relatives à la racine (c'est-à-dire commencant par `/`), puisque leur signification ne dépend pas du contexte.
+Ceci a causé des problèmes et n'est donc plus le cas avec SvelteKit. À la place, les URLs relatives sont résolues par rapport à la page courante (ou la page de destination, pour les URLs en argument de `fetch` dans les fonctions `load`). Dans la plupart des cas, il est plus simple d'utiliser des URLs relatives à la racine (c'est-à-dire commencant par `/`), puisque leur signification ne dépend pas du contexte.
 
 ### Attributs &lt;a&gt;
 
