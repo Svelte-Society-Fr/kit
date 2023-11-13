@@ -4,7 +4,7 @@ title: Images
 
 Les images peuvent avoir un impact conséquent sur la performance de votre application. Pour réduire cet impact, vous devriez optimiser cette performance en faisant ce qui suit :
 
-- générer des formats optimisés d'images, comme `.avif` et `.webp`
+- générer des formats optimisés d'images, comme `.avif` ou `.webp`
 - créer des tailles différentes pour les différents types d'écran
 - vous assurer que les fichiers statiques sont mis en cache de manière efficace
 
@@ -12,7 +12,7 @@ Faire tout ceci à la main est fastidieux. De nombreuses techniques sont à votr
 
 ## Gestion intégrée par Vite
 
-[Vite traite automatiquement les fichiers statiques importés](https://vitejs.dev/guide/assets.html) pour améliorer la performance. Ceci inclut les fichiers référencés via la fonction CSS `url()`. Les <span class='vo'>[hashs](PUBLIC_SVELTE_SITE_URL/docs/development#hash)</span> sont ajoutés aux noms de fichiers afin qu'ils soient mis en cache, et les fichiers plus petits que `assetsInlineLimit` sont inlinés. La gestion de fichiers statiques de Vite est souvent utilisée pour les images, mais est aussi utile pour les vidéos, l'audio, etc.
+[Vite traite automatiquement les fichiers statiques importés](https://vitejs.dev/guide/assets.html) pour améliorer la performance. Ceci inclut les fichiers référencés via la fonction CSS `url()`. Les <span class='vo'>[hashs](PUBLIC_SVELTE_SITE_URL/docs/development#hash)</span> sont ajoutés aux noms de fichier afin qu'ils soient mis en cache, et les fichiers plus petits que `assetsInlineLimit` sont inlinés. La gestion de fichiers statiques de Vite est souvent utilisée pour les images, mais est aussi utile pour les vidéos, l'audio, etc.
 
 ```svelte
 <script>
@@ -26,7 +26,7 @@ Faire tout ceci à la main est fastidieux. De nombreuses techniques sont à votr
 
 > **AVERTISSEMENT**: Le paquet `@sveltejs/enhanced-img` est expérimental. Il utilise une version pre-1.0 et peut introduire des changements critiques avec chaque nouvelle version mineure.
 
-`@sveltejs/enhanced-img` se rajoute à la gestion des fichiers statiques de Vite. Ce module offre un traitement des images clé-en-main permettant de servir des formats de fichiers comme `avif` ou `webp`, d'automatiquement définir des tailles d'image `width` et `height` intrinsèques pour éviter le phénomène de [décalage de layout](https://web.dev/articles/cls), crée des images de diverses tailles pour différents appareils, et supprime les données EXIF pour protéger la vie privée. Ce module fonctionne dans tout projet basé sur Vite, incluant notamment les projets SvelteKit, mais aussi d'autres types de projets.
+`@sveltejs/enhanced-img` se rajoute à la gestion des fichiers statiques de Vite. Ce module offre un traitement des images clé-en-main permettant de servir des formats de fichiers comme `avif` ou `webp`, d'automatiquement définir des tailles d'image `width` et `height` intrinsèques pour éviter le phénomène de [décalage de layout](https://web.dev/articles/cls), crée des images de diverses tailles pour différents appareils, et supprime les données EXIF pour protéger la vie privée. Ce module fonctionne dans tout projet basé sur Vite, incluant notamment les projets SvelteKit, mais aussi d'autres types de projet.
 
 ### Installation
 
@@ -61,7 +61,7 @@ Dans vos composants `.svelte`, utilisez `<enhanced:img>` plutôt que `<img>` et 
 
 À la compilation, votre balise `<enhanced:img>` sera remplacée par une `<img>` entourée d'une `<picture>` fournissant plusieurs types d'images et de tailles. Il est uniquement possible de réduire les tailles d'images sans perdre en qualité, ce qui signifie que vous devriez fournir la plus haute résolution d'image dont vous avez besoin – les résolutions plus petites seront générées pour les différents types d'appareils qui pourraient requêter une image.
 
-Nous conseillons de fournir votre image à une résolution 2x pour les moniteurs HiDPI (c'est-à-dire les moniteurs Retina). `<enhanced:img>` se chargera automatiquement de servir des versions plus légères aux appareils plus petits.
+Nous conseillons de fournir votre image à une résolution 2x pour les moniteurs HiDPI (aussi appelé écran Retina). `<enhanced:img>` se chargera automatiquement de servir des versions plus légères aux appareils plus petits.
 
 Si vous souhaitez ajouter des styles à votre `<enhanced:img>`, vous devriez ajouter une `class`, puis la cibler avec un sélecteur approprié.
 
@@ -77,7 +77,7 @@ Vous pouvez aussi importer manuellement un fichier d'image et le passer à une b
 <enhanced:img src={MyImage} alt="Un texte descriptif" />
 ```
 
-Vous pouvez aussi utiliser le [`import.meta.glob` de Vite](https://vitejs.dev/guide/features.html#glob-import). Notez que vous aurez besoin de préciser `enhanced` via une [query personnalisée](https://vitejs.dev/guide/features.html#custom-queries) :
+Vous pouvez aussi utiliser l'[`import.meta.glob` de Vite](https://vitejs.dev/guide/features.html#glob-import). Notez que vous aurez besoin de préciser `enhanced` via une [query personnalisée](https://vitejs.dev/guide/features.html#custom-queries) :
 
 ```js
 const pictures = import.meta.glob(
@@ -126,7 +126,7 @@ Si `sizes` n'est pas précisé, une image sera alors générée en format HiDPI/
 
 ### Transformations d'images
 
-Par défaut, les images améliorées sont transformées pour être dans des formats optimisés. Cependant, vous pourriez vouloir appliquer d'autres transformations telles qu'un flou, un rotation, ou un aplatissement. Vous pouvez appliquer des transformations par image en ajoutant une chaîne de caractères de recherche :
+Par défaut, les images améliorées sont transformées pour être dans des formats optimisés. Cependant, vous pourriez vouloir appliquer d'autres transformations telles qu'un flou, une rotation, ou un aplatissement. Vous pouvez appliquer des transformations par image en ajoutant une chaîne de caractères de recherche :
 
 ```svelte
 <enhanced:img src="./path/to/your/image.jpg?blur=15" alt="Un texte descriptif" />
@@ -147,5 +147,5 @@ L'utilisation d'un <span class='vo'>[CDN](PUBLIC_SVELTE_SITE_URL/doc/web#cdn)</s
 - Vos images d'origine devraient être de bonne qualité/résolution, et devraient avoir une largeur 2x plus grande que celle que vous souhaitez afficher pour pouvoir être affichées sur des appareils HiDPI. Le traitement d'image peut réduire les tailles d'image pour économiser de la bande passante lorsque vous servez des écran plus petits, mais cela serait une perte sèche de bande passante d'inventer des pixels pour créer artificiellement des images plus grandes.
 - Pour les images qui sont bien plus larges que la largeur des appareils mobiles (en général 400px), par exemple des images prenant toute la largeur du design, préciser `sizes` afin que des images plus petites puissent être servies sur des appareils plus petits.
 - Choisissez une image par page comme étant la plus grande/importante, et donnez-lui l'attribut `priority` afin qu'elle se charge plus vite. Ceci permet d'augmenter les scores de performance web (particulièrement le "Largest Contentful Paint" ou LCP).
-- Doonez à vos images un conteneur ou du style permettant qu'elles ne soient pas contraintes et ne "saute" pas. `width` et `height` aident le navigateur à réserver la place pendant que l'image est en train de se charger. `@sveltejs/enhanced-img` ajoute une `width` et `height` pour vous.
+- Donnez à vos images un conteneur ou du style permettant qu'elles ne soient pas contraintes et ne "saute" pas. `width` et `height` aident le navigateur à réserver la place pendant que l'image est en train de se charger. `@sveltejs/enhanced-img` ajoute une `width` et `height` pour vous.
 - Fournissez toujours un texte alternatif `alt` de qualité. Le compilateur Svelte vous avertira si vous l'oubliez.
