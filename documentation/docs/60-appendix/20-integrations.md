@@ -4,7 +4,7 @@ title: Intégrations
 
 ## Pré-processeurs
 
-Les pré-processeurs transforment vos fichiers `.svelte` avant de les passer au compilateur. Par exemple, si votre fichier `.svelte` utilise TypeScript et PostCSS, il doit d'abord être transformé en Javascript et CSS afin que le compilateur Svelte puisse le traiter. Il existe plusieurs [pré-processeurs disponibles](https://sveltesociety.dev/packages#preprocessors). L'équipe Svelte maintient deux pré-processeurs officiels qui sont décrits ci-dessous.
+Les pré-processeurs transforment vos fichiers `.svelte` avant de les passer au compilateur. Par exemple, si votre fichier `.svelte` utilise TypeScript et PostCSS, il doit d'abord être transformé en Javascript et CSS afin que le compilateur Svelte puisse le traiter. Il existe plusieurs [pré-processeurs disponibles](https://sveltesociety.dev/packages?category=preprocessors). L'équipe Svelte maintient deux pré-processeurs officiels qui sont décrits ci-dessous.
 
 ### `vitePreprocess`
 
